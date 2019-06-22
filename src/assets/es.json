@@ -1,0 +1,144 @@
+{
+    "HOME": {
+        "title": "Inicio",
+        "T1": "Trayectos desde",
+        "T2": "Salida",
+        "T3": "Asientos",
+        "T4": "Cargar más trayectos",
+        "T5": "Tablón",
+        "T6": "Cargar todo el tablon",
+        "T7": "Los trayectos estan vacíos",
+        "T8": "Aun no hay trayectos en esta zona",
+        "T9": "El tablon esta vacío",
+        "T10": "Aun no hay posts en esta zona"
+
+
+
+    },
+    "PROFILE": {
+        "T1": "Contacto",
+        "T2": "Trayectos ",
+        "T3": "Salida",
+        "T4": "Asientos",
+        "T5": "¡Perfil vacío rellenalo ya!",
+        "T6": "RELLENAR",
+        "T7": "¡Aun no tiene ningun trayecto!",
+        "T8": "Cargando"
+    },
+    "TRAYECT": {
+        "T1": "Trayecto",
+        "T2": "Salida",
+        "T3": "Destino",
+        "T4": "Hora",
+        "T5": "Ir Perfil de Usuario",
+        "T6": "Información de trayecto",
+        "T7": "Descripción"
+
+    },
+    "MODAL": {
+        "T1": "Opciones",
+        "T2": "POLÍTICAS PRIVACIDAD",
+        "T3": "AYUDA",
+        "T4": "INTRODUCCIÓN",
+        "T5": "CERRAR SESIÓN",
+        "T6": "Idioma"
+
+    },
+    "EDIT": {
+        "T1": "Editar usuario",
+        "T2": "Seleccionar foto",
+        "T3": "Nombre",
+        "T4": "Telefono con prefijo",
+        "T5": "Introduce tu calle",
+        "T6": "GUARDAR",
+        "T7": "Calle",
+        "T8": "Código postal",
+        "T10": "Prefijo"
+
+    },
+    "CREATE": {
+        "T1": "Crear trayecto",
+        "T2": "Inicio",
+        "T3": "Destino",
+        "T4": "Hora",
+        "T5": "Rutina",
+        "T6": "Nº Asientos",
+        "T7": "Descripción",
+        "T8": "CREAR"
+
+
+    },
+    "SEARCH": {
+        "T1": "Buscar trayecto",
+        "T2": "Lugar de inicio",
+        "T3": "Lugar de destino",
+        "T4": "Resultados",
+        "T5": "No se ha encontrado ningun trayecto!",
+        "T6": "VER TODOS LOS TRAYECTOS",
+        "T7": "Salida",
+        "T8": "Asientos",
+        "T9": "BUSCAR"
+
+
+    },
+    "LOGIN": {
+        "T1": "Inicia sesión",
+        "T2": "Email",
+        "T3": "Contraseña",
+        "T4": "ENTRAR",
+        "T5": "No tienes cuenta?",
+        "T6": "Registrate"
+
+    },
+    "REGISTER": {
+        "T1": "Registrate",
+        "T2": "Email",
+        "T3": "Contraseña",
+        "T4": "Confirma contraseña",
+        "T5": "ENTRAR",
+        "T6": "¿Tienes cuenta?",
+        "T7": "Inicia sesión",
+        "T8": "Losiento las contraseñas no coenciden"
+
+    },
+    "SLIDES": {
+        "T1": "Continuar"
+
+    },
+    "CREATETABLON": {
+        "T1": "Añadir al tablon",
+        "T2": "Escribe tu post",
+        "T3": "Enviar"
+
+
+    },
+    "TODOTRAY": {
+        "T1": "Todos los trayectos",
+        "T2": "Salida",
+        "T3": "Asientos",
+        "T4": "No se ha encontrado ningun trayecto!",
+        "T5": "Publica tus trayectos para que te contacten!"
+
+
+    },
+    "TODOTAB": {
+        "T1": "Todos los post",
+        "T2": "Salida",
+        "T3": "Asientos",
+        "T4": "No se ha encontrado ningun post!",
+        "T5": "Postea tus trayectos para que te contacten!"
+
+
+    },
+    "ERROR": {
+        "T1": "Ubicación no valida intente otra",
+        "T2": "Contraseña incorrecta",
+        "T3": "Ese gmail no pertenece a ningún usuario",
+        "T4": "Revisa los campos",
+        "T5": "Email es invalido",
+        "T6": "Lo siento su email o usuario no se encuentra registrado",
+        "T7": "Losiento las contraseñas no coenciden",
+        "T8": "Losiento algo a ido mal intentalo más tarde"
+    }
+
+}

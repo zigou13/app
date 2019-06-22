@@ -1,0 +1,59 @@
+<ion-header no-border>
+    <ion-toolbar no-border>
+        <ion-title style=" color: #E45454;font-size: 24px;font-weight: bold;text-align: center">{{ 'MODAL.T1' | translate }}
+        </ion-title>
+
+        <ion-buttons slot="end">
+            <ion-icon src="/assets/icons/cancel-music.svg" (click)="dismiss()" padding></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngFor="let item of links">
+    <br>
+    <br>
+
+    <ion-button color="secondary" expand="full" (click)="gotopage(item.terms)" size="large">
+        <ion-icon slot="end" size="large" name="bookmarks"></ion-icon>
+        {{ 'MODAL.T2' | translate }}
+    </ion-button>
+    <br>
+    <ion-button color="light" expand="full" size="large" (click)="gotopage(item.url)">
+        <ion-icon slot="end" size="large" name="help-circle-outline"></ion-icon>
+        {{ 'MODAL.T3' | translate }}
+    </ion-button>
+    <br>
+    <ion-button color="light" expand="full" (click)="gotoslides()" size="large">
+        <!-- <ion-icon slot="end" size="large" name="happy"></ion-icon> -->
+        {{ 'MODAL.T4' | translate }}
+    </ion-button>
+    <br>
+
+    <!-- <h3 color="primary" padding> {{ 'MODAL.T6' | translate }}</h3> -->
+
+
+    <ion-button expand="full" size="large" color="secondary" size="large" (click)="change('en')">
+
+        English
+    </ion-button>
+
+    <br>
+
+
+    <ion-button expand="full" size="large" color="secondary" (click)="change('es')">
+
+        Español
+    </ion-button>
+
+    <br><br>
+
+
+
+    <br>
+    <ion-button (click)="signOut()" color="primary" expand="full" size="large">
+        <ion-icon slot="end" size="large" name="log-out"></ion-icon>
+        {{ 'MODAL.T5' | translate }}
+    </ion-button>
+
+
+</ion-content>

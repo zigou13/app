@@ -1,0 +1,113 @@
+<ion-header no-border>
+    <ion-toolbar no-border>
+        <ion-buttons slot="start">
+            <ion-icon (click)="gotomain()" size="large" src="/assets/icons/left-arrow.svg" padding></ion-icon>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <h2 class="titulo">{{ 'SEARCH.T1' | translate }}</h2>
+    <br>
+    <div class="formulario">
+        <ion-item>
+            <ion-label position="stacked">{{ 'SEARCH.T2' | translate }}</ion-label>
+            <ion-input id="pac-input" type="text"></ion-input>
+
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-label position="stacked">{{ 'SEARCH.T3' | translate }}</ion-label>
+            <ion-input id="pac-input2" type="text"></ion-input>
+
+        </ion-item>
+        <br>
+
+
+
+        <br>
+        <ion-button (click)="search()" fill="solid" expand="block" color="secondary">{{ 'SEARCH.T9' | translate }}</ion-button>
+
+        <br><br>
+        <div *ngIf="buscado">
+            <h3 margin-bottom padding style="color:#3B455A;">{{ 'SEARCH.T4' | translate }}</h3>
+
+            <div margin-bottom class="noprofile" *ngIf="(trayectos)?.length === 0 ">
+                <br>
+                <br>
+
+                <img class="notrayect" src="assets/map.svg">
+                <br>
+                <br>
+                <br>
+
+                <h3 style="color: #E45454;" class="notrayecto">{{ 'SEARCH.T5' | translate }}</h3>
+                <br>
+
+            </div>
+
+            <ion-card mode="ios" *ngFor="let item of trayectos">
+                <ion-card-content mode="ios" style="height: 110px;border-radius: 100px!important" (click)="gotoinfoTrayecto(item.id)">
+                    <ion-row class="carta">
+                        <ion-col class="truncar" size="5">
+                            {{ item.inicio }}
+                        </ion-col>
+                        <ion-col size="2">
+                            <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
+                            </ion-icon>
+                        </ion-col>
+                        <ion-col class="truncar" size="5">
+                            {{ item.destino }}
+                        </ion-col>
+
+                    </ion-row>
+
+                    <ion-row class="cartadesc">
+                        <ion-col size="5">
+                            {{ item.hora }} {{ 'SEARCH.T7' | translate }}
+                        </ion-col>
+                        <ion-col size="2">
+
+                        </ion-col>
+                        <ion-col style="font-size: 12px;text-align: center" size="3">
+                            {{ item.asientos }} <br>{{ 'SEARCH.T8' | translate }}
+                        </ion-col>
+                        <ion-col size="2">
+                            <br>
+                            <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
+                        </ion-col>
+
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+            <ion-button (click)="gotoall()" style="font-size:12px; width:100%;">{{ 'SEARCH.T6' | translate }} {{ this.inicio }}</ion-button>
+            <br>
+            <br>
+            <br>
+
+        </div>
+
+        <h3 id="place-ub1"></h3>
+        <div style="display: none" id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon">
+            <span id="place-name" class="title"></span><br>
+            <span id="place-address"></span>
+        </div>
+
+        <div style="display:none;">
+            <div id="infowindow-content2">
+                Ubicacion inicio:
+                <h3 id="place-ub1"></h3>
+                Codigo postal inicio:
+                <h3 id="place-code"></h3>
+
+            </div>
+            <div id="infowindow-content3">
+                Ubicacion destino:
+                <h3 id="place-ub2"></h3>
+                Codigo postal destino:
+                <h3 id="place-code2"></h3>
+            </div>
+        </div>
+    </div>
+</ion-content>

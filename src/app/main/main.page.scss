@@ -1,0 +1,165 @@
+.welcome-card ion-img {
+    max-height: 35vh;
+    overflow: hidden;
+}
+
+.notrayect {
+    height: 200px!important;
+    margin-top: 12px;
+}
+
+h2 {
+    color: #3b455a;
+    text-align: center;
+    font-weight: bold;
+}
+
+h4 {
+    color: #E45454;
+    text-align: center;
+    font-weight: bold;
+}
+
+.circle {
+    display: block;
+    width: 190px;
+    height: 190px;
+    margin: 1em auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-border-radius: 99em;
+    -moz-border-radius: 99em;
+    border-radius: 99em;
+    // border: 1px solid #eee;
+    box-shadow: 0 2px 5px #F2F0F0;
+}
+
+.imagenthum {
+    display: block;
+    width: 90px;
+    height: 90px;
+    margin: 1em auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-border-radius: 99em;
+    -moz-border-radius: 99em;
+    border-radius: 99em;
+    // border: 1px solid #eee;
+    box-shadow: 0 2px 5px #F2F0F0;
+}
+
+h3 {
+    color: #3B455A;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.post {
+    color: #3B455A;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+.ubication {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3B455A;
+}
+
+.carta {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #E45454;
+}
+
+.cartadesc {
+    margin-top: -15px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #3B455A;
+}
+
+.cartaicon {
+    margin-bottom: 0px!important;
+}
+
+.noprofile {
+    text-align: center;
+}
+
+.notrayect {
+    max-width: 100px;
+    margin-top: -30px;
+}
+
+.notrayecto {
+    margin-top: -20px;
+    color: #E45454;
+}
+
+.noprofile h3 {
+    text-align: center;
+    color: #3B455A;
+}
+
+#map {
+    height: 410px;
+}
+
+a div img {
+    display: none;
+}
+
+ion-icon {
+    font-size: 30px;
+}
+
+.rain {
+    background: #3B455A;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #3B455A 100%);
+    height: 50px;
+    position: absolute;
+    width: 1px;
+}
+
+$rain: 150;
+@for $i from 1 through $rain {
+    $top: (random(50) + 50) * 1%;
+    $left: random(100) * 1%;
+    $opacity: (random(30) + 30) * 0.01;
+    $delay: random(20) - 1s;
+    .rain:nth-of-type(#{$i}) {
+        animation-name: rain-#{$i};
+        animation-delay: $delay;
+        animation-duration: random(6) + 4s;
+        animation-iteration-count: infinite;
+        left: $left;
+        opacity: $opacity;
+        top: -$top;
+    }
+    @Keyframes rain-#{$i} {
+        0% {
+            left: $left;
+            opacity: $opacity;
+            top: -$top;
+        }
+        100% {
+            opacity: 0;
+            top: $top + 40%;
+        }
+    }
+}
+
+.truncar {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

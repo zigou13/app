@@ -1,0 +1,83 @@
+<ion-header no-border>
+    <ion-toolbar no-border>
+        <ion-title style=" color: #3B455A;font-size: 24px;font-weight: bold;text-align: center!important">
+            {{ 'TRAYECT.T1' | translate }}
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-icon (click)="return()" size="large" src="/assets/icons/left-arrow.svg" padding></ion-icon>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div margin-bottom #map class="map" id="map2" style="position: relative"></div>
+
+    <div padding>
+
+
+        <div *ngFor="let item of trayectodata">
+
+
+            <!-- <ion-icon style="font-size: 64px;margin-left: 40%;margin-right: 40%;width: 20%;" src="/assets/icons/{{ item.vehiculo }}.svg"></ion-icon> -->
+
+
+            <ion-card mode="ios">
+                <ion-card-header>
+
+                    <ion-card-title>{{ 'TRAYECT.T6' | translate }}</ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-card-subtitle> {{ 'TRAYECT.T2' | translate }}</ion-card-subtitle>
+                    {{ item.inicio }}
+                    <br><br>
+                    <ion-card-subtitle> {{ 'TRAYECT.T3' | translate }}</ion-card-subtitle>
+                    {{ item.destino }}
+                    <br><br><br>
+                    <ion-card-subtitle>{{ item.hora }} </ion-card-subtitle>
+                </ion-card-content>
+
+                <ion-row class="cartadesc">
+                    <ion-col size="5">
+
+                    </ion-col>
+                    <ion-col size="2">
+
+                    </ion-col>
+                    <ion-col size="5">
+                        <br>
+                        <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
+                    </ion-col>
+
+                </ion-row>
+            </ion-card>
+
+
+
+
+            <ion-card mode="ios">
+                <div padding>
+                    <ion-card-title>{{ 'TRAYECT.T7' | translate }}</ion-card-title>
+
+                </div>
+                <ion-card-content style="font-size:16px;color:#3B455A;">
+                    {{ item.info }}
+                    <br>
+                </ion-card-content>
+
+
+            </ion-card>
+
+
+            <div text-center margin-top margin-bottom (click)="gotoprofile(item.uid)" class="tc flex jusify-center align-center flex-wrap w-100">
+                <div class="w-100 tc flex align-center justify-center">
+                    <button class="buttone google flex justify-center align-center"><img src="assets/icons/avatar.svg"
+                            class="flex self-center pr2"> {{ 'TRAYECT.T5' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

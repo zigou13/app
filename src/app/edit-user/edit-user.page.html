@@ -1,0 +1,45 @@
+<ion-header no-border>
+    <ion-toolbar no-border>
+        <ion-buttons (click)="gotouser()" slot="start">
+            <ion-icon size="large" src="/assets/icons/left-arrow.svg" padding></ion-icon>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <h2 class="titulo">{{ 'EDIT.T1' | translate }}</h2>
+    <img margin-bottom (click)="cargarImagen()" class="circle" src="{{ cargaImagen.url }}">
+    <p style="color:#3B455A;text-align: center" (click)="cargarImagen()">{{ 'EDIT.T2' | translate }}</p>
+    <div margin-bottom margin-top class="formulario">
+        <ion-list>
+            <ion-item id="rounded">
+                <ion-input (keyup.enter)="moveFocus(b)" type="text" placeholder="{{ 'EDIT.T3' | translate }}" [(ngModel)]="nombre"></ion-input>
+            </ion-item>
+            <br>
+
+
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item id="rounded">
+                        <ion-input (keyup.enter)="moveFocus(c)" id="prefix" type="number" #b placeholder="{{ 'EDIT.T10' | translate }}" [(ngModel)]="prefijo"></ion-input>
+                    </ion-item>
+
+                </ion-col>
+                <ion-col size="8" id="rounded">
+                    <ion-item id="rounded">
+                        <ion-input id="prefix" type="number" #c (keyup.enter)="moveFocus(d)" placeholder="{{ 'EDIT.T4' | translate }}" [(ngModel)]="telefono"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+
+            <br>
+            <ion-item>
+                <ion-input #d placeholder="{{ 'EDIT.T8' | translate }}" (keyup.enter)="makepost()" type="text" [(ngModel)]="zona"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <br><br>
+        <ion-button margin-top fill="solid" expand="block" color="primary" (click)="makepost()">{{ 'EDIT.T6' | translate }}</ion-button>
+    </div>
+</ion-content>

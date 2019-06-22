@@ -1,0 +1,8 @@
+{
+  "name": "Uicar",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,145 @@
+{
+    "HOME": {
+        "title": "Home",
+        "T1": "Rides from",
+        "T2": "Start",
+        "T3": "Seats",
+        "T4": "Load more rides",
+        "T5": "Tablon",
+        "T6": "Load all the tablon",
+        "T7": "There is not rides in this area",
+        "T8": "Publish your own rides so the people can contact you",
+        "T9": "The tablon is empty",
+        "T10": "Make a post to talk the people close to you"
+
+
+
+    },
+    "PROFILE": {
+        "T1": "Contact",
+        "T2": "Rides",
+        "T3": "Start",
+        "T4": "Seats",
+        "T5": "¡Empty profile fill it now!",
+        "T6": "Fill it",
+        "T7": "¡You dont have any rides!",
+        "T8": "Loading"
+    },
+    "TRAYECT": {
+        "T1": "Ride",
+        "T2": "Start",
+        "T3": "Destination",
+        "T4": "Hour",
+        "T5": "Go to user profile",
+        "T6": "Ride information",
+        "T7": "Description"
+
+
+    },
+    "MODAL": {
+        "T1": "Options",
+        "T2": "PRIVACY POLICY",
+        "T3": "HELP",
+        "T4": "INTRODUCTION",
+        "T5": "LOGOUT",
+        "T6": "Language"
+
+    },
+    "EDIT": {
+        "T1": "Edit user",
+        "T2": "Select profile photo",
+        "T3": "Name",
+        "T4": "Phone with prefix",
+        "T5": "Direction",
+        "T6": "Save",
+        "T7": "Street",
+        "T8": "Postal code",
+        "T10": "Prefix"
+
+    },
+    "CREATE": {
+        "T1": "Create ride",
+        "T2": "Start point",
+        "T3": "Destination",
+        "T4": "Hour",
+        "T5": "Rutine",
+        "T6": "Nº Seats",
+        "T7": "Description",
+        "T8": "CREATE"
+
+
+    },
+    "SEARCH": {
+        "T1": "Search ride",
+        "T2": "Start point",
+        "T3": "Destination",
+        "T4": "Results",
+        "T5": "¡No ride found!",
+        "T6": "SEE ALL RIDES",
+        "T7": "Start",
+        "T8": "Seats",
+        "T9": "Search"
+
+    },
+    "LOGIN": {
+        "T1": "Login",
+        "T2": "Email",
+        "T3": "Password",
+        "T4": "ENTRY",
+        "T5": "¿Dont have account?",
+        "T6": "Register"
+
+    },
+    "REGISTER": {
+        "T1": "Register",
+        "T2": "Email",
+        "T3": "Password",
+        "T4": "Confirm password",
+        "T5": "ENTRY",
+        "T6": "¿Do you have an account?",
+        "T7": "Login",
+        "T8": "Sorry the passwords dont match"
+
+    },
+    "SLIDES": {
+        "T1": "Continue"
+
+    },
+    "CREATETABLON": {
+        "T1": "Add to tablon",
+        "T2": "Write your post",
+        "T3": "Send"
+
+
+    },
+    "TODOTRAY": {
+        "T1": "All rides",
+        "T2": "Start",
+        "T3": "Seats",
+        "T4": "Not rides found!",
+        "T5": "Public your to get contact!"
+
+
+    },
+    "TODOTAB": {
+        "T1": "All post",
+        "T2": "Start",
+        "T3": "Seats",
+        "T4": "Not posts found!",
+        "T5": "Public your rides to get contact!"
+
+
+    },
+    "ERROR": {
+        "T1": "Ubication not valid try other",
+        "T2": "Incorrect password",
+        "T3": "This email dont match any user",
+        "T4": "Check the fields",
+        "T5": "The email is invalid",
+        "T6": "Lo siento su email o usuario no se encuentra registrado",
+        "T7": "Sorry the passwords dont match try again",
+        "T8": "Sorry something gone wrong try again later"
+    }
+
+
+}

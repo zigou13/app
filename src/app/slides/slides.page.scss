@@ -1,0 +1,45 @@
+ion-slide {
+    display: block;
+}
+
+h3 {
+    font-size: 30;
+    font-weight: lighter;
+    margin-bottom: 60px;
+    font-weight: bold;
+    color: gray;
+}
+
+img {
+    margin-top: 70px;
+    max-height: 400px;
+    height: 250px;
+    width: auto!important;
+}
+
+h4 {
+    color: #f95e5f;
+}
+
+.slide-img-padding {
+    padding: 40px;
+}
+
+.btn-primary {
+    height: 60px;
+}
+
+ion-grid {
+    margin-bottom: 20px;
+}
+
+ion-slides {
+    --bullet-background: #CED1DF;
+    --bullet-background-active: #f95e5f;
+}
+
+@media screen and (max-height: 775px) {
+    img {
+        width: 70%;
+    }
+}
