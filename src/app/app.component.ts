@@ -77,7 +77,7 @@ export class AppComponent {
 
   languageload() {
     this.http.get(`http://api.ipstack.com/213.99.99.182?access_key=c36e4dd64bd5e197d466538bec25caa0`).subscribe((data: any) => {
-       console.log(data.country_name);
+       // console.log(data.country_name);
        this.country = data.country_name;
        if ( this.country === 'Spain' ) {
 
@@ -85,7 +85,7 @@ export class AppComponent {
           if (val) {
             this.languageService.setLanguage(val);
           } else {
-            console.log('España');
+            // console.log('España');
             this.language = 'es';
             this.languageService.setLanguage('es');
           }

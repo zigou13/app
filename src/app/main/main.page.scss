@@ -163,3 +163,22 @@ $rain: 150;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+ion-slide >:first-child {
+    width: 100%;
+    }
+
+ion-slide { overflow-y: auto }
+
+.slide-zoom {
+    height: 100%;
+    }
+    .slider {
+        min-height: 100%;
+        background-color: #eee;
+      }
+      
+      ion-scroll.custom {
+        height: 100vh !important;
+        overflow: auto !important;
+      }

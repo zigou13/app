@@ -1,9 +1,9 @@
-import {Component, AfterViewInit, OnInit, DoCheck, OnChanges} from '@angular/core';
+import {Component, AfterViewInit, OnInit, DoCheck, OnChanges, ViewChild} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ServicesService} from '../services.service';
 import {HttpClient} from '@angular/common/http';
-import {ModalController, Platform} from '@ionic/angular';
+import {ModalController, Platform, IonSegment} from '@ionic/angular';
 import {ModalPagePage} from '../modal-page/modal-page.page';
 import {ModalTablonPage} from '../modal-tablon/modal-tablon.page';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
@@ -65,6 +65,10 @@ export class MainPage implements AfterViewInit, OnInit {
     directionsService = new google.maps.DirectionsService();
 
 
+    segment: number;
+    @ViewChild('slides') slides;
+
+
     constructor(private aut: AngularFireAuth,
                 public modalController: ModalController,
                 private router: Router, public _servicie: ServicesService,
@@ -74,13 +78,17 @@ export class MainPage implements AfterViewInit, OnInit {
                 private storage: Storage,
                 private backgroundGeolocation: BackgroundGeolocation,
                 private http2: HTTP) {
+                    this.segment = 0;
                 }
+                public async setSegment(activeIndex: Promise<number>) {
+                    this.segment = await activeIndex;
+                  }
 
     ngOnInit() {
         this.logueado();
         this.checkday();
-        this.getweather();
-        this.startBackgroundGeolocation();
+        // this.getweather();
+        // this.startBackgroundGeolocation();
     }
 
     ngAfterViewInit() {
@@ -94,7 +102,7 @@ export class MainPage implements AfterViewInit, OnInit {
                     if (!user) {
                         this.router.navigate(['/login']);
                     } else {
-                        console.log('logueado');
+                        // console.log('logueado');
                         this.uid = user.uid;
                     }
                 });
@@ -103,12 +111,12 @@ export class MainPage implements AfterViewInit, OnInit {
     }
 
     async checkday() {
-        console.log(this.hr);
+        // console.log(this.hr);
         if ( this.hr >= 21 || this.hr <= 7 ) {
             // console.log('Es de noche');
             this.estilo = mapstyle;
         } else {
-            console.log('Es de dia');
+            // console.log('Es de dia');
             this.estilo = mapstyle2;
         }
     }
@@ -153,7 +161,7 @@ export class MainPage implements AfterViewInit, OnInit {
     async getweather() {
     await this.http
     .get(`http://api.openweathermap.org/data/2.5/weather?q=Madrid&appid=18c90d97bb8bcdd19f4321b7926b0e6f`).subscribe((data: any) => {
-         console.log(data);
+         // console.log(data);
     this.weather = data;
         // console.log(data.rain['1h']);
         if ( data.rain['1h'] >= 0.1 ) {
@@ -285,11 +293,11 @@ export class MainPage implements AfterViewInit, OnInit {
         }, 1000);
 
         setTimeout(() => {
-            this.zona = this.profiledata[0].ubication;
             this.nombre = this.profiledata[0].nombre;
             this.num = this.profiledata[0].whatsapp;
+            this.zona = this.profiledata[0].ubication;
             this.img = this.profiledata[0].img;
-        }, 2500);
+        }, 2000);
 
         setTimeout(() => {
             this.trayectosload(this.zona);
@@ -368,6 +376,20 @@ export class MainPage implements AfterViewInit, OnInit {
             console.log(error.headers);
             this.backgroundGeolocation.finish(); // FOR IOS ONLY
           });
+      }
+
+
+
+
+      // Segment
+
+
+      segmentChanged( event) {
+
+        const valuesegment = event.detail.value;
+
+        console.log(valuesegment);
+
       }
 
 }

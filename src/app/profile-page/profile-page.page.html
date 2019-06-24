@@ -57,7 +57,7 @@
 
             <div margin-bottom class="noprofile" *ngIf="(profiletrayectos)?.length === 0 ">
                 <br><br>
-                <img class="notrayect" src="assets/icons/undraw_fast_car_p4cu.svg">
+                <img (click)="create()" class="notrayect" src="assets/icons/undraw_fast_car_p4cu.svg">
                 <br><br>
                 <h3 style="color: #E45454;" class="notrayecto">{{ 'PROFILE.T7' | translate }}</h3>
             </div>

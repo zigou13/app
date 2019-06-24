@@ -11,6 +11,7 @@ import { ModalTablonPage } from '../modal-tablon/modal-tablon.page';
 
 
 import { TranslateModule } from '@ngx-translate/core';
+
 const routes: Routes = [
   {
     path: '',
@@ -24,9 +25,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    TranslateModule
+    TranslateModule,
+
   ],
-   declarations: [MainPage  , ModalTablonPage],
+   declarations: [MainPage  , ModalTablonPage ],
   entryComponents: [ ModalTablonPage ]
 })
 export class MainPageModule {}

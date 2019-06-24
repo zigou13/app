@@ -44,9 +44,6 @@
         <i class="rain"></i>
         <i class="rain"></i>
     </div>
-    <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher> -->
 
     <div margin-bottom #map class="map" id="map" style="position: relative"></div>
 
@@ -61,21 +58,72 @@
 
         <div text-center *ngIf="(trayectos)?.length != 0">
 
-            <!-- <ion-segment scrollable>
-                <ion-segment-button>
-                    <ion-icon name="home"></ion-icon> Today
-                </ion-segment-button>
-                <ion-segment-button checked>
-                    <ion-icon name="car"></ion-icon> This week
-                </ion-segment-button>
-                <ion-segment-button>
-                    <ion-icon name="pin"></ion-icon> Everyday
-                </ion-segment-button>
+                <ion-segment (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment">
+                        <ion-segment-button value="0">
+                            <ion-label>Today</ion-label>
+                          <ion-icon name="flame"></ion-icon>
+                        </ion-segment-button>
+                        <ion-segment-button value="1">
+                                <ion-label>This week</ion-label>
+                          <ion-icon name="walk"></ion-icon>
+                        </ion-segment-button>
+                        <ion-segment-button value="2">
+                                <ion-label>Rutine</ion-label>
+                          <ion-icon name="repeat"></ion-icon>
+                        </ion-segment-button>
+                      </ion-segment>
+                
+                    
+                      <ion-slides #slides (ionSlideWillChange)="setSegment(slides.getActiveIndex())">
+                        <ion-slide class="custom">
+                         <ion-card mode="ios" style="border-bottom:1px solid #ccc;" *ngFor="let item of trayectos.slice().reverse() " (click)="gotoinfoTrayecto(item.id)">
+                                <ion-card-content style="height: 110px;border-radius: 100px !important">
+                                    <ion-row class="carta">
+                                        <ion-col class="truncar" size="5">
+                                            {{ item.inicio }}
+                                        </ion-col>
+                                        <ion-col size="2">
+                                            <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
+                                            </ion-icon>
+                                        </ion-col>
+                                        <ion-col class="truncar" size="5">
+                                            {{ item.destino }}
+                                        </ion-col>
+                
+                                    </ion-row>
+                
+                                    <ion-row class="cartadesc">
+                                        <ion-col size="5">
+                                            {{ item.hora }} {{ 'HOME.T2' | translate }}
+                                        </ion-col>
+                                        <ion-col size="2">
+                
+                                        </ion-col>
+                                        <ion-col style="font-size: 12px;text-align: center" size="3">
+                                            {{ item.asientos }} <br>{{ 'HOME.T3' | translate }}
+                                        </ion-col>
+                                        <ion-col size="2">
+                                            <br>
+                                            <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
+                                        </ion-col>
+                
+                                    </ion-row>
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-slide>
+                        
+                        <ion-slide>
+                          <h1>Slide 3</h1>
+                        </ion-slide>
 
-            </ion-segment> -->
+                        <ion-slide>
+                          <h1>Slide 4</h1>
+                        </ion-slide>
+
+                      </ion-slides>
 
             <br>
-            <ion-card mode="ios" style="border-bottom:1px solid #ccc;" *ngFor="let item of trayectos.slice().reverse()" (click)="gotoinfoTrayecto(item.id)">
+            <ion-card mode="ios" style="border-bottom:1px solid #ccc;" *ngFor="let item of trayectos.slice().reverse() " (click)="gotoinfoTrayecto(item.id)">
                 <ion-card-content style="height: 110px;border-radius: 100px !important">
                     <ion-row class="carta">
                         <ion-col class="truncar" size="5">
@@ -174,6 +222,17 @@
 
 
     </div>
+
+    <br><br>
+
+    
+    
+
+      <br>
+      <br>
+      <br>
+      <br>
+      
 
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

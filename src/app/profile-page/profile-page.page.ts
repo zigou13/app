@@ -43,11 +43,6 @@ export class ProfilePagePage implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.profileload(this.uid);
     this.trayectosload(this.uid);
-
-    setTimeout(() => {
-      this.profileload(this.uid);
-      this.trayectosload(this.uid);
-    }, 1000);
   }
 
 
