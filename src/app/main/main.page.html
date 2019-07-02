@@ -3,11 +3,11 @@
         <ion-title style=" color: #3B455A;font-size: 24px;font-weight: bold;text-align: center">
             {{ 'HOME.title' | translate }}
         </ion-title>
-        <ion-buttons slot="start" (click)="gotoprofile()">
+        <ion-buttons slot="start" (click)="bs.goto2('profile' , uid)">
             <ion-icon src="/assets/icons/avatar.svg" padding></ion-icon>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-icon name="search" style="color:#E45454;font-size: 37px;" (click)="gotosearch()" padding>
+            <ion-icon name="search" style="color:#E45454;font-size: 37px;" (click)="bs.goto('search')" padding>
             </ion-icon>
         </ion-buttons>
     </ion-toolbar>
@@ -18,148 +18,190 @@
 
 <ion-content>
     <div *ngIf="lloviendo">
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i><i class="rain"></i>
-        <i class="rain"></i>
-        <i class="rain"></i>
+        <app-rain></app-rain>
     </div>
 
     <div margin-bottom #map class="map" id="map" style="position: relative"></div>
 
     <div padding margin-bottom margin-top>
         <h2 margin-top margin-bottom> {{ 'HOME.T1' | translate }} {{ zona }} </h2>
-        <div text-center *ngIf="(trayectos)?.length === 0">
-            <img class="notrayect" style="height: 200px!important;width: auto;" src="assets/map.svg">
+      
 
-            <h3>{{ 'HOME.T7' | translate }}</h3>
-            <p>{{ 'HOME.T8' | translate }}</p>
-        </div>
-
-        <div text-center *ngIf="(trayectos)?.length != 0">
+        <div text-center *ngIf="(bs.trayectos)?.length != 0">
 
                 <ion-segment (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment">
                         <ion-segment-button value="0">
-                            <ion-label>Today</ion-label>
+                            <ion-label>{{ 'HOME.T11' | translate }}</ion-label>
                           <ion-icon name="flame"></ion-icon>
                         </ion-segment-button>
                         <ion-segment-button value="1">
-                                <ion-label>This week</ion-label>
+                                <ion-label>{{ 'HOME.T12' | translate }}</ion-label>
                           <ion-icon name="walk"></ion-icon>
                         </ion-segment-button>
                         <ion-segment-button value="2">
-                                <ion-label>Rutine</ion-label>
+                                <ion-label>{{ 'HOME.T13' | translate }}</ion-label>
                           <ion-icon name="repeat"></ion-icon>
                         </ion-segment-button>
                       </ion-segment>
                 
                     
-                      <ion-slides #slides (ionSlideWillChange)="setSegment(slides.getActiveIndex())">
-                        <ion-slide class="custom">
-                         <ion-card mode="ios" style="border-bottom:1px solid #ccc;" *ngFor="let item of trayectos.slice().reverse() " (click)="gotoinfoTrayecto(item.id)">
-                                <ion-card-content style="height: 110px;border-radius: 100px !important">
-                                    <ion-row class="carta">
-                                        <ion-col class="truncar" size="5">
-                                            {{ item.inicio }}
-                                        </ion-col>
-                                        <ion-col size="2">
-                                            <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
-                                            </ion-icon>
-                                        </ion-col>
-                                        <ion-col class="truncar" size="5">
-                                            {{ item.destino }}
-                                        </ion-col>
-                
-                                    </ion-row>
-                
-                                    <ion-row class="cartadesc">
-                                        <ion-col size="5">
-                                            {{ item.hora }} {{ 'HOME.T2' | translate }}
-                                        </ion-col>
-                                        <ion-col size="2">
-                
-                                        </ion-col>
-                                        <ion-col style="font-size: 12px;text-align: center" size="3">
-                                            {{ item.asientos }} <br>{{ 'HOME.T3' | translate }}
-                                        </ion-col>
-                                        <ion-col size="2">
-                                            <br>
-                                            <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
-                                        </ion-col>
-                
-                                    </ion-row>
-                                </ion-card-content>
-                            </ion-card>
-                        </ion-slide>
+                      <ion-slides style="margin-top:20px; margin-bottom:20px;" [options]="slideOpts" #slides
+                (ionSlideWillChange)="setSegment(slides.getActiveIndex())">
+                <ion-slide>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col margin-bottom size="12" style="margin-bottom: 10px;">
+
+                                <div text-center *ngIf="(bs.trayectos)?.length === 0">
+                                        <img class="notrayect" style="height: 200px!important;width: auto;" src="assets/map.svg">
+                            
+                                        <h3>{{ 'HOME.T7' | translate }}</h3>
+                                        <p>{{ 'HOME.T8' | translate }}</p>
+                                </div>
+                                <ion-card mode="ios"  *ngFor="let item of bs.trayectos.slice().reverse() " (click)="bs.goto2( 'info-trayecto' ,item.id)">
+                                        <ion-card-content style="height: 110px;border-radius: 100px !important">
+                                            <ion-row class="carta">
+                                                <ion-col class="truncar" size="5">
+                                                    {{ item.inicio }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                                                    <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
+                                                    </ion-icon>
+                                                </ion-col>
+                                                <ion-col class="truncar" size="5">
+                                                    {{ item.destino }}
+                                                </ion-col>
                         
-                        <ion-slide>
-                          <h1>Slide 3</h1>
-                        </ion-slide>
+                                            </ion-row>
+                        
+                                            <ion-row class="cartadesc">
+                                                <ion-col size="5">
+                                                    {{ item.hora }} {{ 'HOME.T2' | translate }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                        
+                                                </ion-col>
+                                                <ion-col style="font-size: 12px;text-align: center" size="3">
+                                                    {{ item.asientos }} <br>{{ 'HOME.T3' | translate }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                                                    <br>
+                                                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
+                                                </ion-col>
+                        
+                                            </ion-row>
+                                        </ion-card-content>
+                                    </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
 
-                        <ion-slide>
-                          <h1>Slide 4</h1>
-                        </ion-slide>
-
-                      </ion-slides>
-
+                </ion-slide>
+                <ion-slide>
+                    <ion-grid>
+                        
+                        <ion-row>
+                            <ion-col margin-bottom size="12" style="margin-bottom: 10px;">
+                                    <div text-center *ngIf="(bs.trayectosweekdata)?.length === 0">
+                                            <img class="notrayect" style="height: 200px!important;width: auto;" src="assets/map.svg">
+                                
+                                            <h3>{{ 'HOME.T14' | translate }}</h3>
+                                            <p>{{ 'HOME.T8' | translate }}</p>
+                                    </div>
+                                <ion-card mode="ios"  *ngFor="let item of bs.trayectosweekdata.slice().reverse() " (click)="bs.goto2( 'info-trayecto' ,item.id)">
+                                        <ion-card-content style="height: 110px;border-radius: 100px !important">
+                                            <ion-row class="carta">
+                                                <ion-col class="truncar" size="5">
+                                                    {{ item.inicio }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                                                    <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
+                                                    </ion-icon>
+                                                </ion-col>
+                                                <ion-col class="truncar" size="5">
+                                                    {{ item.destino }}
+                                                </ion-col>
+                        
+                                            </ion-row>
+                        
+                                            <ion-row class="cartadesc">
+                                                <ion-col size="5">
+                                                    {{ item.hora }} {{ 'HOME.T2' | translate }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                        
+                                                </ion-col>
+                                                <ion-col style="font-size: 12px;text-align: center" size="3">
+                                                    {{ item.asientos }} <br>{{ 'HOME.T3' | translate }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                                                    <br>
+                                                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
+                                                </ion-col>
+                        
+                                            </ion-row>
+                                        </ion-card-content>
+                                    </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                   
+                </ion-slide>
+                <ion-slide>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col margin-bottom size="12" style="margin-bottom: 10px;">
+                                    <div text-center *ngIf="(bs.trayectosrutinedata)?.length === 0">
+                                            <img class="notrayect"  src="assets/map.svg">
+                                
+                                            <h3>{{ 'HOME.T15' | translate }}</h3>
+                                            <p>{{ 'HOME.T8' | translate }}</p>
+                                    </div>
+                                <ion-card mode="ios"  *ngFor="let item of bs.trayectosrutinedata.slice().reverse() " (click)="bs.goto2( 'info-trayecto' ,item.id)">
+                                        <ion-card-content style="height: 110px;border-radius: 100px !important">
+                                            <ion-row class="carta">
+                                                <ion-col class="truncar" size="5">
+                                                    {{ item.inicio }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                                                    <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
+                                                    </ion-icon>
+                                                </ion-col>
+                                                <ion-col class="truncar" size="5">
+                                                    {{ item.destino }}
+                                                </ion-col>
+                        
+                                            </ion-row>
+                        
+                                            <ion-row class="cartadesc">
+                                                <ion-col size="5">
+                                                    {{ item.hora }} {{ 'HOME.T2' | translate }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                        
+                                                </ion-col>
+                                                <ion-col style="font-size: 12px;text-align: center" size="3">
+                                                    {{ item.asientos }} <br>{{ 'HOME.T3' | translate }}
+                                                </ion-col>
+                                                <ion-col size="2">
+                                                    <br>
+                                                    <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
+                                                </ion-col>
+                        
+                                            </ion-row>
+                                        </ion-card-content>
+                                    </ion-card>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                   
+                </ion-slide>
+            </ion-slides>
             <br>
-            <ion-card mode="ios" style="border-bottom:1px solid #ccc;" *ngFor="let item of trayectos.slice().reverse() " (click)="gotoinfoTrayecto(item.id)">
-                <ion-card-content style="height: 110px;border-radius: 100px !important">
-                    <ion-row class="carta">
-                        <ion-col class="truncar" size="5">
-                            {{ item.inicio }}
-                        </ion-col>
-                        <ion-col size="2">
-                            <ion-icon style=" font-size: 25px;color: #3B455A" src="assets/icons/right-arrow.svg">
-                            </ion-icon>
-                        </ion-col>
-                        <ion-col class="truncar" size="5">
-                            {{ item.destino }}
-                        </ion-col>
-
-                    </ion-row>
-
-                    <ion-row class="cartadesc">
-                        <ion-col size="5">
-                            {{ item.hora }} {{ 'HOME.T2' | translate }}
-                        </ion-col>
-                        <ion-col size="2">
-
-                        </ion-col>
-                        <ion-col style="font-size: 12px;text-align: center" size="3">
-                            {{ item.asientos }} <br>{{ 'HOME.T3' | translate }}
-                        </ion-col>
-                        <ion-col size="2">
-                            <br>
-                            <ion-icon style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='assets/icons/{{ item.vehiculo }}.svg'></ion-icon>
-                        </ion-col>
-
-                    </ion-row>
-                </ion-card-content>
-            </ion-card>
+            
         </div>
         <br>
-        <p *ngIf="(trayectos)?.length != 0" style="font-weight: bold;color:#3B455A;text-decoration: underline;text-align: center" (click)="gotoall()">{{ 'HOME.T4' | translate }}</p>
+        <p *ngIf="(bs.trayectos)?.length != 0" style="font-weight: bold;color:#3B455A;text-decoration: underline;text-align: center" (click)="bs.goto2('todos-trayectos' , zona)">{{ 'HOME.T4' | translate }}</p>
 
         <br>
 
@@ -169,19 +211,19 @@
 
             </ion-col>
             <ion-col size="2">
-                <ion-buttons *ngFor="let item of profiledata" (click)="presentModal2(item.ubication)">
+                <ion-buttons *ngFor="let item of bs.profiledata" (click)="presentModal2(item.ubication)">
                     <ion-icon slot="end" size="large" src="/assets/icons/add.svg"></ion-icon>
                 </ion-buttons>
             </ion-col>
         </ion-row>
 
 
-        <div text-center *ngIf="(tablondata)?.length === 0">
+        <div text-center *ngIf="(bs.tablondata)?.length === 0">
             <h3>{{ 'HOME.T9' | translate }}</h3>
             <p style="font-weight: bold;color:#3B455A">{{ 'HOME.T10' | translate }}</p>
         </div>
 
-        <div *ngIf="(tablondata)?.length != 0">
+        <div *ngIf="(bs.tablondata)?.length != 0">
             <h2 margin-top margin-bottom>{{ 'HOME.T5' | translate }} {{ zona }}</h2>
             <!-- <ion-segment scrollable>
                 <ion-segment-button>
@@ -197,7 +239,7 @@
 
             <br>
 
-            <ion-card mode="ios" *ngFor="let item of tablondata.slice().reverse()" (click)="gotoPerfil(item.uid)">
+            <ion-card mode="ios" *ngFor="let item of bs.tablondata.slice().reverse()" (click)="bs.goto2('profile' , item.uid )">
                 <img class="imagenthum" [src]="item.img">
                 <ion-card-content style="min-height: 100px;border-radius: 100px!important">
                     <h3 class="post">{{ item.info }}</h3>
@@ -216,7 +258,7 @@
         </div>
 
         <br>
-        <p *ngIf="(trayectos)?.length != 0" style="font-weight: bold;color:#3B455A;text-decoration: underline;text-align: center" (click)="gotoalltablon()">{{ 'HOME.T6' | translate }}</p>
+        <p *ngIf="(bs.trayectos)?.length != 0" style="font-weight: bold;color:#3B455A;text-decoration: underline;text-align: center" (click)="bs.goto2('todos-tablon' , zona)">{{ 'HOME.T6' | translate }}</p>
 
         <br>
 

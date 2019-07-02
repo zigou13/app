@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { LanguageService } from './lenguage.service';
+import { LanguageService } from './services/lenguage.service';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 

@@ -31,7 +31,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
 import { HTTP } from '@ionic-native/http/ngx';
-import { FiltrePipe } from './pipes/filtre.pipe';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader( http, 'assets/' , '.json');
@@ -39,7 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, FiltrePipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
     IonicModule.forRoot(),

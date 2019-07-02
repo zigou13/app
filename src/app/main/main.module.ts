@@ -11,6 +11,7 @@ import { ModalTablonPage } from '../modal-tablon/modal-tablon.page';
 
 
 import { TranslateModule } from '@ngx-translate/core';
+import { RainComponent } from '../componets/rain/rain.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
     TranslateModule,
 
   ],
-   declarations: [MainPage  , ModalTablonPage ],
+   declarations: [MainPage  , ModalTablonPage, RainComponent ],
   entryComponents: [ ModalTablonPage ]
 })
 export class MainPageModule {}

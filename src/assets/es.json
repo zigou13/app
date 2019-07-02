@@ -7,10 +7,16 @@
         "T4": "Cargar más trayectos",
         "T5": "Tablón",
         "T6": "Cargar todo el tablon",
-        "T7": "Los trayectos estan vacíos",
+        "T7": "Los trayectos de hoy estan vacíos",
         "T8": "Aun no hay trayectos en esta zona",
         "T9": "El tablon esta vacío",
-        "T10": "Aun no hay posts en esta zona"
+        "T10": "Aun no hay posts en esta zona",
+        "T11": "Este día",
+        "T12": "Esta semana",
+        "T13": "Rutinarios",
+        "T14": "Los trayectos de esta semana estan vacíos",
+        "T15": "Todavía no existen trayectos cotidianos, pon los tuyos!"
+
 
 
 
@@ -60,12 +66,12 @@
         "T1": "Crear trayecto",
         "T2": "Inicio",
         "T3": "Destino",
-        "T4": "Hora",
+        "T4": "Fecha Hora",
         "T5": "Rutina",
         "T6": "Nº Asientos",
         "T7": "Descripción",
-        "T8": "CREAR"
-
+        "T8": "CREAR",
+        "T13": "Rutina"
 
     },
     "SEARCH": {

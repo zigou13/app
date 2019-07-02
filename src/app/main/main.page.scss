@@ -14,8 +14,8 @@ h2 {
     font-weight: bold;
 }
 
-h4 {
-    color: #E45454;
+h4,p {
+    color: #E45454 !important;
     text-align: center;
     font-weight: bold;
 }
@@ -95,10 +95,7 @@ h3 {
     text-align: center;
 }
 
-.notrayect {
-    max-width: 100px;
-    margin-top: -30px;
-}
+
 
 .notrayecto {
     margin-top: -20px;
@@ -156,6 +153,12 @@ $rain: 150;
             top: $top + 40%;
         }
     }
+}
+
+.centrarM{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .truncar {

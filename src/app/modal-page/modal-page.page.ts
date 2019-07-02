@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { LanguageService } from '../lenguage.service';
+import { LanguageService } from '../services/lenguage.service';
 
 
 @Component({

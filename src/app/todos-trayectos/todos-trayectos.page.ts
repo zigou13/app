@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ServicesService } from '../services.service';
+import { ServicesService } from '../services/services.service';
 
 @Component({
   selector: 'app-todos-trayectos',

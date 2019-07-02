@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
-import { ServicesService } from '../services.service';
+import { ServicesService } from '../services/services.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 

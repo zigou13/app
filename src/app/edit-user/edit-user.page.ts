@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
-import { ServicesService } from '../services.service';
+import { ServicesService } from '../services/services.service';
 import { Storage } from '@ionic/storage';
 
 declare var google;

@@ -10,7 +10,10 @@
         "T7": "There is not rides in this area",
         "T8": "Publish your own rides so the people can contact you",
         "T9": "The tablon is empty",
-        "T10": "Make a post to talk the people close to you"
+        "T10": "Make a post to talk the people close to you",
+        "T11": "Today",
+        "T12": "This week",
+        "T13": "Rutine"
 
 
 
@@ -61,12 +64,12 @@
         "T1": "Create ride",
         "T2": "Start point",
         "T3": "Destination",
-        "T4": "Hour",
+        "T4": "Date & Hour",
         "T5": "Rutine",
         "T6": "Nº Seats",
         "T7": "Description",
-        "T8": "CREATE"
-
+        "T8": "CREATE",
+        "T13": "Rutine"
 
     },
     "SEARCH": {

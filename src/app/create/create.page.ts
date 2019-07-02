@@ -22,8 +22,9 @@ export class CreatePage implements OnInit, AfterViewInit {
   zones: any;
   inicio2: string;
   destino2: string;
-  hora;
-  rutina: string;
+  hour: any;
+  date: any;
+  rutina: boolean;
   asientos: string;
   vehiculo = 'car';
   descripcion: string;
@@ -104,7 +105,7 @@ export class CreatePage implements OnInit, AfterViewInit {
   async makepost() {
     this.initMap(this.errore);
     const fecha = Date.now();
-    const { hora, rutina, asientos, vehiculo, descripcion, uid , lugar1 , lugar2} = this;
+    const { hour, rutina, asientos, vehiculo, descripcion, uid , lugar1 , lugar2} = this;
 
     const ubic1 = localStorage.getItem('ubic1');
     const ubic2 = localStorage.getItem('ubic2');
@@ -113,7 +114,7 @@ export class CreatePage implements OnInit, AfterViewInit {
 
 
     console.log(fecha , ubic1 , ubic2 , cod1 , cod2 , rutina, asientos , vehiculo
-      , descripcion , uid, hora  , lugar1 , lugar2);
+      , descripcion , uid, hour  , lugar1 , lugar2);
 
 
     // this.guardar();
@@ -124,14 +125,16 @@ export class CreatePage implements OnInit, AfterViewInit {
       destino: lugar2,
       cod1: cod1 ,
       cod2 : cod2,
-      hora: hora,
+      hora: hour,
       rutina: rutina,
       uid: uid,
       asientos: asientos,
       vehiculo: vehiculo,
       zona: cod1,
       info: descripcion,
-      fecha: fecha
+      datecreation: fecha,
+      fecha: fecha,
+      rutine: rutina,
     }).subscribe((response) => {
       console.log(response);
       this.router.navigate([`home`]);

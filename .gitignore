@@ -30,7 +30,7 @@ www/
 src/app/firebase.ts
 $RECYCLE.BIN/
 
-src/app/index.html
+/src/index.html
 
 .DS_Store
 Thumbs.db

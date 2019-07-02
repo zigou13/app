@@ -2,7 +2,7 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ServicesService } from '../services.service';
+import { ServicesService } from '../services/services.service';
 import { ModalController } from '@ionic/angular';
 import { ModalPagePage } from '../modal-page/modal-page.page';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
