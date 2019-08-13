@@ -23,6 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TranslateModule
   ],
-  declarations: [ModalTablonPage]
+  declarations: []
 })
 export class ModalTablonPageModule {}
