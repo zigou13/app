@@ -19,12 +19,13 @@ declare var google;
 })
 export class CreatePage implements OnInit, AfterViewInit {
 
+  fecha = Date.now();
   zones: any;
   inicio2: string;
   destino2: string;
-  hour: any;
-  date: any;
-  rutina: boolean;
+  hour = 200;
+  fecharide = 1563556794360;
+  rutina = false;
   asientos: string;
   vehiculo = 'car';
   descripcion: string;
@@ -35,8 +36,8 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   errore: string;
 
-   input = <HTMLInputElement>document.getElementById('pac-input');
-   input2 = <HTMLInputElement>document.getElementById('pac-input2');
+  input = <HTMLInputElement>document.getElementById('pac-input');
+  input2 = <HTMLInputElement>document.getElementById('pac-input2');
 
   public form = [
     { val: 'Rutine', isChecked: false },
@@ -86,7 +87,7 @@ export class CreatePage implements OnInit, AfterViewInit {
   }
 
   async zonasload() {
-    await this.http.get(`http://uicar.openode.io/zonas/`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/zonas/`).subscribe((data: any) => {
       this.zones = data;
     });
   }
@@ -102,10 +103,13 @@ export class CreatePage implements OnInit, AfterViewInit {
     nextElement.setFocus();
   }
 
+  updateMyDate($event) {
+    console.log($event.value); // --> wil contains $event.day.value, $event.month.value and $event.year.value
+  }
+
   async makepost() {
     this.initMap(this.errore);
-    const fecha = Date.now();
-    const { hour, rutina, asientos, vehiculo, descripcion, uid , lugar1 , lugar2} = this;
+    const {  rutina, asientos, vehiculo, descripcion, uid , lugar1 , lugar2} = this;
 
     const ubic1 = localStorage.getItem('ubic1');
     const ubic2 = localStorage.getItem('ubic2');
@@ -113,27 +117,28 @@ export class CreatePage implements OnInit, AfterViewInit {
     const cod2 = localStorage.getItem('cod2');
 
 
-    console.log(fecha , ubic1 , ubic2 , cod1 , cod2 , rutina, asientos , vehiculo
-      , descripcion , uid, hour  , lugar1 , lugar2);
+    console.log(this.fecha , ubic1 , ubic2 , cod1 , cod2 , rutina, asientos , vehiculo
+      , descripcion , uid, this.hour  , this.fecharide , lugar1 , lugar2);
 
 
     // this.guardar();
-    await this.http.post('http://uicar.openode.io/create/', {
+    await this.http.post('http://uicar.fr.openode.io/create/', {
       ubic1: ubic1,
       ubic2: ubic2,
       inicio : lugar1,
       destino: lugar2,
       cod1: cod1 ,
       cod2 : cod2,
-      hora: hour,
+      hora: this.hour,
+      fecharide: this.fecharide,
       rutina: rutina,
       uid: uid,
       asientos: asientos,
       vehiculo: vehiculo,
       zona: cod1,
       info: descripcion,
-      datecreation: fecha,
-      fecha: fecha,
+      datecreation: this.fecha,
+      fecha: this.fecharide,
       rutine: rutina,
     }).subscribe((response) => {
       console.log(response);

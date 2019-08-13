@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'todos-trayectos/:zona', loadChildren: './todos-trayectos/todos-trayectos.module#TodosTrayectosPageModule' },
   { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
   { path: 'todos-tablon/:zona', loadChildren: './todos-tablon/todos-tablon.module#TodosTablonPageModule' },
-  { path: 'slides', loadChildren: './slides/slides.module#SlidesPageModule' }
+  { path: 'slides', loadChildren: './slides/slides.module#SlidesPageModule' },
+  { path: 'info', loadChildren: './info/info.module#InfoPageModule' }
 
 ];
 @NgModule({

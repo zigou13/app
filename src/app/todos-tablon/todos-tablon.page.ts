@@ -27,7 +27,7 @@ export class TodosTablonPage implements OnInit {
     this.router.navigate(['home']);
   }
   async tablonload() {
-    await this.http.get(`http://uicar.openode.io/tablon/${this.zona}/100`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/tablon/${this.zona}/100`).subscribe((data: any) => {
       this.tablondata = data;
       console.log(this.tablondata);
     });

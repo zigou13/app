@@ -142,6 +142,15 @@
         "T6": "Lo siento su email o usuario no se encuentra registrado",
         "T7": "Sorry the passwords dont match try again",
         "T8": "Sorry something gone wrong try again later"
+    },
+    "INFO": {
+        "T1": "INFORMATION",
+        "T2": "What is a ride?",
+        "T3": "Publish the rides you make, either a quick route (which you do at a specific time) or a daily journey that you make every day, publish your daily journey by checking the routine box and it will appear to users who live near the beginning of the ride , the journeys you publish every day will be kept in the routine section",
+        "T4": "How the payment is made?",
+        "T5": "Payments are between the driver and the traveler, pay half the gas, or share a meal! The payment depends on you, you can contact him from the user's profile",
+        "T6": "Bonification system",
+        "T7": "Uicar works in an Algorithm of neural networks that is why we need our users' travel data, all user data is encrypted and completely private, the bonus system rewards you with uicoins which you can use for payments in the app and It can even be redeemed if it reaches more than a certain amount"
     }
 
 

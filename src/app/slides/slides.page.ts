@@ -34,7 +34,7 @@ export class SlidesPage implements OnInit {
   }
 
   async slidesload(len: string) {
-    await this.http.get(`http://uicar.openode.io/slides/${len}`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/slides/${len}`).subscribe((data: any) => {
         console.log(data);
         this.slides  = data;
     });

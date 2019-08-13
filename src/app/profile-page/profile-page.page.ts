@@ -64,7 +64,7 @@ export class ProfilePagePage implements AfterViewInit, OnInit {
 
   async profileload(id: string) {
 
-    await this.http.get(`http://uicar.openode.io/users/` + id + '/info').subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/users/` + id + '/info').subscribe((data: any) => {
       console.log(data);
       this.cargado = false;
       this.profiledata = data;
@@ -72,7 +72,7 @@ export class ProfilePagePage implements AfterViewInit, OnInit {
   }
 
   async trayectosload(id: string) {
-    await this.http.get(`http://uicar.openode.io/users/` + id + '/trayectos').subscribe((data2: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/users/` + id + '/trayectos').subscribe((data2: any) => {
       // console.log(data2);
       this.cargado = false;
       this.profiletrayectos = data2;

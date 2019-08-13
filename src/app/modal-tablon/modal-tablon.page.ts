@@ -49,7 +49,7 @@ export class ModalTablonPage implements OnInit {
     const { info, uid, zona, nombre , img } = this;
     console.log(nombre);
     console.log(info, uid , nombre , zona , img);
-    const url = 'http://uicar.openode.io/tablon/' + zona;
+    const url = 'http://uicar.fr.openode.io/tablon/' + zona;
     await this.http.post(url, {
       nombre: nombre,
       uid: uid,

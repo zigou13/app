@@ -35,7 +35,7 @@
                 <ion-item  *ngIf="!rutina" id="rounded">
                  
                     <ion-label style="color:grey;">{{ 'CREATE.T4' | translate  }}</ion-label>
-                    <ion-datetime [(ngModel)]="date" display-format="MMM DD, HH:mm"></ion-datetime>
+                    <ion-datetime  display-format="MMM DD" picker-format="MMM DD"   #myPicker  (ionChange)="updateMyDate(myPicker.value)" ></ion-datetime>
                              
                 </ion-item>
 

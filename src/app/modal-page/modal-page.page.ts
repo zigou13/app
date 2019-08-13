@@ -41,7 +41,7 @@ export class ModalPagePage implements OnInit {
 
   async linksload() {
 
-    await this.http.get(`http://uicar.openode.io/links/`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/links/`).subscribe((data: any) => {
       this.links = data;
     });
   }
@@ -54,5 +54,13 @@ export class ModalPagePage implements OnInit {
     this.modalcontroler.dismiss();
     this.router.navigate(['/slides']);
   }
+
+  gotoinfo() {
+    this.modalcontroler.dismiss();
+    this.router.navigate(['/info']);
+  }
+
+
+
 
 }

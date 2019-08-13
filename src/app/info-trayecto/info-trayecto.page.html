@@ -36,14 +36,24 @@
                     <ion-card-subtitle> {{ 'TRAYECT.T3' | translate }}</ion-card-subtitle>
                     {{ item.destino }}
                     <br><br><br>
-                    <ion-card-subtitle>{{ item.hora }} </ion-card-subtitle>
+                    <ion-card-subtitle  *ngIf="!item.rutine">{{ item.fecha | date:'short' }} </ion-card-subtitle>
+
+                <ion-item *ngIf="item.rutine">
+                        <ion-card-subtitle>{{ item.hora }} </ion-card-subtitle>
+                    <ion-chip color="danger"  slot="end">
+                          
+
+                        <ion-label color="danger">{{ 'CREATE.T13' | translate  }}</ion-label>
+                    </ion-chip>
+                </ion-item>
+                
                 </ion-card-content>
 
                 <ion-row class="cartadesc">
                     <ion-col size="5">
 
                     </ion-col>
-                    <ion-col size="2">
+                    <ion-col size="2">   
 
                     </ion-col>
                     <ion-col size="5">

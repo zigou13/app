@@ -3,7 +3,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {ServicesService} from '../services/services.service';
 import {HttpClient} from '@angular/common/http';
-import {ModalController, Platform, IonSegment} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
 
 import {ModalTablonPage} from '../modal-tablon/modal-tablon.page';
 
@@ -14,12 +14,7 @@ import { mapstyle2 } from '../../assets/maps/mapstyle2';
 
 import { BackendService } from '../services/backend.service';
 
-import {
-    BackgroundGeolocation,
-    BackgroundGeolocationConfig,
-    BackgroundGeolocationResponse,
-    BackgroundGeolocationEvents
-  } from '@ionic-native/background-geolocation/ngx';
+
   import { HTTP } from '@ionic-native/http/ngx';
 
 
@@ -76,7 +71,6 @@ export class MainPage implements AfterViewInit, OnInit {
 
 
     constructor(private aut: AngularFireAuth,
-                private backgroundGeolocation: BackgroundGeolocation,
                 private http2: HTTP,
                 public modalController: ModalController,
                 private router: Router, public _servicie: ServicesService,
@@ -102,8 +96,6 @@ export class MainPage implements AfterViewInit, OnInit {
     ngOnInit() {
         this.bs.logueado();
         this.checkday();
-        // this.getweather();
-         this.startBackgroundGeolocation();
     }
 
     ngAfterViewInit() {
@@ -145,7 +137,7 @@ export class MainPage implements AfterViewInit, OnInit {
         });
         this.directionsDisplay.setMap(this.map);
 
-        await this.http.get(`http://uicar.openode.io/zonas/${zona}/3`).subscribe((data: any) => {
+        await this.http.get(`http://uicar.fr.openode.io/zonas/${zona}/3`).subscribe((data: any) => {
             for (let i = 0; i < data.length; i++) {
                 this.directionsService.route({
                     origin: data[i].inicio,
@@ -218,6 +210,8 @@ export class MainPage implements AfterViewInit, OnInit {
             this.bs.trayectosload(this.zona);
             this.bs.tablonload(this.zona);
             this.rutas(this.zona);
+            this.bs.trayectosrutine(this.zona);
+            this.bs.trayectosweek(this.zona);
             event.target.complete();
         }, 3000);
         setTimeout(() => {
@@ -227,7 +221,6 @@ export class MainPage implements AfterViewInit, OnInit {
                 this.bs.tablonload('28013');
                 this.rutas('28013');
             }
-            this.startBackgroundGeolocation();
         }, 4500);
 
     }
@@ -273,63 +266,6 @@ export class MainPage implements AfterViewInit, OnInit {
 
         console.log(valuesegment);
 
-      }
-
-      startBackgroundGeolocation() {
-        console.log('something');
-        const config: BackgroundGeolocationConfig = {
-          desiredAccuracy: 10,
-          stationaryRadius: 1,
-          distanceFilter: 1,
-          debug: true, //  enable this hear sounds for background-geolocation life-cycle.
-          stopOnTerminate: false // enable this to clear background location settings when the app terminates
-        };
-        console.log('something');
-        this.backgroundGeolocation.configure(config).then(() => {
-          this.backgroundGeolocation
-            .on(BackgroundGeolocationEvents.location)
-            .subscribe((location: BackgroundGeolocationResponse) => {
-              console.log(location);
-              this.sendGPS(location);
-              // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
-              // and the background-task may be completed.  You must do this regardless if your operations are successful or not.
-              // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-            });
-        });
-        // start recording location
-        this.backgroundGeolocation.start();
-        //  you wish to turn OFF background-tracking, call the #stop method.
-        this.backgroundGeolocation.stop();
-      }
-      sendGPS(location) {
-        console.log('something');
-        if (location.speed === undefined) {
-          location.speed = 0;
-        }
-        const timestamp = new Date(location.time);
-        this.http2
-          .post(
-            this.gps_update_link, // backend api to post
-            {
-              lat: location.latitude,
-              lng: location.longitude,
-               uid: this.uid,
-              timestamp: timestamp
-            },
-            {}
-          )
-          .then(data => {
-            console.log(data.status);
-            console.log(data.data); // data received by server
-            console.log(data.headers);
-            this.backgroundGeolocation.finish(); // FOR IOS ONLY
-          })
-          .catch(error => {
-            console.log(error.status);
-            console.log(error.error); // error message as string
-            console.log(error.headers);
-            this.backgroundGeolocation.finish(); // FOR IOS ONLY
-          });
       }
 
 }

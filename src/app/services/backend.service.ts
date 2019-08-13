@@ -26,7 +26,7 @@ export class BackendService {
 
   img = '/assets/icons/user.svg';
 
-  gps_update_link = 'uicar.openode.io/data/';
+  gps_update_link = 'uicar.fr.openode.io/data/';
 
   links: any;
   profiledata = [];
@@ -80,14 +80,14 @@ export class BackendService {
 
   async linksload() {
 
-    await this.http.get(`http://uicar.openode.io/links/`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/links/`).subscribe((data: any) => {
       this.links = data;
       console.log(data);
     });
   }
 
   async profileload(id: string) {
-    await this.http.get(`http://uicar.openode.io/users/${id}/info`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/users/${id}/info`).subscribe((data: any) => {
          console.log(data);
         this.profiledata = data;
     });
@@ -108,7 +108,7 @@ this.weather = data;
 }
 async tablonload(id: string) {
 
-    await this.http.get(`http://uicar.openode.io/tablon/${id}/100`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/tablon/${id}/100`).subscribe((data: any) => {
       console.log(data);
 
         this.tablondata = data;
@@ -116,20 +116,21 @@ async tablonload(id: string) {
 }
 
 async trayectosload(id: string) {
-    await this.http.get(`http://uicar.openode.io/zonas/${id}/4`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/zonas/${id}/4`).subscribe((data: any) => {
         console.log(data);
         this.trayectos = data;
     });
 }
 
 async trayectosrutine(id: string) {
-  await this.http.get(`http://uicar.openode.io/zonas/${id}/4/rutine`).subscribe((data: any) => {
+  await this.http.get(`http://uicar.fr.openode.io/zonas/${id}/4/rutine`).subscribe((data: any) => {
       console.log(data);
+      console.log(id);
       this.trayectosrutinedata = data;
   });
 }
 async trayectosweek(id: string) {
-  await this.http.get(`http://uicar.openode.io/zonas/${id}/4/week`).subscribe((data: any) => {
+  await this.http.get(`http://uicar.fr.openode.io/zonas/${id}/4/week`).subscribe((data: any) => {
       console.log(data);
       this.trayectosweekdata = data;
   });

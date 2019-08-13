@@ -145,6 +145,15 @@
         "T6": "Lo siento su email o usuario no se encuentra registrado",
         "T7": "Losiento las contraseñas no coenciden",
         "T8": "Losiento algo a ido mal intentalo más tarde"
+    },
+    "INFO": {
+        "T1": "INFORMACIÓN",
+        "T2": "Que es un trayecto?",
+        "T3": "Publica los trayectos que hagas, ya sea un trayecto rapido ( que haces en un momento específico ) o un trayecto cotidiano que realices todos los días, publíca tu trayecto cotidiano marcando la casilla de rutinario y aparecera a los usuarios que vivan cerca del inicio del trayecto, los trayectos que publiques cotidianamente se mantendran en la seccion de la rutina",
+        "T4": "Como se hacen los pagos?",
+        "T5": "Los pagos son entre el conductor y el viajero, pagad a media la gasolina, o compartir una comida! El pago depende de vosotros, puedes contactar con el desde el perfil del usuario",
+        "T6": "Sistema de bonificación",
+        "T7": "Uicar trabaja en un Algorithmo de redes neuronales por eso necesitamos datos de viaje de nuestros usuarios, todos los datos de los usuarios estan encriptados y son completamente privados, el sistema de bonificacion te bonifica con uicoins los cuales los puedos utilizar para pagos en la app y incluso se puede canjear si se llega a más de una cierta cantidad "
     }
 
 }

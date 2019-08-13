@@ -68,7 +68,7 @@ export class EditUserPage implements OnInit, OnDestroy {
 
   async profileload() {
 
-    await this.http.get(`http://uicar.openode.io/users/` + this.uid + '/info').subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/users/` + this.uid + '/info').subscribe((data: any) => {
       console.log(data);
       this.cargaImagen.url = data[0].img;
       this.nombre = data[0].nombre;
@@ -97,7 +97,7 @@ export class EditUserPage implements OnInit, OnDestroy {
       this.cargaImagen.url = '/assets/icons/user.svg';
     }
 
-    await this.http.post('http://uicar.openode.io/edituser/', {
+    await this.http.post('http://uicar.fr.openode.io/edituser/', {
       nombre: nombre,
       uid: this.uid,
       img: this.cargaImagen.url,

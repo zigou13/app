@@ -112,7 +112,7 @@ export class InfoTrayectoPage implements OnInit {
     });
     this.directionsDisplay.setMap(this.map);
 
-    this.http.get(`http://uicar.openode.io/trayectos/${this.id}`).subscribe((data: any) => {
+    this.http.get(`http://uicar.fr.openode.io/trayectos/${this.id}`).subscribe((data: any) => {
       for (let i = 0; i < data.length; i++) {
         this.directionsService.route({
           origin: data[i].inicio,
@@ -137,7 +137,7 @@ export class InfoTrayectoPage implements OnInit {
 
   async trayectoload(id: string) {
 
-    await this.http.get(`http://uicar.openode.io/trayectos/` + id).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/trayectos/` + id).subscribe((data: any) => {
       this.trayectodata = data;
     });
   }

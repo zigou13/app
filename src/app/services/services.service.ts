@@ -121,19 +121,19 @@ export class ServicesService {
 
 
   trayectos(zonas: string) {
-    return this.http.get(`http://uicar.openode.io/zonas/${zonas}/3`);
+    return this.http.get(`http://uicar.fr.openode.io/zonas/${zonas}/3`);
   }
   tablon(tablon: string) {
-    return this.http.get(`http://uicar.openode.io/tablon/${tablon}/5`);
+    return this.http.get(`http://uicar.fr.openode.io/tablon/${tablon}/5`);
   }
   profile(id) {
-    return this.http.get(`http://uicar.openode.io/users/${id}/info`);
+    return this.http.get(`http://uicar.fr.openode.io/users/${id}/info`);
   }
   profileTrayectos(zona: string) {
-    return this.http.get(`http://uicar.openode.io/users/${zona}/trayectos`);
+    return this.http.get(`http://uicar.fr.openode.io/users/${zona}/trayectos`);
   }
 
   todoTrayectos(zona: string) {
-    return this.http.get(`http://uicar.openode.io/zonas/${zona}/30`);
+    return this.http.get(`http://uicar.fr.openode.io/zonas/${zona}/30`);
   }
 }

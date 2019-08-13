@@ -44,7 +44,7 @@ export class SearchPage implements OnInit {
   }
 
   async zonasload() {
-    await this.http.get(`http://uicar.openode.io/zonas/`).subscribe((data: any) => {
+    await this.http.get(`http://uicar.fr.openode.io/zonas/`).subscribe((data: any) => {
       this.zones = data;
     });
   }
@@ -61,7 +61,7 @@ export class SearchPage implements OnInit {
 
   async search() {
     console.log(localStorage.getItem('cod1') , localStorage.getItem('cod2'));
-    await this.http.get(`http://uicar.openode.io/search/${ localStorage.getItem('cod1') }/${ localStorage.getItem('cod2') }`)
+    await this.http.get(`http://uicar.fr.openode.io/search/${ localStorage.getItem('cod1') }/${ localStorage.getItem('cod2') }`)
     .subscribe((data: any) => {
       this.trayectos = data;
       this.buscado = true;
