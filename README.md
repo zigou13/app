@@ -18,7 +18,7 @@ It is a multiplafroma application to share a car in everyday journeys, developed
 ## Car sharing
 
 
-<img src="http://uicar.io/images/Artboard.png">
+<img src="http://uicar.io/images/Artboard-en.png">
 
 
 
