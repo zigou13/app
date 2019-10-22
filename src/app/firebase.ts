@@ -1,12 +1,12 @@
 const Config = {
     // Put here your firebase configuration
-    apiKey: 'AIzaSyCYQKlScl0SGKAfJRnIVUaj1SB25O66TTo',
-    authDomain: 'uicar-app.firebaseapp.com',
-    databaseURL: 'https://uicar-app.firebaseio.com',
-    projectId: 'uicar-app',
-    storageBucket: 'uicar-app.appspot.com',
-    messagingSenderId: '72373989580',
-    appId: '1:72373989580:web:53d05b12dd853d9d'
+    apiKey: 'AIzaSyAnoaQMKj84_WvG1PHp3e_e70ihZk1hx4g',
+    authDomain: 'uicarapp.firebaseapp.com',
+    databaseURL: 'https://uicarapp.firebaseio.com',
+    projectId: 'uicarapp',
+    storageBucket: 'uicarapp.appspot.com',
+    messagingSenderId: '465417573805',
+    appId: '1:465417573805:web:adc27c098371fe18'
 };
 
 export default Config;

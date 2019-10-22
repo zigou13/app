@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar >
+      <ion-buttons  slot="start">
+          <ion-button [routerLink]="['/profile']"  >
+            <ion-icon mode="ios" color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
+         </ion-button>
+      </ion-buttons>
+    
+    <ion-title color="primary" class="goodfont">Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <img *ngIf="img && !urlImage" src="{{img}}" style=" width: 100%;height: 450px;object-fit: cover;"> 
+    <img *ngIf="urlImage"  [src]="urlImage | async" style=" width: 100%;height: 450px;object-fit: cover;"> 
+    <div text-center>
+    <img *ngIf="!urlImage && !img"  src="assets/user.svg" width="200px"> <br>
+
+    </div>
+
+
+
+
+  <div padding>
+
+  <div margin-bottom  text-center >
+      <label class="custom-file-upload" style="margin:auto;max-width:400px">
+        <input id="file-upload" placeholder="Seleciona imagen" type="file" accept=".png, .jpg"
+          (change)="onUpload($event)" />
+        <ion-icon margin-right name="cloud-download"></ion-icon> Select profile photo
+      </label>
+    </div>
+  
+
+    <h3 padding class="goodfont">Profile info</h3>
+
+  <br>
+  <ion-item margin-bottom margin-bottom >
+    <ion-input (keyup.enter)="moveFocus(b)" type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
+  </ion-item>
+  <ion-item margin-bottom margin-bottom  >
+    <ion-input #b (keyup.enter)="moveFocus(d)" type="text" placeholder="Phone" [(ngModel)]="phone"></ion-input>
+  </ion-item>
+
+  <ion-item margin-bottom margin-bottom  >
+    <ion-input [(ngModel)]="mail" disabled></ion-input>
+  </ion-item>
+
+  <ion-item margin-bottom margin-bottom >
+    <ion-input #d (keyup.enter)="save(name, phone,adress)" type="text" placeholder="Direcction" [(ngModel)]="adress">
+    </ion-input>
+  </ion-item>
+
+  <input #imageProd type="hidden" [value]="urlImage | async" style="color:black;">
+  <br><br>
+  <ion-button mode="ios" size="large" (click)="save(name, phone,adress)" class="main-container" color="primary" expand="block">
+    Save</ion-button>
+  </div>
+  <br>
+</ion-content>

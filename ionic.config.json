@@ -1,8 +1,7 @@
 {
-  "name": "Uicar",
+  "name": "Yourchat",
   "integrations": {
-    "cordova": {},
-    "capacitor": {}
+    "cordova": {}
   },
   "type": "angular"
 }

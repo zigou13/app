@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { ServicesService } from '../services/services.service';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -18,67 +16,65 @@ export class LoginPage {
   password: string;
   passwordType = 'password';
   passwordIcon = 'eye-off';
-  t2: string;
-  t3: string;
-  t4: string;
-  t5: string;
-  t6: string;
-
 
   constructor(public afs: AngularFireAuth,
     public rout: Router,
     public service: ServicesService,
     public alertController: AlertController,
-    public loadingController: LoadingController,
-    private translate: TranslateService) {
-
-      this.translate.get('ERROR.T2').subscribe((text: string) => {
-        this.t2 = text ; } );
-      this.translate.get('ERROR.T3').subscribe((text: string) => {
-        this.t3 = text ; } );
-      this.translate.get('ERROR.T4').subscribe((text: string) => {
-        this.t4 = text ; } );
-      this.translate.get('ERROR.T5').subscribe((text: string) => {
-        this.t5 = text ; } );
-      this.translate.get('ERROR.T6').subscribe((text: string) => {
-        this.t6 = text ; } );
-
+    public loadingController: LoadingController) {
 
   }
 
   async login() {
 
     const { username, password } = this;
+    console.log(username, password);
     try {
-      const res = await this.afs.auth.signInWithEmailAndPassword(username, password).then(data => {
-        this.rout.navigate(['/home']);
-      });
+      const res = await this.afs.auth.signInWithEmailAndPassword(username, password);
+      console.log(res);
+      this.rout.navigateByUrl('/');
     } catch (error) {
+      console.log(error);
       if (error.code === 'auth/wrong-password') {
-        this.error(this.t2);
-      }  if (error.code === 'auth/user-not-found') {
-        this.error(this.t3);
+        this.error('Incorrect Password');
+      } if (error.code === 'auth/user-not-found') {
+        this.error('User dont found');
       }
-      if ( error.code === 'auth/argument-error') {
-        this.error(this.t4);
-       }
-       if ( error.code === 'auth/invalid-email') {
-        this.error(this.t5);
-       }
+      if (error.code === 'auth/email-already-in-use') {
+        this.error('User already use');
+      }
+      if (error.code === 'auth/argument-error') {
+        this.error('Argument error');
+      }
+      if (error.code === 'auth/invalid-email') {
+        this.error('Invalid email');
+      } else {
+        this.error('Something went wrong try later');
+      }
     }
   }
-
   async loginGmail() {
-    const loading = await this.loadingController.create({
-      message: 'No se encuentra disponible'
-    });
-    this.presentLoading(loading);
-
-    setTimeout(() => {
-      loading.dismiss();
-    }, 3000);
-
-
+    try {
+      const res = await this.afs.auth.signInWithPopup(new auth.GoogleAuthProvider());
+      console.log(res);
+      this.rout.navigateByUrl('/');
+    } catch (error) {
+      if (error.code === 'auth/wrong-password') {
+        this.error('Incorrect Password');
+      } if (error.code === 'auth/user-not-found') {
+        this.error('User dont found');
+      }
+      if (error.code === 'auth/email-already-in-use') {
+        this.error('User already use');
+      }
+      if (error.code === 'auth/argument-error') {
+        this.error('Argument error');
+      }
+      if (error.code === 'auth/invalid-email') {
+        this.error('Invalid error');
+      }
+      console.log(error);
+    }
   }
 
   goRegister() {
@@ -87,7 +83,7 @@ export class LoginPage {
 
   async presentAlert(username) {
     const alert = await this.alertController.create({
-      header: 'Logueado como: ',
+      header: 'Loged as: ',
       message: `${username}`,
       buttons: ['OK']
     });
@@ -104,9 +100,9 @@ export class LoginPage {
     await alert.present();
   }
 
-  async errorUsuario() {
+  async erroruser() {
     const alert = await this.alertController.create({
-      message: this.t6,
+      message: 'User not found',
     });
 
     await alert.present();

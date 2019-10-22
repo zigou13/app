@@ -1,48 +1,49 @@
 h4 {
-    color: #3B455A;
+    color:#222428;
     font-size: 17px;
     font-weight: bold;
 }
 
 .titulo {
-    color: #3B455A;
+    color: #FCD000;
     font-size: 24px;
     font-weight: bold;
 }
 
 h1 {
     margin-top: 100px;
-    font-size: 78px;
+    font-size: 50px;
     font-weight: bold;
     text-align: center;
-    color: #E45454;
+    color:#FCD000;
     margin-bottom: 100px;
 }
 
-ion-button {
+.boton ion-button {
     height: 39px;
     border-radius: 50px;
-    background-color: #E45454;
     font-size: 17px;
     font-weight: bold;
 }
 
-:host {
-    ion-content {
-        --background: url('/assets/background.png') no-repeat;
-    }
+.sep {
+    margin-top: 10px;
 }
 
-ion-content ::ng-deep ion-scroll {
-    background-image: url('/assets/background.png')!important;
-    background-repeat: no-repeat!important;
-    background-position: center;
-    background-size: contain;
-}
-
+// :host {
+//     ion-content {
+//         --background: url('/assets/background.png') no-repeat;
+//     }
+// }
+// ion-content ::ng-deep ion-scroll {
+//     background-image: url('/assets/background.png')!important;
+//     background-repeat: no-repeat!important;
+//     background-position: center;
+//     background-size: contain;
+// }
 h2 {
     font-size: 1.5rem;
-    color: #27444A;
+    color: #232B38;
 }
 
 h3 {
