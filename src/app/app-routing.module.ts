@@ -10,6 +10,11 @@ const routes: Routes = [
   { path: 'main', loadChildren: './main/main.module#MainPageModule' },
   { path: 'fill', loadChildren: './fill/fill.module#FillPageModule' },
   { path: 'ride/:id', loadChildren: './ride/ride.module#RidePageModule' },
+  { path: 'view/:uid', loadChildren: './view/view.module#ViewPageModule' },
+  { path: 'chats', loadChildren: './chats/chats.module#ChatsPageModule' },
+  { path: 'chat/:id', loadChildren: './chat/chat.module#ChatPageModule' },
+  { path: 'terms', loadChildren: './terms/terms.module#TermsPageModule' },
+  { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

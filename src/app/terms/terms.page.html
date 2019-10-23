@@ -1,0 +1,30 @@
+<ion-header mode="ios">
+  <ion-toolbar  mode="ios">
+      <ion-buttons  slot="start">
+          <ion-button [routerLink]="['/']"  >
+            <ion-icon mode="ios" color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
+         </ion-button>
+      </ion-buttons>
+    <ion-title color="primary">Terms & conditions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <h2 text-center class="goodfont">You can check Uicar.io terms and conditions in : </h2>
+    <br>
+    <h3 text-center class="goodfont"><a>https://uicar.io/terms</a></h3>
+
+    <br>
+    <br>
+    <br>
+    <h2 text-center class="goodfont">If you need any help or contact to help you can go here :</h2>
+    <br>
+    <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/help']" 
+            fill="outline" size="large" expand="block" >
+              Help
+    </ion-button>
+    <br><br>
+    <div text-center>
+        <img width="400px" src="assets/question.svg">
+    </div>
+</ion-content>

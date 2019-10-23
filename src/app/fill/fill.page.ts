@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from '../services/services.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-fill',
@@ -7,9 +9,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FillPage implements OnInit {
 
-  constructor() { }
+  num = 0;
+  mode: string;
+  car: string;
+  high = null;
+  weight = null ;
+  uid: string;
+
+  constructor(public service: ServicesService , private aut: AngularFireAuth) { }
 
   ngOnInit() {
+    this.logueado();
+  }
+
+
+
+  logueado() {
+    this.aut.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.uid = user.uid;
+          }
+        },
+        () => {
+          // this.router.navigateByUrl('/login');
+        }
+      );
+  }
+
+  setmode(mode: string) {
+    this.mode = mode;
+    this.num = 1;
+    // if (this.mode = 'rider' ) {
+    //   this.setcar('none');
+    //   this.service.userdata(this.car , this.mode, this.uid);
+    // }
+  }
+  setcar(car: string) {
+    this.car = car;
+    this.num = 2;
+  }
+
+
+  moveFocus(nextElement) {
+    nextElement.setFocus();
   }
 
 }

@@ -1,9 +1,102 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>fill</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header mode="ios" >
+    <ion-toolbar mode="ios"> 
+      <ion-title text-center></ion-title>
+      <ion-buttons  slot="start">
+          <ion-button [routerLink]="['/profile']"  >
+            <ion-icon mode="ios" color="primary" slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding >
+    
+      <div *ngIf="num === 0">
+      <h1 text-center color="medium" class="goodfont">Select your mode</h1> 
+      <br>
+      <br>
+      <br>
+      <ion-row text-center>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  
+        
+          <ion-col > 
+            <img height="150px" (click)="service.userdata('none', 'rider', uid)"  src="assets/rider.svg">
+            <h2 class="goodfont" text-center >Rider</h2>
+          </ion-col>
+          <ion-col >
+            <img height="150px"  (click)="setmode('driver')" src="assets/driver.svg">
+             <h2 text-center  class="goodfont">Driver</h2>
+  
+          </ion-col>
+        
+        </ion-row>
+        
+      </div>
+  
+      <div *ngIf="num >= 1">
+          <h1 text-center class="goodfont">Select your car type</h1> 
+          <br>
+          <br>
+          <br>
+          <ion-row text-center>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+      
+            
+              <ion-col no-padding size="6">
+                
+                <img (click)="setcar('compact')"    height="100px"  src="assets/compact.png">
+                <h5 class="goodfont" text-center >Compact car</h5>
+              
+              </ion-col>
+              <ion-col no-padding size="6">
+        
+              <img  (click)="setcar('coupe')"   height="100px" src="assets/coupe.png">
+              <h5 text-center  class="goodfont">Coupe</h5>
+      
+              </ion-col>
+              <br>
+              <ion-col  no-padding size="6">
+        
+              <img  (click)="setcar('minivan')"  height="100px" src="assets/minivan.png">
+              <h5 text-center  class="goodfont">Minivan</h5>
+      
+              </ion-col>
 
-<ion-content padding>
-
-</ion-content>
+              <ion-col  no-padding size="6">
+    
+              <img  (click)="setcar('suv')"    height="100px"  src="assets/suv.png">
+              <h5 text-center  class="goodfont">Suv</h5>
+                
+            </ion-col>
+            
+            </ion-row>
+          </div>
+  
+  
+  
+      <br>
+      <br>
+      <br>
+      <br>
+      
+      <ion-button class="goodfont"  expand="block" size="large"  color="light" *ngIf="num == 2 " (click)="service.userdata(car, mode, uid)"  mode="ios" text-center  >
+          <ion-icon color="primary" name="checkmark-circle"></ion-icon>  Done
+        </ion-button>  
+  
+      <ion-button  color="primary" *ngIf="num > 0  " (click)="num = num - 1" mode="ios" text-center  >
+        <ion-icon mode="ios" name="arrow-back"></ion-icon> 
+      </ion-button>    
+  
+  </ion-content>
+  

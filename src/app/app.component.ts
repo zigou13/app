@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-root',
@@ -21,7 +20,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public aut: AngularFireAuth,
-    private rout: Router
+    private rout: Router,
+    private menu: MenuController
   ) {
     this.initializeApp();
   }
@@ -31,6 +31,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
 
 
     this.aut.authState
@@ -46,6 +47,17 @@ export class AppComponent {
           // this.rout.navigateByUrl('/login');
         }
       );
+  }
+
+  open(id) {
+    this.rout.navigateByUrl(id);
+    this.menu.close();
+  }
+  async signOut() {
+    const res = await this.aut.auth.signOut();
+    console.log(res);
+    this.menu.close();
+    this.rout.navigateByUrl('/login');
   }
 
 }

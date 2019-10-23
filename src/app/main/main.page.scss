@@ -3,14 +3,25 @@
 }
 
 ion-toolbar {
-    --background-color: transparent!important;;
-    --ion-color-base: transparent !important;
-  }
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
 
-  ion-header {
-    --background-color: transparent!important;;
-    --ion-color-base: transparent !important;
-  }
+/* Show background if class is active */
+.show-background {
+  border-style: none;
+  background: var(--ion-color-primary);
+}
+
+/* Remove bottom border on md */
+.header-md::after {
+  background-image: none;
+}
+
+/* Remove bottom border on ios */
+.header-ios ion-toolbar:last-child {
+  --border-width: 0;
+}
 
 ion-icon {
     color: var(--ion-color-primary)!important;;
@@ -21,4 +32,22 @@ ion-title {
 }
 ion-icon {
     font-size: 30px;
+}
+
+.boton {
+  background: rgba(255,255,255,0.4);
+  border: none;
+  position: relative;
+  display: block;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: -32px;
+  outline: none;
+  height: 30p;
+  padding: 10px;
+  color: #333;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
 }

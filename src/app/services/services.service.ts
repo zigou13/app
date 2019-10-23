@@ -43,16 +43,17 @@ export class ServicesService {
 
   crearUser(value) {
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection(`users/${value.uid}/profile`).add({
+      this.afs.collection(`users/${value.uid}/profile`).doc(value.uid).set({
         name: value.name,
         phone: value.phone,
         mail: value.mail,
         img: value.img,
         uid: value.uid,
         adress: value.adress,
-        date: Date.now()
+        date: Date.now(),
+
       });
-      this.rout.navigateByUrl(`profile`);
+      this.rout.navigateByUrl(`fill`);
     });
   }
 
@@ -60,6 +61,17 @@ export class ServicesService {
 
   updateUser(value, id?) {
    return this.afs.collection('users').doc(value.uid).collection('profile').doc(id).set(value);
+  }
+
+  userdata(car, mode , uid) {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection(`users/${uid}/profile`).doc(uid).update({
+        car: car,
+        mode: mode,
+      });
+
+      this.rout.navigateByUrl(`profile`);
+    });
   }
 
 }

@@ -35,7 +35,7 @@
                 
               </ion-label>
               <ion-button size="large" slot="end">
-                 Rider 🚶‍♂ {{item[0].payload.doc.data().plan}}
+               {{item[0].payload.doc.data().mode}}
                 </ion-button>
             </ion-item>
         
@@ -100,11 +100,23 @@
         </ion-row>
 
         </div>
-        <br>
-        <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/fill']" 
-        fill="outline" size="large" expand="block" >
-          Your car
-        </ion-button>
+        <br> 
+        <div text-center *ngIf="item[0].payload.doc.data().mode == 'driver'" >
+            <img height="150px"  src='/assets/{{item[0].payload.doc.data().car}}.png'>
+            <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/fill']" 
+            fill="outline" size="large" expand="block" >
+              Change
+            </ion-button>
+        </div>
+
+        <div text-center *ngIf="item[0].payload.doc.data().mode !== 'driver'" >
+           
+            <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/fill']" 
+            fill="outline" size="large" expand="block" >
+              Change to driver
+            </ion-button>
+        </div>
+        
       
         <br>
         <div *ngIf="empty">
@@ -116,6 +128,15 @@
         <br>
         </div>
 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="color: gray; font-size: 13px" text-center bold>User id : {{ id }} </p>
+
+        <br>
+        <br>
 
 
 </ion-content>

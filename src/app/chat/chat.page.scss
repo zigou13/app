@@ -1,0 +1,59 @@
+.message {
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    margin-top: 15px;
+    white-space: pre-wrap;
+    box-shadow: 0 1.5px 1.5px rgba(95, 95, 95, 0.16), 0 1.5px 1.5px rgba(185, 180, 180, 0.23);
+}
+
+.my-message {
+    background: #ffffff;	  
+    color: #3F474F;	 
+    box-shadow: 0 1.5px 1.5px rgba(95, 95, 95, 0.16), 0 1.5px 1.5px rgba(185, 180, 180, 0.23);
+}
+
+.other-message {
+    color: #3F474F;	    // color: #3F474F;
+    border: 1px solid #FF9B85;
+}
+
+.time {
+    color: #FF9B85;;
+    float: right;
+    font-size: small;
+}
+
+.message-input {
+    width: 100%;
+    border: 0.5px solid rgba(185, 180, 180, 0.23);
+    border-radius: 10px;
+    resize: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media screen and (min-width: 700px) {
+    .message-input {
+        width: 100%;
+        border: 1px solid rgba(185, 180, 180, 0.23);
+        border-radius: 10px;
+        resize: none;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+  }
+
+.msg-btn {
+    --padding-start: 0.5em;
+    --padding-end: 0.5em;
+}
+
+
+.separation {
+    margin-left: 10px;
+}
+ion-input {
+    padding-left: 20px!important;
+}

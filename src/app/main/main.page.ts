@@ -61,7 +61,7 @@ export class MainPage implements OnInit {
   }
 
   async getrides() {
-    await this.ridesservice.functiongetRides('28110').subscribe((data: any) => {
+    await this.ridesservice.functiongetRides('94305').subscribe((data: any) => {
       console.log(data);
       this.rides = data;
     });
@@ -178,6 +178,7 @@ export class MainPage implements OnInit {
 }
 
 
+
 emptymap() {
     this.directionsDisplay = new google.maps.DirectionsRenderer();
     this.map = new google.maps.Map(document.getElementById('map'), {
@@ -190,12 +191,12 @@ emptymap() {
 attachInstructionText(marker) {
     const self = this;
     google.maps.event.addListener(marker, 'click', function () {
-        this.router.navigateByUrl( '/ride' , this.id);
+        // this.router.navigateByUrl( '/ride' , this.id),
         console.log(this.id);
     });
 }
 
-async presentActionSheet() {
+async presentActionSheets() {
   const actionSheet = await this.actionSheetController.create({
     header: 'Settings',
     buttons: [

@@ -14,6 +14,8 @@
     <img *ngIf="img && !urlImage" src="{{img}}" style=" width: 100%;height: 450px;object-fit: cover;"> 
     <img *ngIf="urlImage"  [src]="urlImage | async" style=" width: 100%;height: 450px;object-fit: cover;"> 
     <div text-center>
+    <br>
+    <br>
     <img *ngIf="!urlImage && !img"  src="assets/user.svg" width="200px"> <br>
 
     </div>

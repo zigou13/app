@@ -1,0 +1,54 @@
+<ion-header mode="ios" >
+    <div *ngFor="let item of userchat ;">
+        <ion-toolbar mode="ios">
+            <ion-buttons slot="start">
+                <ion-button [routerLink]="['/chats']">
+                    <ion-icon mode="ios" color="primary" slot="icon-only" name="arrow-back"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>{{ item.payload.doc.data().name }}</ion-title>
+            <ion-avatar>
+                <img (click)="gotoprofile(item.payload.doc.data().uid)" class="avatar"
+                    [src]="item.payload.doc.data().img" />
+            </ion-avatar>
+        </ion-toolbar>
+    </div>
+</ion-header>
+
+<ion-content padding #scrollElement>
+    <ion-grid>
+        <ion-row *ngFor="let message of messages.slice().reverse()">
+
+            <ion-col size="9" *ngIf="message.payload.doc.data().uid !== uid" class="message other-message">
+                <b color="secundary">{{ message.payload.doc.data().name }}</b><br>
+                <span>{{ message.payload.doc.data().text }}</span>
+                <div class="time" text-right><br>{{ message.payload.doc.data().date | date:'short' }}</div>
+            </ion-col>
+
+            <ion-col offset="3" size="9" *ngIf="message.payload.doc.data().uid === uid" class="message my-message">
+                <b>You</b><br>
+                <span>{{ message.payload.doc.data().text }}</span>
+                <div class="time" text-right><br>{{ message.payload.doc.data().date | date:'short' }}</div>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-row no-padding align-items-center>
+            <ion-col size="10">
+                <ion-input style=" margin-left: 5px;" (keyup.enter)="sendmessage(message , uid , id)" autosize
+                    class="message-input" [(ngModel)]="message"></ion-input>
+            </ion-col>
+            <ion-col size="2">
+
+                <ion-button fill="clear" color="secondary" (click)="sendmessage(message , uid , id)">
+                    <ion-icon class="icono" color="primary" name="ios-send" slot="icon-only"></ion-icon>
+                </ion-button>
+
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>
