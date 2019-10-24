@@ -1,9 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>modal</ion-title>
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+      <ion-buttons  slot="start">
+          <ion-button (click)="modalCtrl.dismiss()">
+            <ion-icon mode="ios" color="secondary" size="large" slot="icon-only" name="close" ></ion-icon>
+         </ion-button>
+      </ion-buttons>
+    <ion-title>Search ride</ion-title>
   </ion-toolbar>
+  <div padding>
+      <ion-input id="pac-input"   style="border-radius: 3px; border: 1px #f08585 solid;padding: 40px;"  type="text" placeholder="15 Echo Pi"></ion-input>
+      <br>
+      <ion-input id="pac-input2"  style="border-radius: 3px; border: 1px #f08585 solid;padding: 40px;"  type="text" placeholder="Where to go?"></ion-input>    
+  </div>
+  <br>
+  
 </ion-header>
 
 <ion-content padding>
+        <h3 id="place-ub1"></h3>
+        <div style="display: none" id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon">
+            <span id="place-name" class="title"></span><br>
+            <span id="place-address"></span>
+        </div>
 
+        <div style="display:none;">
+            <div id="infowindow-content2">
+                Ubicacion inicio:
+                <h3 id="place-ub1"></h3>
+                Codigo postal inicio:
+                <h3 id="place-code"></h3>
+
+            </div>
+            <div id="infowindow-content3">
+                Ubicacion destino:
+                <h3 id="place-ub2"></h3>
+                Codigo postal destino:
+                <h3 id="place-code2"></h3>
+            </div>
+          </div>
 </ion-content>

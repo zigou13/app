@@ -1,22 +1,3 @@
-<!-- <ion-header color="translucent">
-    <ion-toolbar color="translucent">
-        <ion-title style=" color: #3B455A;font-size: 24px;font-weight: bold;text-align: center">
-            Uicar
-        </ion-title>
-        <ion-buttons  slot="start">
-            <ion-button [routerLink]="['/profile/']"  >
-              <ion-icon mode="ios" color="primary" slot="icon-only" name="contact"></ion-icon>
-           </ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end" >
-            <ion-button (click)="presentActionSheets()">
-                <ion-icon color="primary" name="more" slot="icon-only"></ion-icon>
-              </ion-button>
-        
-          </ion-buttons>
-        
-    </ion-toolbar>
-</ion-header> -->
 
 <ion-header>
         <ion-toolbar>
@@ -30,9 +11,9 @@
 <ion-content fullscreen>
 
   <div margin-bottom #map class="map" id="map" style="position: relative;margin-top: -62px"></div>
-    <div>
+    <div (click)="presentModal()">
   
-    <ion-input class="boton" type="text" placeholder="Where do you want to go?" text-center></ion-input>               
+    <div   class="input-good" type="text" placeholder="Where do you want to go?" text-center>Where do you want to go?</div>              
         
     </div>
 
@@ -40,4 +21,6 @@
         <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }}</h1>
     </div>
     <br>
+
+   
 </ion-content>

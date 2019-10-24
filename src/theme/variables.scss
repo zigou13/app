@@ -159,3 +159,25 @@ height:auto;
   font-size: 16px;
   font-family: 'Lexend Exa', sans-serif;
 }
+
+.input-good {
+  background: rgba(255,255,255,0.4);
+  border: none;
+  position: relative;
+  display: block;
+  width: 80%;
+  color: var(--ion-color-medium);
+  margin-left: 10%;
+  margin-top: -32px;
+  font-family: 'Lexend Exa', sans-serif;
+
+  outline: none;
+  height: 30p;
+  padding: 10px;
+  color: #333;
+  background-color: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 3px 1px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 19px 1px rgba(156, 153, 153, 0.5);
+}
+

@@ -11,6 +11,9 @@ import { ActionSheetController } from '@ionic/angular';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { RidesService } from '../services/rides.service';
+import { ModalController } from '@ionic/angular';
+
+import { ModalPage } from '../modal/modal.page';
 
 
 declare var google;
@@ -43,7 +46,8 @@ export class MainPage implements OnInit {
     , private http: HttpClient,
     public actionSheetController: ActionSheetController,
     private geolocation: Geolocation ,
-    private ridesservice: RidesService ) {
+    private ridesservice: RidesService,
+    private modalController: ModalController ) {
 
       setTimeout(() => {
       this.rutes();
@@ -122,6 +126,13 @@ export class MainPage implements OnInit {
   profile() {
     this.router.navigateByUrl(`profile`);
   }
+
+  async presentModal() {
+    const modal2 = await this.modalController.create({
+        component: ModalPage,
+    });
+    return await modal2.present();
+}
 
   // Maps
   async rutes() {
