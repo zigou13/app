@@ -19,8 +19,46 @@
 
     <div padding>
         <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }}</h1>
+        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you {{ item[0].payload.doc.data().zone }}</h5>
     </div>
-    <br>
+    <div  *ngFor="let item of rides">
+    <ion-card [routerLink]="['/ride' , item[0].payload.doc.data().id]"   mode="ios" *ngIf="item[0].payload.doc.data().inicio !== null" >
+        <ion-card-content style="height: 110px;border-radius: 100px !important">
+            <ion-row class="carta">
+                <ion-col class="cut" size="5">
+                    {{ item[0].payload.doc.data().inicio }}
+                </ion-col>
+                <ion-col size="2">
+                    <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
+                    </ion-icon>
+                </ion-col>
+                <ion-col class="cut" size="5">
+                    {{ item[0].payload.doc.data().destino }}
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="cartadesc">
+                <ion-col size="5">
+                    {{ item[0].payload.doc.data().hora }} Hour
+                </ion-col>
+                <ion-col size="2">
+
+                </ion-col>
+                <ion-col style="font-size: 12px;text-align: center" size="3">
+                    {{ item[0].payload.doc.data().asientos }} <br> Seets
+                </ion-col>
+                <ion-col size="2">
+                    <br>
+                    <img style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='/assets/{{ item[0].payload.doc.data().vehiculo }}.png'>
+                </ion-col>
+
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</div>
 
    
 </ion-content>
+
+  

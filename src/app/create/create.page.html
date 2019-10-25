@@ -1,0 +1,52 @@
+<ion-header>
+        <ion-toolbar >
+            <ion-buttons  slot="start">
+                <ion-button [routerLink]="['/']"  >
+                  <ion-icon mode="ios" color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
+               </ion-button>
+            </ion-buttons>
+          <ion-title color="primary" class="goodfont">Create ride</ion-title>
+      
+        </ion-toolbar>
+      </ion-header>
+<ion-content padding>
+    <div class="formulario">
+
+        <ion-item>
+            <ion-input id="pac-input-create" placeholder="Begin" type="text"></ion-input>
+
+        </ion-item>
+        <br>
+        <ion-item>
+            <ion-input  placeholder="Destine" id="pac-input-create2" type="text"></ion-input>
+
+        </ion-item>
+        <br>
+
+        <!-- <ion-button  fill="solid" expand="block" color="primary">Post</ion-button> -->
+
+
+        <h3 id="place-ub1"></h3>
+        <div style="display: none" id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon">
+            <span id="place-name" class="title"></span><br>
+            <span id="place-address"></span>
+        </div>
+
+        <div style="display:none;">
+            <div id="infowindow-content2">
+                Ubicacion inicio:
+                <h3 id="place-ub1"></h3>
+                Codigo postal inicio:
+                <h3 id="place-code"></h3>
+
+            </div>
+            <div id="infowindow-content3">
+                Ubicacion destino:
+                <h3 id="place-ub2"></h3>
+                Codigo postal destino:
+                <h3 id="place-code2"></h3>
+            </div>
+        </div>
+    </div>
+</ion-content>

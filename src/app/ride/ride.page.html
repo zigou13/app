@@ -1,9 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ride</ion-title>
+    <ion-title>Ride info</ion-title>
+    <ion-buttons  slot="start">
+        <ion-button [routerLink]="['/']"  >
+          <ion-icon mode="ios" color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
+       </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+    <div margin-bottom #map class="map" id="map2" style="position: relative"></div>
 </ion-content>

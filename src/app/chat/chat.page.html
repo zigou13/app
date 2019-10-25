@@ -1,14 +1,14 @@
-<ion-header mode="ios" >
+<ion-header  >
     <div *ngFor="let item of userchat ;">
-        <ion-toolbar mode="ios">
+        <ion-toolbar (click)="gotoprofile(item.payload.doc.data().uid)">
             <ion-buttons slot="start">
                 <ion-button [routerLink]="['/chats']">
                     <ion-icon mode="ios" color="primary" slot="icon-only" name="arrow-back"></ion-icon>
                 </ion-button>
             </ion-buttons>
             <ion-title>{{ item.payload.doc.data().name }}</ion-title>
-            <ion-avatar>
-                <img (click)="gotoprofile(item.payload.doc.data().uid)" class="avatar"
+            <ion-avatar [routerLink]="['/view' , item.payload.doc.data().uid]">
+                <img  [routerLink]="['/view' , item.payload.doc.data().uid]"  class="avatar"
                     [src]="item.payload.doc.data().img" />
             </ion-avatar>
         </ion-toolbar>

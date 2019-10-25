@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'chat/:id', loadChildren: './chat/chat.module#ChatPageModule' },
   { path: 'terms', loadChildren: './terms/terms.module#TermsPageModule' },
   { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
+  { path: 'create', loadChildren: './create/create.module#CreatePageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

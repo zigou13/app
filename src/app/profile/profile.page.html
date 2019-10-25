@@ -8,15 +8,14 @@
     <ion-title color="primary" class="goodfont">Your account</ion-title>
 
     <ion-buttons slot="end" >
-      <ion-button (click)="goedit()">
+      <ion-button [routerLink]="['/edit-profile']" >
         <ion-icon color="primary" slot="icon-only" name="settings"></ion-icon>
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="dark">
+<ion-content>
     <div class="form">
         <div *ngIf="empty">
           <div text-center >
@@ -26,7 +25,7 @@
       
           <h2 class="goodfont" style="font-size:38px;" padding> {{item[0].payload.doc.data().name}}</h2>
       
-          <ion-item color="dark">
+          <ion-item >
               <ion-avatar slot="start">
                 <ion-icon  name="pin" size="large"></ion-icon>
               </ion-avatar>
@@ -34,9 +33,15 @@
                 <h1>{{item[0].payload.doc.data().adress}}</h1>
                 
               </ion-label>
-              <ion-button size="large" slot="end">
-               {{item[0].payload.doc.data().mode}}
-                </ion-button>
+                <ion-button size="large" slot="end">
+  
+                    <div *ngIf="item[0].payload.doc.data().mode != 'driver'">
+                      Rider 🚶
+                    </div>
+                    <div *ngIf="item[0].payload.doc.data().mode == 'driver'">
+                       Driver 🚗 
+                     </div>
+                     </ion-button>
             </ion-item>
         
         
@@ -54,7 +59,7 @@
                 <h3>Your profile is empty , fill it to continue</h3>
               </ion-col>
               <ion-col size="12" text-center>
-                <ion-button (click)="goedit()">Fill it</ion-button>
+                <ion-button [routerLink]="['/edit-user']"  >Fill it</ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -67,10 +72,10 @@
         <h2 class="goodfont" style="font-size:38px;" padding>Your info</h2>
         <ion-row>
           <ion-col size="6">
-              <ion-card  color="light" >
+              <ion-card  color="primary" >
                   <ion-card-header>
-                      <ion-card-title style="color:var(--ion-color-medium)" class="goodfont">Rides</ion-card-title>
-                      <ion-card-subtitle style="font-size:40px;color:var(--ion-color-primary)!important" class="goodfont">{{item[0].payload.doc.data().weight}}10</ion-card-subtitle>
+                      <ion-card-title style="color:var(--ion-color-light)" class="goodfont">Rides</ion-card-title>
+                      <ion-card-subtitle style="font-size:40px;color:var(--ion-color-light)!important" class="goodfont">{{item[0].payload.doc.data().weight}}10</ion-card-subtitle>
                       
                     </ion-card-header>
                   
@@ -78,7 +83,7 @@
           </ion-col>
       
           <ion-col size="6">
-              <ion-card  color="light" >
+              <ion-card  color="secundary" >
                   <ion-card-header>
                       <ion-card-title style="color:var(--ion-color-medium)" class="goodfont">Stars</ion-card-title>
                       <ion-card-subtitle style="font-size:40px;color:var(--ion-color-tertiary)!important" class="goodfont">

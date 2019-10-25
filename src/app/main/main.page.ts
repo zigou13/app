@@ -1,7 +1,6 @@
 
 import { Component , OnInit} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ServicesService } from '../services/services.service';
 
@@ -14,6 +13,7 @@ import { RidesService } from '../services/rides.service';
 import { ModalController } from '@ionic/angular';
 
 import { ModalPage } from '../modal/modal.page';
+
 
 
 declare var google;
@@ -40,14 +40,17 @@ export class MainPage implements OnInit {
 
   rides: any;
 
+  rideszone: any;
+
+  zone = '94901';
+
   constructor(
     private aut: AngularFireAuth,
-    private router: Router , public services: ServicesService
-    , private http: HttpClient,
+    private router: Router , public services: ServicesService,
     public actionSheetController: ActionSheetController,
     private geolocation: Geolocation ,
     private ridesservice: RidesService,
-    private modalController: ModalController ) {
+    private modalController: ModalController) {
 
       setTimeout(() => {
       this.rutes();
@@ -64,13 +67,12 @@ export class MainPage implements OnInit {
     this.getrides();
   }
 
-  async getrides() {
-    await this.ridesservice.functiongetRides('94305').subscribe((data: any) => {
+  getrides() {
+     this.ridesservice.functiongetRides(this.zone).subscribe((data: any) => {
       console.log(data);
       this.rides = data;
     });
   }
-
   posicion() {
     this.geolocation.getCurrentPosition().then((resp) => {
         this.lat = resp.coords.latitude;
@@ -118,10 +120,15 @@ export class MainPage implements OnInit {
         console.log('Profile not empty');
         console.log(data);
         this.item = data;
+        console.log(data[0].payload.doc.data().zone);
+        if ( data[0].payload.doc.data().zone === null ) {
+          console.log('No zone');
+        } else  {
+          this.zone = data[0].payload.doc.data().zone;
+        }
       }
     });
   }
-
 
   profile() {
     this.router.navigateByUrl(`profile`);
@@ -137,7 +144,7 @@ export class MainPage implements OnInit {
   // Maps
   async rutes() {
 
-     this.ridesservice.functiongetRides('28110').subscribe((data: any) => {
+     this.ridesservice.functiongetRides(this.zone).subscribe((data: any) => {
       console.log(data);
         for (let i = 0; i < data.length; i++) {
           console.log(data[i][0].payload.doc.data().id);
@@ -152,8 +159,11 @@ export class MainPage implements OnInit {
                     this.directionsDisplay.setDirections(response);
 
                     this.directionsDisplay = new google.maps.DirectionsRenderer({
-                        suppressBicyclingLayer: true
-                        // suppressMarkers: true
+                        suppressBicyclingLayer: true,
+                        // suppressMarkers: true,
+                        polylineOptions: {
+                          strokeColor: 'red'
+                        }
                     });
                     const myRoute = response.routes[0].legs[0];
                     const marker = new google.maps.Marker({

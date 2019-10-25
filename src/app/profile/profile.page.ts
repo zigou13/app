@@ -60,10 +60,6 @@ export class ProfilePage implements OnInit {
   }
 
 
-  goedit() {
-    this.rout.navigateByUrl(`/edit-profile`);
-  }
-
   async signOut() {
     const res = await this.aut.auth.signOut();
     console.log(res);

@@ -2,7 +2,7 @@
     <ion-menu auto-hide="true"    side="start" menuId="push">
         <ion-header mode="ios">
           <ion-toolbar  mode="ios">
-            <ion-title color="primary" class="goodfont">Uicar</ion-title>
+            <ion-title color="primary" class="goodfont">Menu</ion-title>
           </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -14,6 +14,10 @@
           <ion-item (click)="open('chats')"  >
               <ion-icon name="chatbubbles"  color="secondary"mode="ios"slot="start"></ion-icon>
               <p class="goodfont">Chats</p>
+          </ion-item> 
+          <ion-item (click)="open('create')"  >
+              <ion-icon name="add-circle-outline"  color="secondary"mode="ios"slot="start"></ion-icon>
+              <p class="goodfont">Create ride</p>
           </ion-item> 
           <ion-item (click)="open('terms')"  >
               <ion-icon name="help-circle-outline"  color="secondary" mode="ios"slot="start"></ion-icon>

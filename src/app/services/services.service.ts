@@ -74,4 +74,20 @@ export class ServicesService {
     });
   }
 
+  getride(id) {
+    this.itemsCollection = this.afs.collection<any>(`trayectos/${id}/info/`);
+
+    return this.itemsCollection.snapshotChanges().pipe(map((info: any[]) => {
+      this.info = [];
+
+      for (const infos of info) {
+        this.info.unshift(infos);
+      }
+
+      return this.info;
+    }));
+  }
+
+
+
 }
