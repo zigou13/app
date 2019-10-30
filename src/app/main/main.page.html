@@ -22,7 +22,7 @@
         <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you {{ item[0].payload.doc.data().zone }}</h5>
     </div>
     <div  *ngFor="let item of rides">
-    <ion-card [routerLink]="['/ride' , item[0].payload.doc.data().id]"   mode="ios" *ngIf="item[0].payload.doc.data().inicio !== null" >
+    <ion-card (click)="gotoride(item[0].payload.doc.data().id)"   mode="ios" *ngIf="item[0].payload.doc.data().inicio !== null" >
         <ion-card-content style="height: 110px;border-radius: 100px !important">
             <ion-row class="carta">
                 <ion-col class="cut" size="5">

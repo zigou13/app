@@ -67,6 +67,10 @@ export class MainPage implements OnInit {
     this.getrides();
   }
 
+  gotoride(id) {
+    this.router.navigateByUrl(`ride/${id}`);
+  }
+
   getrides() {
      this.ridesservice.functiongetRides(this.zone).subscribe((data: any) => {
       console.log(data);

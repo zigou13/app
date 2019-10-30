@@ -11,4 +11,31 @@
 
 <ion-content>
     <div margin-bottom #map class="map" id="map2" style="position: relative"></div>
+
+    <ion-card mode="ios">
+      <ion-card-header>
+
+          <ion-card-title>{{ride[0].payload.doc.data().adress}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+          <ion-card-subtitle> {{ride[0].payload.doc.data().adress}}</ion-card-subtitle>
+          {{ ride.inicio }}
+          <br><br>
+          <ion-card-subtitle> {{ride[0].payload.doc.data().adress}}</ion-card-subtitle>
+          {{ride[0].payload.doc.data().adress}}
+          <br><br><br>
+          <ion-card-subtitle  *ngIf="!item.rutine">{{ ride.fecha | date:'short' }} </ion-card-subtitle>
+
+      <ion-item *ngIf="ride.rutine">
+              <ion-card-subtitle>{{ ride.hora }} </ion-card-subtitle>
+          <ion-chip color="danger"  slot="end">
+                
+
+              <ion-label color="danger">{{ride[0].payload.doc.data().adress}}</ion-label>
+          </ion-chip>
+      </ion-item>
+      
+      </ion-card-content>
+    </ion-card>
 </ion-content>
