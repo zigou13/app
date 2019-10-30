@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AlertController } from '@ionic/angular';
-
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+declare var google;
 
 declare var google;
 
@@ -14,118 +12,74 @@ declare var google;
   templateUrl: './create.page.html',
   styleUrls: ['./create.page.scss'],
 })
-export class CreatePage implements OnInit {
+export class CreatePage implements OnInit, AfterViewInit {
 
-  fecha = Date.now();
-  zones: any;
-  inicio2: string;
-  destino2: string;
-  hour = 200;
-  fecharide = 1563556794360;
-  rutina = false;
-  asientos: string;
-  vehiculo = 'car';
-  descripcion: string;
-  uid: string;
+  @ViewChild('mapElement') mapNativeElement: ElementRef;
+  @ViewChild('autoCompleteInput') inputNativeElement: any;
+  @ViewChild('autoCompleteInput2') inputNativeElement2: any;
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+  directionForm: FormGroup;
+  currentLocation: any = {
+    lat: 0,
+    lng: 0
+  };
+  lat: any;
+  lng: any;
 
-  lugar1: string;
-  lugar2: string;
-
-  errore: string;
-
-  input = <HTMLInputElement>document.getElementById('pac-input');
-  input2 = <HTMLInputElement>document.getElementById('pac-input2');
-
-  public form = [
-    { val: 'Rutine', isChecked: false },
-  ];
-
-  horas = ['00:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00',
-    '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
-    '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
-
-
-
-
-  constructor(
-    private http: HttpClient,
-    public router: Router,
-    private aut: AngularFireAuth,
-    public alertController: AlertController) {
-
+  constructor(private fb: FormBuilder, private geolocation: Geolocation) {
+    this.createDirectionForm();
   }
-
 
   ngOnInit() {
-    this.logueado();
-
-  }
-
-  async logueado() {
-    await this.aut.authState
-      .subscribe(
-        user => {
-          if (!user) {
-            this.router.navigate(['/login']);
-          } else {
-            console.log('logueado');
-            this.uid = user.uid;
-          }
-        });
-
-    return this.uid;
-  }
-
-  moveFocus(nextElement) {
-    nextElement.setFocus();
-  }
-
-
-  async error(mensaje: string) {
-    const alert = await this.alertController.create({
-      message: mensaje,
-      buttons: ['OK']
+    this.geolocation.getCurrentPosition().then((resp) => {
+      localStorage.setItem('lat', JSON.stringify(resp.coords.latitude));
+      localStorage.setItem('lng', JSON.stringify(resp.coords.longitude));
+      this.currentLocation.lat = resp.coords.latitude;
+      this.currentLocation.lng = resp.coords.longitude;
     });
+    this.lat = JSON.parse(localStorage.getItem('lat'));
+    this.lng = JSON.parse(localStorage.getItem('lng'));
   }
-
-
-  async initMap(errore: string) {
-    const input = <HTMLInputElement>document.getElementById('pac-input-create');
-    const input2 = <HTMLInputElement>document.getElementById('pac-input-create2');
-
-    this.lugar1 = input.value;
-    this.lugar2 = input2.value;
-
-
-    const autocomplete = new google.maps.places.Autocomplete(input);
-    const autocomplete2 = new google.maps.places.Autocomplete(input2);
-
-    autocomplete.setFields(
-      ['address_components', 'geometry', 'icon', 'name']);
-    autocomplete2.setFields(
-      ['address_components', 'geometry', 'icon', 'name']);
+  ngAfterViewInit(): void {
+    const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+      zoom: 12,
+      center: { lat: Number(this.lat), lng: Number(this.lng) }
+    });
+    this.directionsDisplay.setMap(map);
 
     const infowindow = new google.maps.InfoWindow();
-
     const infowindowContent = document.getElementById('infowindow-content');
     const infowindowContent2 = document.getElementById('infowindow-content2');
-    const infowindowContent3 = document.getElementById('infowindow-content3');
 
     infowindow.setContent(infowindowContent);
     infowindow.setContent(infowindowContent2);
-    infowindow.setContent(infowindowContent3);
 
-    autocomplete.addListener('place_changed', function () {
+
+    const marker = new google.maps.Marker({
+      map: map,
+      anchorPoint: new google.maps.Point(0, -29)
+    });
+    const autocomplete = new google.maps.places.Autocomplete(this.inputNativeElement.nativeElement as HTMLInputElement);
+    const autocomplete2 = new google.maps.places.Autocomplete(this.inputNativeElement2.nativeElement as HTMLInputElement);
+    autocomplete.addListener('place_changed', () => {
       infowindow.close();
+      marker.setVisible(false);
       const place = autocomplete.getPlace();
-
-
-
       if (!place.geometry) {
-        window.alert(errore);
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert('No details available for input: ' + place.name);
         return;
       }
-
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);  // Why 17? Because it looks good.
+      }
+      marker.setPosition(place.geometry.location);
+      marker.setVisible(true);
       let address = '';
       if (place.address_components) {
         address = [
@@ -134,36 +88,30 @@ export class CreatePage implements OnInit {
           (place.address_components[2] && place.address_components[2].short_name || '')
         ].join(' ');
       }
-
       infowindowContent.children['place-icon'].src = place.icon;
       infowindowContent.children['place-name'].textContent = place.name;
       infowindowContent.children['place-address'].textContent = address;
-
-
-      console.log(place);
-
-      if (place.address_components[place.address_components.length - 1].types[0] === 'postal_code') {
-        console.log('tiene codigo postal');
-        localStorage.setItem('ubic1', input.value);
-        infowindowContent2.children['place-ub1'].textContent = input.value;
-        infowindowContent2.children['place-code'].textContent =
-          place.address_components[place.address_components.length - 1].long_name;
-        localStorage.setItem('cod1', place.address_components[place.address_components.length - 1].long_name);
-      } else {
-        input.value = '';
-        alert(errore);
-      }
+      infowindow.open(map, marker);
     });
 
-    autocomplete2.addListener('place_changed', function () {
+    autocomplete2.addListener('place_changed', () => {
       infowindow.close();
+      marker.setVisible(false);
       const place = autocomplete2.getPlace();
-
       if (!place.geometry) {
-        window.alert(errore);
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert('No details available for input: ' + place.name);
         return;
       }
-
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);  // Why 17? Because it looks good.
+      }
+      marker.setPosition(place.geometry.location);
+      marker.setVisible(true);
       let address = '';
       if (place.address_components) {
         address = [
@@ -172,41 +120,32 @@ export class CreatePage implements OnInit {
           (place.address_components[2] && place.address_components[2].short_name || '')
         ].join(' ');
       }
-
-      infowindowContent.children['place-icon'].src = place.icon;
-      infowindowContent.children['place-name'].textContent = place.name;
-      infowindowContent.children['place-address'].textContent = address;
-
-      console.log(place);
-      if (place.address_components[place.address_components.length - 1].types[0] === 'postal_code') {
-        console.log('tiene codigo postal');
-        localStorage.setItem('ubic2', input2.value);
-        infowindowContent3.children['place-ub2'].textContent =  input2.value;
-        infowindowContent3.children['place-code2'].textContent =
-          place.address_components[place.address_components.length - 1].long_name;
-        localStorage.setItem('cod2', place.address_components[place.address_components.length - 1].long_name);
-      } else {
-        input2.value = '';
-        window.alert(errore);
-      }
+      infowindowContent2.children['place-icon'].src = place.icon;
+      infowindowContent2.children['place-name'].textContent = place.name;
+      infowindowContent2.children['place-address'].textContent = address;
+      infowindow.open(map, marker);
     });
   }
 
-  guardar() {
-    if (localStorage.getItem('ubic1') !== null && localStorage.getItem('ubic2') !== null) {
-      const valor = {
-        ubi1: localStorage.getItem('ubic1'),
-        ubi2: localStorage.getItem('ubic2'),
-        cod1: localStorage.getItem('cod1'),
-        cod2: localStorage.getItem('cod2')
-      };
-      console.log(valor);
-      localStorage.clear();
-    } else {
-      alert('los valores tienen que estar llenos');
-    }
-
+  createDirectionForm() {
+    this.directionForm = this.fb.group({
+      source: ['', Validators.required],
+      destination: ['', Validators.required]
+    });
   }
 
-
+  calculateAndDisplayRoute(formValues) {
+    const that = this;
+    this.directionsService.route({
+      origin: formValues.source,
+      destination: formValues.destination,
+      travelMode: 'DRIVING'
+    }, (response, status) => {
+      if (status === 'OK') {
+        that.directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
 }
