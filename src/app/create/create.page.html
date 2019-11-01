@@ -14,10 +14,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content >
 
 
-  <form *ngIf="band" class="form" [formGroup]="directionForm">
+  <form padding *ngIf="band" class="form" [formGroup]="directionForm">
     <ion-item>
       <input class="input" formControlName="source" id="pac-input-create" #autoCompleteInput placeholder="Begin"
         type="text">
@@ -33,13 +33,13 @@
 
 
 
-  <div class="ion-margin-top" id="infowindow-content">
+  <div style="display: none" class="ion-margin-top" id="infowindow-content">
     <img src="" width="16" height="16" id="place-icon">
     <span id="place-name" class="title"></span><br>
     <span id="place-address"></span>
   </div>
 
-  <div id="infowindow-content2">
+  <div style="display: none"  id="infowindow-content2">
     Ubicacion inicio:
     <img src="" width="16" height="16" id="place-icon">
     <h3 id="place-ub1"></h3>
@@ -47,7 +47,7 @@
     <h3 id="place-code"></h3>
   </div>
 
-  <div id="infowindow-content3">
+  <div style="display: none"  id="infowindow-content3">
     Ubicacion destino:
     <img src="" width="16" height="16" id="place-icon">
     <h3 id="place-ub2"></h3>
