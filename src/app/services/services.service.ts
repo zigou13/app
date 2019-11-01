@@ -88,6 +88,31 @@ export class ServicesService {
     }));
   }
 
+  createride(data) {
+    return new Promise<any>((resolve, reject) => {
+
+      const num = Math.floor(Math.random() * 6) + 1;
+      const id = 'idride-' + num * Date.now();
+      this.afs.collection(`zones/${data.zone}/rides`).doc(id).update({
+        zone: data.zone,
+        zipcode1: data.zipcode1,
+        zipcode2: data.zipcode2,
+        date: data.date,
+        creationdate: data.creationdate,
+        uid: data.uid,
+        information: data.information,
+        start: data.start,
+        destine: data.destine,
+        rutine: data.rutine,
+        id: id,
+      });
+  });
+
+}
+
+
+
 
 
 }
+

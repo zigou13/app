@@ -25,7 +25,7 @@ declare var google;
 })
 export class MainPage implements OnInit {
 
-  item: any;
+  item: any[] = [];
   id: string;
 
   map: any;
@@ -38,7 +38,7 @@ export class MainPage implements OnInit {
   num: any;
   lng: number;
 
-  rides: any;
+  rides: any[] = [];
 
   rideszone: any;
 
@@ -54,8 +54,6 @@ export class MainPage implements OnInit {
 
       setTimeout(() => {
       this.rutes();
-      this.posicion();
-      this.getrides();
       }, 3000);
     }
 
@@ -215,9 +213,14 @@ emptymap() {
 
 attachInstructionText(marker) {
     const self = this;
+    console.log(marker.id);
+    const id = marker.id;
+    console.log(self.id);
+
     google.maps.event.addListener(marker, 'click', function () {
-        // this.router.navigateByUrl( '/ride' , this.id),
-        console.log(this.id);
+      console.log(marker.id);
+        this.router.navigateByUrl( '/ride' , marker.id),
+        console.log(marker.id);
     });
 }
 
