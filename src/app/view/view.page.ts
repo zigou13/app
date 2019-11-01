@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from '../services/services.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ChatService } from '../services/chat.service';
@@ -18,11 +18,16 @@ export class ViewPage implements OnInit {
   uid: string;
   chat: any;
 
-  constructor(public active: ActivatedRoute , public services: ServicesService , public aut: AngularFireAuth ,
-    public chatservice: ChatService , private alertController: AlertController) {
+  ngOnInit() {
     this.useruid = this.active.snapshot.paramMap.get('uid');
-    this.getProfile(this.useruid);
     this.loged();
+    this.getProfile(this.useruid);
+
+  }
+
+
+  constructor(public active: ActivatedRoute , public services: ServicesService , public aut: AngularFireAuth ,
+    public chatservice: ChatService , private alertController: AlertController , private router: Router) {
     }
 
   async getProfile(id) {
@@ -108,7 +113,5 @@ export class ViewPage implements OnInit {
 
 
 
-  ngOnInit() {
-  }
 
 }

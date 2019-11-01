@@ -33,7 +33,7 @@
                 <h1>{{item[0].payload.doc.data().adress}}</h1>
                 
               </ion-label>
-                <ion-button size="large" slot="end">
+                <ion-button [routerLink]="['/fill']"   size="large" slot="end">
   
                     <div *ngIf="item[0].payload.doc.data().mode != 'driver'">
                       Rider 🚶

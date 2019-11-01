@@ -7,7 +7,7 @@
          </ion-button>
       </ion-buttons>
 
-      <ion-buttons slot="end">
+      <ion-buttons *ngIf="uid !== useruid" slot="end">
           <ion-button (click)="presentAlertConfirm()" >
             <ion-icon mode="ios" color="secondary" slot="icon-only" name="alert"></ion-icon>
          </ion-button>
@@ -118,7 +118,7 @@
           
   </ion-content>
 
-  <ion-fab (click)="chatservice.checkchatexistence(uid , useruid)" vertical="bottom" horizontal="end" >
+  <ion-fab *ngIf="uid !== useruid" (click)="chatservice.checkchatexistence(uid , useruid)" vertical="bottom" horizontal="end" >
       <ion-fab-button >
         <ion-icon mode="ios" name="chatbubbles"></ion-icon>
       </ion-fab-button>

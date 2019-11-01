@@ -17,6 +17,8 @@ export class RidePage implements OnInit {
   ride: any;
   item: any;
 
+  uid: string;
+
   constructor(private rout: Router, private services: ServicesService
     , public active: ActivatedRoute) {
     this.id = this.active.snapshot.paramMap.get('id');
@@ -38,6 +40,10 @@ export class RidePage implements OnInit {
 
   ngOnInit() {
     this.getride();
+  }
+
+  gotoprofile(uid) {
+    this.rout.navigateByUrl(`view/${uid}`);
   }
 
   async getProfile(id) {

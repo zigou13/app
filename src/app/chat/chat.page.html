@@ -6,8 +6,8 @@
                     <ion-icon mode="ios" color="primary" slot="icon-only" name="arrow-back"></ion-icon>
                 </ion-button>
             </ion-buttons>
-            <ion-title>{{ item.payload.doc.data().name }}</ion-title>
-            <ion-avatar >
+            <ion-title (click)="gotoprofile(item.payload.doc.data().uid)" >{{ item.payload.doc.data().name }}</ion-title>
+            <ion-avatar (click)="gotoprofile(item.payload.doc.data().uid)" >
                 <img (click)="gotoprofile(item.payload.doc.data().uid)"  class="avatar"
                     [src]="item.payload.doc.data().img" />
             </ion-avatar>
