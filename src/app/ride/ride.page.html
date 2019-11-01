@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar >
     <ion-title>Ride info</ion-title>
     <ion-buttons  slot="start">
         <ion-button [routerLink]="['/']"  >
@@ -8,34 +8,31 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<div no-padding margin-bottom #map class="map" id="map3" style="position: relative"></div>
 
-<ion-content>
-    <div margin-bottom #map class="map" id="map2" style="position: relative"></div>
 
+<ion-content padding>
+   
+    
+  
+    <h2 class="goodfont" style="font-size:38px;" > {{ride[0].payload.doc.data().inicio}}</h2>
+    
     <ion-card mode="ios">
-      <ion-card-header>
+    
+      <ion-row>
+  
+        <ion-col size="6">
+            <img  text-center style=" width: 100%;height: 170px;object-fit: cover;" src="{{item[0].payload.doc.data().img}}" alt="">
+        
+          </ion-col>
+          <ion-col size="6">
+              <h4 class="goodfont" padding> {{item[0].payload.doc.data().name}}</h4>
+    
+  
+          </ion-col>
 
-          <ion-card-title>{{ride[0].payload.doc.data().adress}}</ion-card-title>
-      </ion-card-header>
+      </ion-row>
 
-      <ion-card-content>
-          <ion-card-subtitle> {{ride[0].payload.doc.data().adress}}</ion-card-subtitle>
-          {{ ride.inicio }}
-          <br><br>
-          <ion-card-subtitle> {{ride[0].payload.doc.data().adress}}</ion-card-subtitle>
-          {{ride[0].payload.doc.data().adress}}
-          <br><br><br>
-          <ion-card-subtitle  *ngIf="!item.rutine">{{ ride.fecha | date:'short' }} </ion-card-subtitle>
-
-      <ion-item *ngIf="ride.rutine">
-              <ion-card-subtitle>{{ ride.hora }} </ion-card-subtitle>
-          <ion-chip color="danger"  slot="end">
-                
-
-              <ion-label color="danger">{{ride[0].payload.doc.data().adress}}</ion-label>
-          </ion-chip>
-      </ion-item>
-      
-      </ion-card-content>
     </ion-card>
+ 
 </ion-content>
