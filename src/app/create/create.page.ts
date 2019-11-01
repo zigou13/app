@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-declare var google;
+import { AlertController } from '@ionic/angular';
+
 
 declare var google;
 
@@ -15,8 +16,8 @@ declare var google;
 export class CreatePage implements OnInit, AfterViewInit {
 
   @ViewChild('mapElement') mapNativeElement: ElementRef;
-  @ViewChild('autoCompleteInput') inputNativeElement: any;
-  @ViewChild('autoCompleteInput2') inputNativeElement2: any;
+  @ViewChild('autoCompleteInput') inputNativeElement: ElementRef;
+  @ViewChild('autoCompleteInput2') inputNativeElement2: ElementRef;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   directionForm: FormGroup;
@@ -27,59 +28,108 @@ export class CreatePage implements OnInit, AfterViewInit {
   lat: any;
   lng: any;
 
-  constructor(private fb: FormBuilder, private geolocation: Geolocation) {
+  errore: string;
+  lugar1: string;
+  lugar2: string;
+
+  ub1: string;
+  ub2: string;
+
+  band = true;
+
+
+  constructor(
+    private fb: FormBuilder,
+    private alertCtrl: AlertController,
+    private geolocation: Geolocation) {
     this.createDirectionForm();
   }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      localStorage.setItem('lat', JSON.stringify(resp.coords.latitude));
-      localStorage.setItem('lng', JSON.stringify(resp.coords.longitude));
+    localStorage.clear();
+    this.obtenerUbicacion();
+  }
+
+  async obtenerUbicacion() {
+    await this.geolocation.getCurrentPosition().then((resp) => {
       this.currentLocation.lat = resp.coords.latitude;
       this.currentLocation.lng = resp.coords.longitude;
+
+      const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+        zoom: 16,
+        center: { lat: this.currentLocation.lat, lng: this.currentLocation.lng }
+      });
+      /*location object*/
+      const pos = {
+        lat: this.currentLocation.lat,
+        lng: this.currentLocation.lng
+      };
+      map.setCenter(pos);
+      const icon = {
+        url: 'assets/icon/u.png', // image url
+        scaledSize: new google.maps.Size(50, 50), // scaled size
+      };
+      const marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        title: 'Hello World!',
+        icon: icon
+      });
+      this.directionsDisplay.setMap(map);
     });
-    this.lat = JSON.parse(localStorage.getItem('lat'));
-    this.lng = JSON.parse(localStorage.getItem('lng'));
   }
+
+  select() {
+    this.band = true;
+    this.createDirectionForm();
+    this.obtenerUbicacion();
+  }
+
+  moveFocus(nextElement) {
+    nextElement.setFocus();
+  }
+
   ngAfterViewInit(): void {
-    const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
-      zoom: 12,
-      center: { lat: Number(this.lat), lng: Number(this.lng) }
-    });
-    this.directionsDisplay.setMap(map);
+    this.initMap();
+  }
+
+
+  initMap() {
+    const input = <HTMLInputElement>document.getElementById('pac-input-create');
+    const input2 = <HTMLInputElement>document.getElementById('pac-input-create2');
+
+    this.lugar1 = input.value;
+    this.lugar2 = input2.value;
+
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    const autocomplete2 = new google.maps.places.Autocomplete(input2);
+
+    autocomplete.setFields(
+      ['address_components', 'geometry', 'icon', 'name']);
+    autocomplete2.setFields(
+      ['address_components', 'geometry', 'icon', 'name']);
 
     const infowindow = new google.maps.InfoWindow();
+
     const infowindowContent = document.getElementById('infowindow-content');
     const infowindowContent2 = document.getElementById('infowindow-content2');
+    const infowindowContent3 = document.getElementById('infowindow-content3');
 
     infowindow.setContent(infowindowContent);
     infowindow.setContent(infowindowContent2);
+    infowindow.setContent(infowindowContent3);
 
-
-    const marker = new google.maps.Marker({
-      map: map,
-      anchorPoint: new google.maps.Point(0, -29)
-    });
-    const autocomplete = new google.maps.places.Autocomplete(this.inputNativeElement.nativeElement as HTMLInputElement);
-    const autocomplete2 = new google.maps.places.Autocomplete(this.inputNativeElement2.nativeElement as HTMLInputElement);
     autocomplete.addListener('place_changed', () => {
       infowindow.close();
-      marker.setVisible(false);
       const place = autocomplete.getPlace();
+
+
+
       if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert('No details available for input: ' + place.name);
+        this.error('error');
         return;
       }
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);  // Why 17? Because it looks good.
-      }
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
+
       let address = '';
       if (place.address_components) {
         address = [
@@ -88,30 +138,35 @@ export class CreatePage implements OnInit, AfterViewInit {
           (place.address_components[2] && place.address_components[2].short_name || '')
         ].join(' ');
       }
+
       infowindowContent.children['place-icon'].src = place.icon;
       infowindowContent.children['place-name'].textContent = place.name;
       infowindowContent.children['place-address'].textContent = address;
-      infowindow.open(map, marker);
+
+
+
+      if (place.address_components[place.address_components.length - 1].types[0] === 'postal_code') {
+        // console.log('tiene codigo postal');
+        localStorage.setItem('ubic1', input.value);
+        infowindowContent2.children['place-ub1'].textContent = input.value;
+        infowindowContent2.children['place-code'].textContent =
+          place.address_components[place.address_components.length - 1].long_name;
+        localStorage.setItem('cod1', place.address_components[place.address_components.length - 1].long_name);
+      } else {
+        input.value = '';
+        this.error('error');
+      }
     });
 
     autocomplete2.addListener('place_changed', () => {
       infowindow.close();
-      marker.setVisible(false);
       const place = autocomplete2.getPlace();
+
       if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert('No details available for input: ' + place.name);
+        this.error('error');
         return;
       }
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);  // Why 17? Because it looks good.
-      }
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
+
       let address = '';
       if (place.address_components) {
         address = [
@@ -120,10 +175,33 @@ export class CreatePage implements OnInit, AfterViewInit {
           (place.address_components[2] && place.address_components[2].short_name || '')
         ].join(' ');
       }
-      infowindowContent2.children['place-icon'].src = place.icon;
-      infowindowContent2.children['place-name'].textContent = place.name;
-      infowindowContent2.children['place-address'].textContent = address;
-      infowindow.open(map, marker);
+
+      infowindowContent.children['place-icon'].src = place.icon;
+      infowindowContent.children['place-name'].textContent = place.name;
+      infowindowContent.children['place-address'].textContent = address;
+
+      // console.log(place);
+      if (place.address_components[place.address_components.length - 1].types[0] === 'postal_code') {
+        // console.log('tiene codigo postal');
+        localStorage.setItem('ubic2', input2.value);
+        infowindowContent3.children['place-ub2'].textContent = input2.value;
+        infowindowContent3.children['place-code2'].textContent =
+          place.address_components[place.address_components.length - 1].long_name;
+        localStorage.setItem('cod2', place.address_components[place.address_components.length - 1].long_name);
+        this.calculateAndDisplayRoute();
+      } else {
+        input2.value = '';
+        this.error('error');
+      }
+
+    });
+
+  }
+
+  async error(mensaje: string) {
+    const alert = await this.alertCtrl.create({
+      message: mensaje,
+      buttons: ['OK']
     });
   }
 
@@ -134,17 +212,22 @@ export class CreatePage implements OnInit, AfterViewInit {
     });
   }
 
-  calculateAndDisplayRoute(formValues) {
+  calculateAndDisplayRoute() {
+
+    this.ub1 = localStorage.getItem('ubic1');
+    this.ub2 = localStorage.getItem('ubic2');
     const that = this;
     this.directionsService.route({
-      origin: formValues.source,
-      destination: formValues.destination,
+      origin: this.ub1,
+      destination: this.ub2,
       travelMode: 'DRIVING'
     }, (response, status) => {
       if (status === 'OK') {
         that.directionsDisplay.setDirections(response);
+        this.band = false;
+
       } else {
-        window.alert('Directions request failed due to ' + status);
+        this.error(status);
       }
     });
   }
