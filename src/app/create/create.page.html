@@ -6,31 +6,34 @@
       </ion-button>
     </ion-buttons>
     <ion-title color="primary" class="goodfont">Create ride</ion-title>
-    <ion-buttons slot="end" *ngIf="!band">
-      <ion-button (click)="select()">
-        <ion-icon mode="ios" color="success" slot="icon-only" name="add"></ion-icon>
+    <ion-buttons  slot="end" *ngIf="!band">
+      <ion-button padding (click)="select()">
+       Edit
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content fullscreen>
 
-
-  <form padding *ngIf="band" class="form" [formGroup]="directionForm">
-    <ion-item>
-      <input class="input" formControlName="source" id="pac-input-create" #autoCompleteInput placeholder="Begin"
-        type="text">
-    </ion-item>
-    <ion-item>
-      <input class="input" formControlName="destination" id="pac-input-create2" #autoCompleteInput2
-        placeholder="Destino" type="text">
-    </ion-item>
+  <!-- <div *ngIf="num == 0"> -->
+  <form *ngIf="num == 0 && band" padding   [formGroup]="directionForm">
+      <ion-item>
+          <ion-input  formControlName="source" id="pac-input-create" #autoCompleteInput placeholder="Begin"
+          type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-input  formControlName="destination" id="pac-input-create2" #autoCompleteInput2
+          placeholder="Destine" type="text"></ion-input>
+      </ion-item>
+      
+      
     <!-- <ion-button expand="full" type="submit" [disabled]="directionForm.invalid">Get Direction</ion-button> -->
   </form>
 
-  <div #mapElement class="map"></div>
-
+  <div *ngIf="num == 0" #mapElement class="map"></div>
+  
+  
 
 
   <div style="display: none" class="ion-margin-top" id="infowindow-content">
@@ -54,5 +57,47 @@
     Codigo postal destino:
     <h3 id="place-code2"></h3>
   </div>
+<!-- </div> -->
 
+<div *ngIf="num === 1" padding>
+    <br>
+    <h1 text-center class="goodfont">Put some info of your ride</h1> 
+    <br>
+    <br>
+    <br>
+    <ion-card mode="ios">
+        <ion-card-header>
+            <ion-card-title class="goodfont">Info</ion-card-title>
+          
+          </ion-card-header>
+          <div padding>
+          <ion-textarea [(ngModel)]="information" style="border-radius: 10px; border: 1px var(--ion-color-primary) solid; height: 80px;" type="text" text-center placeholder="I will go by 5pm..."></ion-textarea>
+
+          </div>
+
+        <br>
+        <br>
+        <br>
+    </ion-card>
+    <br>
+    <br>
+
+    <ion-button class="goodfont"  expand="block" size="large"  color="light"   mode="ios" text-center  >
+        <ion-icon color="primary" name="checkmark-circle"></ion-icon>  Done
+      </ion-button>  
+        <br>
+        <br>
+        <br>
+      <ion-button  color="primary" *ngIf="num > 0  " (click)="back()" mode="ios" text-center  >
+          <ion-icon mode="ios" name="arrow-back"></ion-icon> 
+        </ion-button>    
+</div>
 </ion-content>
+
+<ion-footer *ngIf=" num == 0" padding class="bg-transparent" >
+    <ion-button   class="form goodfont" text-center 
+    size="large" (click)="num = 1 " expand="block" >
+       Next
+</ion-button>
+
+</ion-footer>

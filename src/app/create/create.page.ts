@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 
 declare var google;
@@ -28,12 +28,18 @@ export class CreatePage implements OnInit, AfterViewInit {
   lat: any;
   lng: any;
 
+  num = 0;
+
   errore: string;
   lugar1: string;
   lugar2: string;
 
+  information: string;
+
   ub1: string;
   ub2: string;
+
+  footer2 = false;
 
   band = true;
 
@@ -41,7 +47,8 @@ export class CreatePage implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation ,
+    public loadingController: LoadingController) {
     this.createDirectionForm();
   }
 
@@ -66,8 +73,8 @@ export class CreatePage implements OnInit, AfterViewInit {
       };
       map.setCenter(pos);
       const icon = {
-        url: 'assets/icon/u.png', // image url
-        scaledSize: new google.maps.Size(50, 50), // scaled size
+        // url: 'assets/placeholder.png', // image url
+        // scaledSize: new google.maps.Size(50, 50), // scaled size
       };
       const marker = new google.maps.Marker({
         position: pos,
@@ -81,7 +88,8 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   select() {
     this.band = true;
-    this.createDirectionForm();
+    this.footer2 = true;
+    // this.createDirectionForm();
     this.obtenerUbicacion();
   }
 
@@ -200,9 +208,10 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   async error(mensaje: string) {
     const alert = await this.alertCtrl.create({
-      message: mensaje,
+      message: 'Direcction not valid please be more specific',
       buttons: ['OK']
     });
+    await alert.present();
   }
 
   createDirectionForm() {
@@ -217,12 +226,14 @@ export class CreatePage implements OnInit, AfterViewInit {
     this.ub1 = localStorage.getItem('ubic1');
     this.ub2 = localStorage.getItem('ubic2');
     const that = this;
+    this.presentLoading();
     this.directionsService.route({
       origin: this.ub1,
       destination: this.ub2,
       travelMode: 'DRIVING'
     }, (response, status) => {
       if (status === 'OK') {
+
         that.directionsDisplay.setDirections(response);
         this.band = false;
 
@@ -230,5 +241,25 @@ export class CreatePage implements OnInit, AfterViewInit {
         this.error(status);
       }
     });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Loading route',
+      duration: 1000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
+  }
+
+  create() {
+
+  }
+  back() {
+    this.num = 0;
+    this.select();
   }
 }

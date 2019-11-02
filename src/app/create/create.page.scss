@@ -4,7 +4,9 @@
     width:100%;
     margin: 10px auto;
     padding: 10px 8px 10px 8px;
-    
+    border: 1px solid var(--ion-color-secondary);
+    border-radius: 15px;
+    margin-top: 10px;
   }
   
 
@@ -12,3 +14,40 @@
       width: 100%;
       height: 100%;
   }
+
+  .floatbutton {
+    border: none;
+    position: relative;
+    display: block;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: -40%;
+    font-family: 'Lexend Exa', sans-serif;
+    border-radius: 10px;
+  }
+
+  ion-footer {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+  }
+  
+  /* Show background if class is active */
+  .show-background {
+    border-style: none;
+    background: var(--ion-color-primary);
+  }
+  
+  /* Remove bottom border on md */
+  .footer-md::after {
+    background-image: none;
+  }
+  
+  /* Remove bottom border on ios */
+  .footer-ios ion-footer:last-child {
+    --border-width: 0;
+  }
+  
+
+  ion-item{
+    --ion-background-color:#fff;
+ }
