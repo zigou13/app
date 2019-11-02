@@ -62,8 +62,9 @@ export class ProfilePage implements OnInit {
         this.empty = true;
         this.item = data;
         this.stars = data[0].payload.doc.data().stars;
-        this.numbers = Array(this.stars).fill().map((x, i ) => i ); // [0,1,2,3,4]
+        // this.numbers = Array(5).fill().map((x, i) => i); // [0,1,2,3,4]
         // this.numbers = Array(5).fill(4); // [4,4,4,4,4]
+
       }
     }));
   }
