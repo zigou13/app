@@ -11,12 +11,16 @@ import { ServicesService } from '../services/services.service';
 })
 export class ProfilePage implements OnInit {
 
-  id: any;
+  uid: any;
   item: any;
   anuncios: any;
   empty: Boolean;
 
   rides: any;
+
+  stars: number;
+
+  numbers: any;
 
   constructor(private rout: Router, private services: ServicesService, private aut: AngularFireAuth) {
 
@@ -24,6 +28,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.getLogueado();
+    this.getrides();
    }
 
   getLogueado() {
@@ -32,9 +37,10 @@ export class ProfilePage implements OnInit {
         user => {
           if (user) {
             console.log('logeado');
-            this.id = user.uid;
-            console.log(this.id);
-            this.getProfile(this.id);
+            this.uid = user.uid;
+            console.log(this.uid);
+            this.getProfile(this.uid);
+            this.getrides();
           } else {
             this.rout.navigateByUrl('/login');
           }
@@ -55,6 +61,9 @@ export class ProfilePage implements OnInit {
       } else {
         this.empty = true;
         this.item = data;
+        this.stars = data[0].payload.doc.data().stars;
+        this.numbers = Array(this.stars).fill().map((x, i ) => i ); // [0,1,2,3,4]
+        // this.numbers = Array(5).fill(4); // [4,4,4,4,4]
       }
     }));
   }
@@ -65,6 +74,17 @@ export class ProfilePage implements OnInit {
     console.log(res);
     this.rout.navigateByUrl('/login');
   }
+
+  getrides() {
+    this.services.functiongetRides(this.uid).subscribe((data: any) => {
+     console.log(data);
+     this.rides = data;
+   });
+ }
+ gotoride(id) {
+  this.rout.navigateByUrl(`ride/${id}`);
+}
+
 
 
 }

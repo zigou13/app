@@ -21,7 +21,7 @@ export class RidesService {
   // OMG I AM SOME PROUD OF THIS NEXT 100 LINES OF CODE
 
   functiongetRides(zone) {
-    this.itemsCollection = this.afs.collection<any>(`zonas/${zone}/all`);
+    this.itemsCollection = this.afs.collection<any>(`zones/${zone}/rides`);
 
     // Get the uids
     return this.itemsCollection.snapshotChanges().pipe(map((info2: any[]) => {
@@ -54,7 +54,7 @@ export class RidesService {
 
 
   getRides(id) {
-    this.itemsCollection = this.afs.collection<any>(`trayectos/${id}/info/`);
+    this.itemsCollection = this.afs.collection<any>(`rides/${id}/info/`);
 
     return this.itemsCollection.snapshotChanges().pipe(map((info: any[]) => {
       this.users2 = [];

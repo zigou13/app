@@ -152,8 +152,8 @@ export class MainPage implements OnInit {
           console.log(data[i][0].payload.doc.data().id);
 
             this.directionsService.route({
-                origin: data[i][0].payload.doc.data().inicio,
-                destination: data[i][0].payload.doc.data().destino,
+                origin: data[i][0].payload.doc.data().start,
+                destination: data[i][0].payload.doc.data().destine,
                 travelMode: 'DRIVING'
             }, (response, status) => {
                 const waypoint_markers = [];
@@ -162,10 +162,10 @@ export class MainPage implements OnInit {
 
                     this.directionsDisplay = new google.maps.DirectionsRenderer({
                         suppressBicyclingLayer: true,
-                        // suppressMarkers: true,
-                        polylineOptions: {
-                          strokeColor: 'red'
-                        }
+                        suppressMarkers: true,
+                        // polylineOptions: {
+                        //   strokeColor: 'black'
+                        // }
                     });
                     const myRoute = response.routes[0].legs[0];
                     const marker = new google.maps.Marker({
@@ -206,7 +206,7 @@ emptymap() {
     this.directionsDisplay = new google.maps.DirectionsRenderer();
     this.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 11,
-        mapTypeId: 'terrain',
+        mapTypeId: 'roadmap',
         styles: this.style
     });
 }

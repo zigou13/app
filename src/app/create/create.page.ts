@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ServicesService } from '../services/services.service';
 
 
 declare var google;
@@ -30,32 +32,67 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   num = 0;
 
+  uid: string;
+
   errore: string;
   lugar1: string;
   lugar2: string;
 
+  seats: number;
+  car: string;
+
   information: string;
 
-  ub1: string;
-  ub2: string;
+  start: string;
+  destine: string;
 
   footer2 = false;
 
+  rutine = false;
+
   band = true;
+
+  hour: any = '9:00' ;
+
+  ridedate: any;
+
+
+  public form = [
+    { val: 'Rutine', isChecked: false },
+  ];
 
 
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private geolocation: Geolocation ,
-    public loadingController: LoadingController) {
+    public loadingController: LoadingController ,
+    private aut: AngularFireAuth,
+    public service: ServicesService) {
     this.createDirectionForm();
   }
 
   ngOnInit() {
     localStorage.clear();
     this.obtenerUbicacion();
+    this.logueado();
   }
+
+  logueado() {
+    this.aut.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.uid = user.uid;
+            this.getProfile(this.uid);
+          }
+        },
+        () => {
+          // this.router.navigateByUrl('/login');
+        }
+      );
+  }
+
 
   async obtenerUbicacion() {
     await this.geolocation.getCurrentPosition().then((resp) => {
@@ -223,13 +260,13 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   calculateAndDisplayRoute() {
 
-    this.ub1 = localStorage.getItem('ubic1');
-    this.ub2 = localStorage.getItem('ubic2');
+    this.start = localStorage.getItem('ubic1');
+    this.destine = localStorage.getItem('ubic2');
     const that = this;
-    this.presentLoading();
+    this.presentLoading('Loading route');
     this.directionsService.route({
-      origin: this.ub1,
-      destination: this.ub2,
+      origin: this.start,
+      destination: this.destine,
       travelMode: 'DRIVING'
     }, (response, status) => {
       if (status === 'OK') {
@@ -243,9 +280,9 @@ export class CreatePage implements OnInit, AfterViewInit {
     });
   }
 
-  async presentLoading() {
+  async presentLoading(message) {
     const loading = await this.loadingController.create({
-      message: 'Loading route',
+      message: message,
       duration: 1000
     });
     await loading.present();
@@ -256,10 +293,34 @@ export class CreatePage implements OnInit, AfterViewInit {
   }
 
   create() {
-
+    const data = {
+      zone:  localStorage.getItem('cod1'),
+      zipcode1:  localStorage.getItem('cod1'),
+      zipcode2:  localStorage.getItem('cod1'),
+      ridedate: this.ridedate,
+      uid: this.uid,
+      information: this.information,
+      start: this.start,
+      destine: this.destine,
+      rutine: this.rutine,
+      hour: this.hour,
+      seats: this.seats,
+      car: this.car,
+    };
+    // alert( this.start + this.destine + localStorage.getItem('cod1') + localStorage.getItem('cod2') +
+    //  this.rutine + this.hour + this.ridedate + this.uid );
+    this.service.createride(data);
+    this.presentLoading('Creating ride');
   }
   back() {
     this.num = 0;
     this.select();
   }
+  async getProfile(id) {
+    await this.service.getProfile(id).subscribe((data: any) => {
+
+        this.car = data[0].payload.doc.data().car;
+    });
+  }
+
 }

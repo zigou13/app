@@ -57,14 +57,14 @@ export class RidePage implements OnInit {
     await this.services.getride(this.id).subscribe((data => {
         this.ride = data;
         console.log(data);
-        console.log(this.ride[0].payload.doc.data().inicio);
+        console.log(this.ride[0].payload.doc.data().start);
     }));
   }
   async rutes() {
 
            this.directionsService.route({
-               origin: this.ride[0].payload.doc.data().inicio,
-               destination: this.ride[0].payload.doc.data().destino,
+               origin: this.ride[0].payload.doc.data().start,
+               destination: this.ride[0].payload.doc.data().destine,
                travelMode: 'DRIVING'
            }, (response, status) => {
                const waypoint_markers = [];

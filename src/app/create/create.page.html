@@ -63,15 +63,14 @@
     <br>
     <h1 text-center class="goodfont">Put some info of your ride</h1> 
     <br>
-    <br>
-    <br>
+
     <ion-card mode="ios">
         <ion-card-header>
             <ion-card-title class="goodfont">Info</ion-card-title>
           
           </ion-card-header>
           <div padding>
-          <ion-textarea [(ngModel)]="information" style="border-radius: 10px; border: 1px var(--ion-color-primary) solid; height: 80px;" type="text" text-center placeholder="I will go by 5pm..."></ion-textarea>
+          <ion-textarea [(ngModel)]="information" style="border-radius: 10px;height: 80px;" type="text" text-center placeholder="I will go by 5pm..."></ion-textarea>
 
           </div>
 
@@ -80,10 +79,50 @@
         <br>
     </ion-card>
     <br>
+    <ion-row>
+        <ion-col size="6">
+           
+
+            <ion-item *ngFor="let entry of form">
+                <ion-label style="color:grey;">Rutine</ion-label>
+                <ion-checkbox mode="ios" slot="end"  [(ngModel)]="rutine"></ion-checkbox>
+            </ion-item>
+
+            <ion-col>
+                <ion-item class="main-container" >
+                    <ion-label maxlength="1" style="color:grey;" position="floating">Seats availables</ion-label>
+                    <ion-input max-lenght="1" type="number" [(ngModel)]="seats"></ion-input>
+                </ion-item>
+            </ion-col>
+
+
+        </ion-col>
+        <ion-col size="6" size-md>
+
+            <ion-item id="rounded"   *ngIf="rutine" >
+
+                <ion-label style="color:grey;">Hour ride start</ion-label>
+                <ion-datetime [(ngModel)]="hour"  display-format="HH:mm"></ion-datetime>
+                    
+            </ion-item>
+            <!-- <ion-item  *ngIf="!rutine" id="rounded">
+             
+                <ion-label style="color:grey;">Day of ride</ion-label>
+                <ion-datetime [(ngModel)]="ridedate" display-format="MMM DD" picker-format="MMM DD"   #myPicker   ></ion-datetime>
+                         
+            </ion-item> -->
+
+        </ion-col>
+    </ion-row>
+    
+      
+    <br>
+    <br>
+    <br>
     <br>
 
-    <ion-button class="goodfont"  expand="block" size="large"  color="light"   mode="ios" text-center  >
-        <ion-icon color="primary" name="checkmark-circle"></ion-icon>  Done
+    <ion-button [disabled]="!information || !start || !destine || !seats" (click)="create()" class="goodfont"  expand="block" size="large"  color="light"   mode="ios" text-center  >
+        <ion-icon color="primary" name="checkmark-circle"></ion-icon>  Publish ride
       </ion-button>  
         <br>
         <br>

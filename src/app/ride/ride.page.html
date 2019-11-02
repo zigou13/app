@@ -15,19 +15,19 @@
    
     
   
-    <h2 class="goodfont" ><strong>Ride to  :</strong> {{ride[0].payload.doc.data().inicio}} </h2>
+    <h2 class="goodfont" ><strong>Ride to  :</strong> {{ride[0].payload.doc.data().start}} </h2>
     <br>
     <ion-item>
         <ion-label>
-         <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hora }}
+         <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
         </ion-label>
-        <ion-chip *ngIf="ride[0].payload.doc.data().rutine === false" color="dark">
+        <ion-chip *ngIf="ride[0].payload.doc.data().rutine === true" color="dark">
             <ion-icon color="primary" name="refresh-circle"></ion-icon>
             <ion-label color="primary">Rutine</ion-label>
            
         </ion-chip>
 
-        <ion-chip *ngIf="ride[0].payload.doc.data().rutine !== false" color="dark">
+        <ion-chip *ngIf="ride[0].payload.doc.data().rutine === false" color="dark">
             <ion-icon color="primary" name="calendar"></ion-icon>
             <ion-label color="primary">{{ride[0].payload.doc.data().date }}</ion-label>
            
