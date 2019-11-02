@@ -8,36 +8,40 @@
     <ion-title>Search ride</ion-title>
   </ion-toolbar>
   <div padding>
-      <ion-input id="pac-input"   style="border-radius: 3px; border: 1px #f08585 solid;padding: 40px;"  type="text" placeholder="15 Echo Pi"></ion-input>
-      <br>
-      <ion-input id="pac-input2"  style="border-radius: 3px; border: 1px #f08585 solid;padding: 40px;"  type="text" placeholder="Where to go?"></ion-input>    
+      <ion-item>
+        <ion-input id="pac-input"   type="text" placeholder="15 Echo Pi"></ion-input>
+      </ion-item>
   </div>
   <br>
   
 </ion-header>
 
 <ion-content >
-    <div margin-bottom #map2 class="map" id="map2" style="position: relative;width: 100%; height: 100%;"></div>
-        <h3 id="place-ub1"></h3>
-        <div style="display: none" id="infowindow-content">
-            <img src="" width="16" height="16" id="place-icon">
-            <span id="place-name" class="title"></span><br>
-            <span id="place-address"></span>
-        </div>
+    <div  #mapElement class="map"></div>
+  
+  
 
-        <div style="display:none;">
-            <div id="infowindow-content2">
-                Ubicacion inicio:
-                <h3 id="place-ub1"></h3>
-                Codigo postal inicio:
-                <h3 id="place-code"></h3>
 
-            </div>
-            <div id="infowindow-content3">
-                Ubicacion destino:
-                <h3 id="place-ub2"></h3>
-                Codigo postal destino:
-                <h3 id="place-code2"></h3>
-            </div>
-          </div>
+    <div style="display: none" class="ion-margin-top" id="infowindow-content">
+      <img src="" width="16" height="16" id="place-icon">
+      <span id="place-name" class="title"></span><br>
+      <span id="place-address"></span>
+    </div>
+  
+    <div style="display: none"  id="infowindow-content2">
+      Ubicacion inicio:
+      <img src="" width="16" height="16" id="place-icon">
+      <h3 id="place-ub1"></h3>
+      Codigo postal inicio:
+      <h3 id="place-code"></h3>
+    </div>
+  
+    <div style="display: none"  id="infowindow-content3">
+      Ubicacion destino:
+      <img src="" width="16" height="16" id="place-icon">
+      <h3 id="place-ub2"></h3>
+      Codigo postal destino:
+      <h3 id="place-code2"></h3>
+    </div>
+  <!-- </div> -->
 </ion-content>
