@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../services/services.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
 
 declare var google;
 

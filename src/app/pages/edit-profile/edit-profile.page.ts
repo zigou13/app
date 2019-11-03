@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { ServicesService } from '../services/services.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-edit-profile',

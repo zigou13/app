@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,22 +30,6 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-
-
-
-    this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            // this.rout.navigateByUrl('');
-          } else {
-            this.rout.navigateByUrl('/register');
-          }
-        },
-        () => {
-          // this.rout.navigateByUrl('/login');
-        }
-      );
   }
 
   open(id) {

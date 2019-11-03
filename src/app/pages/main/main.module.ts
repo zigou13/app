@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { MainPage } from './main.page';
 import { ModalPage } from '../modal/modal.page';
 
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 const routes: Routes = [
   {
     path: '',
@@ -22,7 +24,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MainPage , ModalPage],
-  entryComponents: [ ModalPage ]
+  declarations: [MainPage, ModalPage],
+  entryComponents: [ModalPage],
+  providers: [
+    NativeGeocoder
+  ]
 })
-export class MainPageModule {}
+export class MainPageModule { }

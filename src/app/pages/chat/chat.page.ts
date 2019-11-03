@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ServicesService } from '../services/services.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatService } from '../services/chat.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { IonContent } from '@ionic/angular';
+import { ServicesService } from 'src/app/services/services.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -25,8 +25,12 @@ export class ChatPage implements OnInit {
 
   messages = [];
 
-  constructor(public service: ServicesService, public active: ActivatedRoute, public chatservice: ChatService
-    , private aut: AngularFireAuth, private router: Router) {
+  constructor(
+    public service: ServicesService,
+    public active: ActivatedRoute,
+    public chatservice: ChatService,
+    private aut: AngularFireAuth,
+    private router: Router) {
     this.uid = this.aut.auth.currentUser.uid;
     this.id = this.active.snapshot.paramMap.get('id');
   }
