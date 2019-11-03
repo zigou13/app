@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ServicesService } from '../services/services.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 
 @Component({

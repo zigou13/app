@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServicesService } from '../services/services.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ChatService } from '../services/chat.service';
 import { AlertController } from '@ionic/angular';
+import { ChatService } from 'src/app/services/chat.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-view',
