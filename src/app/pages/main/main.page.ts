@@ -76,13 +76,13 @@ export class MainPage implements OnInit {
 
   getPostalCode(lat, lng) {
 
-    let options: NativeGeocoderOptions = {
+    const options: NativeGeocoderOptions = {
       useLocale: true,
       maxResults: 1
     };
 
     this.nativeGeocoder.reverseGeocode(lat, lng, options)
-      .then((result: NativeGeocoderResult[]) => alert(JSON.stringify(result[0].postalCode)))
+      .then((result: NativeGeocoderResult[]) => this.zone = JSON.stringify(result[0].postalCode))
       .catch((error: any) => console.log(error));
   }
 
@@ -153,6 +153,10 @@ export class MainPage implements OnInit {
 
   profile() {
     this.router.navigateByUrl(`profile`);
+  }
+
+  goto() {
+    this.router.navigateByUrl(`create`);
   }
 
   async presentModal() {
