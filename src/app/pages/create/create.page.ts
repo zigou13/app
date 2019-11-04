@@ -31,6 +31,7 @@ export class CreatePage implements OnInit, AfterViewInit {
   lng: any;
 
   num = 0;
+  ubic: string;
 
   uid: string;
 
@@ -52,7 +53,7 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   band = true;
 
-  hour: any = '9:00' ;
+  hour: any = '9:00';
 
   ridedate: any;
 
@@ -65,17 +66,32 @@ export class CreatePage implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
-    private geolocation: Geolocation ,
-    public loadingController: LoadingController ,
+    private geolocation: Geolocation,
+    public loadingController: LoadingController,
     private aut: AngularFireAuth,
     public service: ServicesService) {
-    this.createDirectionForm();
+
+      const valor = localStorage.getItem('direccion');
+      this.createDirectionForm(valor);
   }
 
   ngOnInit() {
     localStorage.clear();
+
     this.obtenerUbicacion();
     this.logueado();
+
+  }
+  ngAfterViewInit(): void {
+    this.initMap();
+
+  }
+
+  createDirectionForm(ubic) {
+    this.directionForm = this.fb.group({
+      source: [ubic, Validators.required],
+      destination: ['', Validators.required]
+    });
   }
 
   logueado() {
@@ -93,9 +109,19 @@ export class CreatePage implements OnInit, AfterViewInit {
       );
   }
 
+  async getProfile(id) {
+    await this.service.getProfile(id).subscribe((data: any) => {
+      console.log(data[0].payload.doc.data().adress);
+      this.ubic = data[0].payload.doc.data().adress;
+      this.car = data[0].payload.doc.data().car;
+      this.createDirectionForm(this.ubic);
+    });
+  }
+
 
   async obtenerUbicacion() {
     await this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(resp);
       this.currentLocation.lat = resp.coords.latitude;
       this.currentLocation.lng = resp.coords.longitude;
 
@@ -126,7 +152,8 @@ export class CreatePage implements OnInit, AfterViewInit {
   select() {
     this.band = true;
     this.footer2 = true;
-    // this.createDirectionForm();
+    const valor = localStorage.getItem('direccion');
+    this.createDirectionForm(valor);
     this.obtenerUbicacion();
   }
 
@@ -134,9 +161,7 @@ export class CreatePage implements OnInit, AfterViewInit {
     nextElement.setFocus();
   }
 
-  ngAfterViewInit(): void {
-    this.initMap();
-  }
+
 
 
   initMap() {
@@ -251,12 +276,7 @@ export class CreatePage implements OnInit, AfterViewInit {
     await alert.present();
   }
 
-  createDirectionForm() {
-    this.directionForm = this.fb.group({
-      source: ['', Validators.required],
-      destination: ['', Validators.required]
-    });
-  }
+
 
   calculateAndDisplayRoute() {
 
@@ -294,9 +314,9 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   create() {
     const data = {
-      zone:  localStorage.getItem('cod1'),
-      zipcode1:  localStorage.getItem('cod1'),
-      zipcode2:  localStorage.getItem('cod1'),
+      zone: localStorage.getItem('cod1'),
+      zipcode1: localStorage.getItem('cod1'),
+      zipcode2: localStorage.getItem('cod1'),
       ridedate: this.ridedate,
       uid: this.uid,
       information: this.information,
@@ -312,15 +332,10 @@ export class CreatePage implements OnInit, AfterViewInit {
     this.service.createride(data);
     this.presentLoading('Creating ride');
   }
-  back() {
+  back() {
     this.num = 0;
     this.select();
   }
-  async getProfile(id) {
-    await this.service.getProfile(id).subscribe((data: any) => {
 
-        this.car = data[0].payload.doc.data().car;
-    });
-  }
 
 }

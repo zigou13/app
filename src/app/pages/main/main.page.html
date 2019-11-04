@@ -1,64 +1,64 @@
-
 <ion-header>
-        <ion-toolbar>
-          <ion-title style=" color: #3B455A;font-size: 24px;font-weight: bold;text-align: center">Uicar</ion-title>
-          <ion-buttons slot="start">
-            <ion-menu-button  color="primary" autoHide="false"></ion-menu-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-
+    <ion-toolbar>
+        <ion-title style=" color: #3B455A;font-size: 24px;font-weight: bold;text-align: center">Uicar</ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button color="primary" autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content fullscreen>
 
-  <div margin-bottom #map class="map" id="map" style="position: relative;margin-top: -62px"></div>
+
+
+    <div margin-bottom #map class="map" id="map" style="position: relative;margin-top: -62px"></div>
     <div (click)="goto()">
-  
-    <div   class="input-good" type="text" placeholder="Where are you going?" text-center>Where do you want to go?</div>              
-        
+
+        <div class="input-good" type="text" placeholder="Where are you going?" text-center>Where do you want to go?
+        </div>
+
     </div>
 
-    <div padding>
+    <div padding *ngIf="item.length > 0">
         <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }}</h1>
-        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you {{ item[0].payload.doc.data().zone }}</h5>
+        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you
+            {{ item[0].payload.doc.data().zone }}</h5>
     </div>
-    <div  *ngFor="let item of rides">
-    <ion-card (click)="gotoride(item[0].payload.doc.data().id)"   mode="ios" *ngIf="item[0].payload.doc.data().inicio !== null" >
-        <ion-card-content style="height: 110px;border-radius: 100px !important">
-            <ion-row class="carta">
-                <ion-col class="cut" size="5">
-                    {{ item[0].payload.doc.data().start }}
-                </ion-col>
-                <ion-col size="2">
-                    <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
-                    </ion-icon>
-                </ion-col>
-                <ion-col class="cut" size="5">
-                    {{ item[0].payload.doc.data().destine }}
-                </ion-col>
+    <div *ngFor="let item of rides">
+        <ion-card (click)="gotoride(item[0].payload.doc.data().id)" mode="ios"
+            *ngIf="item[0].payload.doc.data().inicio !== null">
+            <ion-card-content style="height: 110px;border-radius: 100px !important">
+                <ion-row class="carta">
+                    <ion-col class="cut" size="5">
+                        {{ item[0].payload.doc.data().start }}
+                    </ion-col>
+                    <ion-col size="2">
+                        <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
+                        </ion-icon>
+                    </ion-col>
+                    <ion-col class="cut" size="5">
+                        {{ item[0].payload.doc.data().destine }}
+                    </ion-col>
 
-            </ion-row>
+                </ion-row>
 
-            <ion-row class="cartadesc">
-                <ion-col size="5">
-                    {{ item[0].payload.doc.data().hour }} Hour
-                </ion-col>
-                <ion-col size="2">
+                <ion-row class="cartadesc">
+                    <ion-col size="5">
+                        {{ item[0].payload.doc.data().hour }} Hour
+                    </ion-col>
+                    <ion-col size="2">
 
-                </ion-col>
-                <ion-col style="font-size: 12px;text-align: center" size="3">
-                    {{ item[0].payload.doc.data().seats }} <br> Seats
-                </ion-col>
-                <ion-col size="2">
-                    <br>
-                    <img style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='/assets/{{ item[0].payload.doc.data().car }}.png'>
-                </ion-col>
+                    </ion-col>
+                    <ion-col style="font-size: 12px;text-align: center" size="3">
+                        {{ item[0].payload.doc.data().seats }} <br> Seats
+                    </ion-col>
+                    <ion-col size="2">
+                        <br>
+                        <img style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;"
+                            src='/assets/{{ item[0].payload.doc.data().car }}.png'>
+                    </ion-col>
 
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-</div>
-
-   
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>
-
-  

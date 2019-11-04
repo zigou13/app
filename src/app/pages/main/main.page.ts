@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -8,11 +8,6 @@ import { ActionSheetController } from '@ionic/angular';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ModalController } from '@ionic/angular';
-import {
-  NativeGeocoder,
-  NativeGeocoderResult,
-  NativeGeocoderOptions
-} from '@ionic-native/native-geocoder/ngx';
 import { ModalPage } from '../modal/modal.page';
 import { mapstyle } from 'src/assets/maps/mapstyle';
 import { RidesService } from 'src/app/services/rides.service';
@@ -28,6 +23,9 @@ declare var google;
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
+  @ViewChild('map') mapNativeElement: ElementRef;
+  latitude: any;
+  longitude: any;
 
   item: any[] = [];
   id: string;
@@ -36,7 +34,6 @@ export class MainPage implements OnInit {
   directionsDisplay: any;
 
   style = mapstyle;
-
 
   lat: number;
   num: any;
@@ -53,13 +50,9 @@ export class MainPage implements OnInit {
     private router: Router, public services: ServicesService,
     public actionSheetController: ActionSheetController,
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder,
     private ridesservice: RidesService,
     private modalController: ModalController) {
 
-    setTimeout(() => {
-      this.rutes();
-    }, 3000);
   }
 
   directionsService = new google.maps.DirectionsService();
@@ -67,27 +60,69 @@ export class MainPage implements OnInit {
   ngOnInit() {
     this.logueado();
     this.posicion();
-    this.getrides();
   }
 
   gotoride(id) {
     this.router.navigateByUrl(`ride/${id}`);
   }
 
-  getPostalCode(lat, lng) {
-
-    const options: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults: 1
-    };
-
-    this.nativeGeocoder.reverseGeocode(lat, lng, options)
-      .then((result: NativeGeocoderResult[]) => this.zone = JSON.stringify(result[0].postalCode))
-      .catch((error: any) => console.log(error));
+  codeAddress(address) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': address }, (results, status) => {
+      console.log(results);
+      for (let i = 0; i < results.length; i++) {
+        for (let j = 0; j < results[i].address_components.length; j++) {
+          for (let k = 0; k < results[i].address_components[j].types.length; k++) {
+            const element = results[i].address_components[j].types[k];
+            if (element === 'postal_code') {
+              console.log('tiene postal');
+              console.log(results[i].address_components[j].short_name);
+              this.zone = results[i].address_components[j].short_name;
+              this.rutes(this.zone);
+              this.getrides(this.zone);
+            } else {
+              console.log('no tiene postal');
+            }
+          }
+        }
+      }
+    });
   }
 
-  getrides() {
-    this.ridesservice.functiongetRides(this.zone).subscribe((data: any) => {
+  ubicacion() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+      const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+        center: { lat: this.latitude, lng: this.longitude },
+        zoom: 16
+      });
+      /*location object*/
+      const pos = {
+        lat: this.latitude,
+        lng: this.longitude
+      };
+      map.setCenter(pos);
+      const marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        title: 'Hello World!'
+      });
+      const contentString = this.item[0].payload.doc.data().adress;
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 400
+      });
+      marker.addListener('click', function () {
+        infowindow.open(map, marker);
+      });
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+
+  getrides(zone) {
+    this.ridesservice.functiongetRides(zone).subscribe((data: any) => {
       console.log(data);
       this.rides = data;
     });
@@ -97,7 +132,6 @@ export class MainPage implements OnInit {
       console.log(resp);
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
-      this.getPostalCode(this.lat, this.lng);
       // console.log('tus cordenadas', this.lng, this.lat);
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -107,15 +141,15 @@ export class MainPage implements OnInit {
 
 
 
-  logueado() {
-    this.aut.authState
+  async logueado() {
+    await this.aut.authState
       .subscribe(
-        user => {
+        async user => {
           if (user) {
             console.log('loged');
             this.id = user.uid;
             console.log(this.id);
-            this.getProfile(this.id);
+            await this.getProfile(this.id);
           } else {
             this.router.navigateByUrl('/login');
           }
@@ -134,14 +168,14 @@ export class MainPage implements OnInit {
 
   async getProfile(id) {
     await this.services.getProfile(id).subscribe((data: any) => {
+      console.log(data.length);
       if (data.length === 0) {
-        console.log('profile empty');
+        console.log('vacio');
         this.router.navigateByUrl(`edit-profile`);
       } else {
-        console.log('Profile not empty');
-        console.log(data);
         this.item = data;
-        console.log(data[0].payload.doc.data().zone);
+        localStorage.setItem('direccion', this.item[0].payload.doc.data().adress);
+        this.codeAddress(this.item[0].payload.doc.data().adress);
         if (data[0].payload.doc.data().zone === null) {
           console.log('No zone');
         } else {
@@ -167,58 +201,62 @@ export class MainPage implements OnInit {
   }
 
   // Maps
-  async rutes() {
-
-    this.ridesservice.functiongetRides(this.zone).subscribe((data: any) => {
+  async rutes(zone) {
+    console.log(zone);
+    await this.ridesservice.functiongetRides(zone).subscribe((data: any) => {
       console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        console.log(data[i][0].payload.doc.data().id);
+      if (data.length === 0) {
+        this.ubicacion();
+      } else {
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i][0].payload.doc.data().id);
 
-        this.directionsService.route({
-          origin: data[i][0].payload.doc.data().start,
-          destination: data[i][0].payload.doc.data().destine,
-          travelMode: 'DRIVING'
-        }, (response, status) => {
-          const waypoint_markers = [];
-          if (status === 'OK') {
-            this.directionsDisplay.setDirections(response);
+          this.directionsService.route({
+            origin: data[i][0].payload.doc.data().start,
+            destination: data[i][0].payload.doc.data().destine,
+            travelMode: 'DRIVING'
+          }, (response, status) => {
+            const waypoint_markers = [];
+            if (status === 'OK') {
+              this.directionsDisplay.setDirections(response);
 
-            this.directionsDisplay = new google.maps.DirectionsRenderer({
-              suppressBicyclingLayer: true,
-              suppressMarkers: true,
-              // polylineOptions: {
-              //   strokeColor: 'black'
-              // }
-            });
-            const myRoute = response.routes[0].legs[0];
-            const marker = new google.maps.Marker({
-              position: myRoute.steps[0].start_point,
-              map: this.map,
-              id: data[i][0].payload.doc.data().id,
-              zIndex: 999999,
-            });
-            this.attachInstructionText(marker);
-            const marker1 = new google.maps.Marker({
-              position: myRoute.steps[myRoute.steps.length - 1].end_point,
-              map: this.map,
-              id: data[i][0].payload.doc.data().id,
-              zIndex: 999999,
-            });
-            this.attachInstructionText(marker1);
-            this.directionsDisplay.setMap(this.map);
-          } else {
-            // window.alert('Directions request failed due to ' + status);
-          }
-        });
-        this.directionsDisplay = new google.maps.DirectionsRenderer();
-        this.map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          mapTypeId: 'roadmap',
-          styles: this.style,
-          center: { lat: this.lat, lng: this.lng },
-        });
-        this.directionsDisplay.setMap(this.map);
+              this.directionsDisplay = new google.maps.DirectionsRenderer({
+                suppressBicyclingLayer: true,
+                suppressMarkers: true,
+                // polylineOptions: {
+                //   strokeColor: 'black'
+                // }
+              });
+              const myRoute = response.routes[0].legs[0];
+              const marker = new google.maps.Marker({
+                position: myRoute.steps[0].start_point,
+                map: this.map,
+                id: data[i][0].payload.doc.data().id,
+                zIndex: 999999,
+              });
+              this.attachInstructionText(marker);
+              const marker1 = new google.maps.Marker({
+                position: myRoute.steps[myRoute.steps.length - 1].end_point,
+                map: this.map,
+                id: data[i][0].payload.doc.data().id,
+                zIndex: 999999,
+              });
+              this.attachInstructionText(marker1);
+              this.directionsDisplay.setMap(this.map);
+            } else {
+              // window.alert('Directions request failed due to ' + status);
+            }
+          });
+          this.directionsDisplay = new google.maps.DirectionsRenderer();
+          this.map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            mapTypeId: 'roadmap',
+            styles: this.style,
+            center: { lat: this.lat, lng: this.lng },
+          });
+          this.directionsDisplay.setMap(this.map);
 
+        }
       }
     });
   }
