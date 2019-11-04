@@ -69,14 +69,13 @@ export class MainPage implements OnInit {
   codeAddress(address) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': address }, (results, status) => {
-      console.log(results);
+      localStorage.setItem('direccion', results[0].formatted_address);
       for (let i = 0; i < results.length; i++) {
         for (let j = 0; j < results[i].address_components.length; j++) {
           for (let k = 0; k < results[i].address_components[j].types.length; k++) {
             const element = results[i].address_components[j].types[k];
             if (element === 'postal_code') {
               console.log('tiene postal');
-              console.log(results[i].address_components[j].short_name);
               this.zone = results[i].address_components[j].short_name;
               this.rutes(this.zone);
               this.getrides(this.zone);
@@ -174,7 +173,7 @@ export class MainPage implements OnInit {
         this.router.navigateByUrl(`edit-profile`);
       } else {
         this.item = data;
-        localStorage.setItem('direccion', this.item[0].payload.doc.data().adress);
+      
         this.codeAddress(this.item[0].payload.doc.data().adress);
         if (data[0].payload.doc.data().zone === null) {
           console.log('No zone');

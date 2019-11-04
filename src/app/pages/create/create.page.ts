@@ -76,8 +76,6 @@ export class CreatePage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    localStorage.clear();
-
     this.obtenerUbicacion();
     this.logueado();
 
@@ -88,6 +86,7 @@ export class CreatePage implements OnInit, AfterViewInit {
   }
 
   createDirectionForm(ubic) {
+    console.log(ubic);
     this.directionForm = this.fb.group({
       source: [ubic, Validators.required],
       destination: ['', Validators.required]
