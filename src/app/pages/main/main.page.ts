@@ -400,7 +400,7 @@ export class MainPage implements OnInit {
 
   rideszone: any;
 
-  zone = '8050';
+  zone: any;
 
   constructor(
     private aut: AngularFireAuth,
@@ -469,7 +469,7 @@ export class MainPage implements OnInit {
 
     codeAddress(address) {
       console.log(address);
-      var geocoder = new google.maps.Geocoder();
+      const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ 'address': address }, (results, status) => {
         localStorage.setItem('direccion', results[0].formatted_address);
         for (let i = 0; i < results.length; i++) {
@@ -477,10 +477,11 @@ export class MainPage implements OnInit {
             for (let k = 0; k < results[i].address_components[j].types.length; k++) {
               const element = results[i].address_components[j].types[k];
               if (element === 'postal_code') {
-               
                 this.rutes(results[i].address_components[j].short_name);
+                console.log(results[i].address_components[j].short_name);
               } else {
-                // console.log('no tiene postal');
+                console.log('no tiene postal');
+                this.rutes(results[i].address_components[j].short_name);
               }
             }
           }
