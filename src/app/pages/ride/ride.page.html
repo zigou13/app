@@ -11,13 +11,13 @@
 <div no-padding margin-bottom #map class="map" id="map3" style="position: relative"></div>
 
 
-<ion-content padding>
+<ion-content padding *ngIf="ride?.length>0">
    
     
   
-    <h2 class="goodfont" ><strong>Ride to  :</strong> {{ride[0].payload.doc.data().start}} </h2>
+    <h2 class="goodfont"><strong>Ride to  :</strong> {{ride[0].payload.doc.data().start}} </h2>
     <br>
-    <ion-item>
+    <ion-item >
         <ion-label>
          <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
         </ion-label>
@@ -36,7 +36,7 @@
     <br>
     <br>
 
-    <ion-card (click)="gotoprofile(item[0].payload.doc.data().uid)" mode="ios">
+    <ion-card *ngIf="item?.length>0" (click)="gotoprofile(item[0].payload.doc.data().uid)" mode="ios">
     
       <ion-row no-padding> 
   

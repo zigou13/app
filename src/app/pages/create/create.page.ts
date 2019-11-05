@@ -40,7 +40,7 @@ export class CreatePage implements OnInit, AfterViewInit {
   lugar2: string;
 
   seats: number;
-  car: string;
+  car: string = 'suv';
 
   information: string;
 
@@ -55,7 +55,7 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   hour: any = '9:00';
 
-  ridedate: any;
+  ridedate: any = '';
 
 
   public form = [
@@ -71,8 +71,8 @@ export class CreatePage implements OnInit, AfterViewInit {
     private aut: AngularFireAuth,
     public service: ServicesService) {
 
-      const valor = localStorage.getItem('direccion');
-      this.createDirectionForm(valor);
+    const valor = localStorage.getItem('direccion');
+    this.createDirectionForm(valor);
   }
 
   ngOnInit() {
@@ -110,9 +110,9 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   async getProfile(id) {
     await this.service.getProfile(id).subscribe((data: any) => {
-      console.log(data[0].payload.doc.data().adress);
+      console.log(data[0].payload.doc.data().car);
       this.ubic = data[0].payload.doc.data().adress;
-      this.car = data[0].payload.doc.data().car;
+      this.car = data[0].payload.doc.data().car || 'suv';
       this.createDirectionForm(this.ubic);
     });
   }
@@ -315,7 +315,7 @@ export class CreatePage implements OnInit, AfterViewInit {
     const data = {
       zone: localStorage.getItem('cod1'),
       zipcode1: localStorage.getItem('cod1'),
-      zipcode2: localStorage.getItem('cod1'),
+      zipcode2: localStorage.getItem('cod2'),
       ridedate: this.ridedate,
       uid: this.uid,
       information: this.information,
@@ -326,10 +326,14 @@ export class CreatePage implements OnInit, AfterViewInit {
       seats: this.seats,
       car: this.car,
     };
+
+    console.log(data);
     // alert( this.start + this.destine + localStorage.getItem('cod1') + localStorage.getItem('cod2') +
     //  this.rutine + this.hour + this.ridedate + this.uid );
-    this.service.createride(data);
-    this.presentLoading('Creating ride');
+    this.service.createride(data).then(data => {
+      console.log(data);
+    });
+    // this.presentLoading('Creating ride');
   }
   back() {
     this.num = 0;

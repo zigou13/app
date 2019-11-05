@@ -6,7 +6,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
+<ion-content fullscreen *ngIf="item?.length>0">
 
 
 
@@ -18,9 +18,9 @@
 
     </div>
 
-    <div padding *ngIf="item.length > 0">
+    <div padding>
         <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }}</h1>
-        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you
+        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you {{ item[0].payload.doc.data().zone }}
             {{ item[0].payload.doc.data().zone }}</h5>
     </div>
     <div *ngFor="let item of rides">

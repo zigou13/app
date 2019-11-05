@@ -30,12 +30,12 @@ export class RidesService {
       for (const infos of info2) {
         this.users1.unshift(infos);
       }
+
       // Put them in a array
       for (let i = 0; i < this.users1.length; i++ )  {
-
         this.users2.push(this.users1[i].payload.doc.data().id);
       }
-      // Get the info from those uniques uid
+      // // Get the info from those uniques uid
       for (let i = 0; i < this.users2.length; i++ )  {
         // console.log(this.users2[i]);
         this.secondgetRides(this.users2[i]);
