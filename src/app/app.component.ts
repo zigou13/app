@@ -23,6 +23,7 @@ export class AppComponent {
     private menu: MenuController
   ) {
     this.initializeApp();
+    this.logueado();
   }
 
   async logueado() {

@@ -64,6 +64,12 @@ export class MainPage implements OnInit, AfterViewInit {
         this.rutes();
       }, 3000);
       setTimeout(() => {
+        this.rutes();
+      }, 6000);
+      setTimeout(() => {
+        this.rutes();
+      }, 9000);
+      setTimeout(() => {
         if ( this.rides.length === 0 && this.rides2.length === 0) {
            this.ubicacion();
         }

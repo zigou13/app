@@ -18,7 +18,7 @@ export class LoginGuard implements CanActivate {
 
 
 
-    if (state.url === '') {
+    if (state.url === 'login') {
       this.aut.authState
         .subscribe(
           user => {
