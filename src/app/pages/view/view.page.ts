@@ -17,11 +17,13 @@ export class ViewPage implements OnInit {
   userdata = [];
   uid: string;
   chat: any;
+  rides: any;
 
   ngOnInit() {
     this.useruid = this.active.snapshot.paramMap.get('uid');
     this.loged();
     this.getProfile(this.useruid);
+    this.getrides();
 
   }
 
@@ -54,6 +56,16 @@ export class ViewPage implements OnInit {
           }
         );
     }
+    getrides() {
+      this.services.functiongetRides(this.useruid).subscribe((data: any) => {
+       console.log(data);
+       this.rides = data;
+     });
+   }
+
+   gotoride(id) {
+    this.router.navigateByUrl(`ride/${id}`);
+  }
 
     async presentAlertConfirm() {
       const alert = await this.alertController.create({

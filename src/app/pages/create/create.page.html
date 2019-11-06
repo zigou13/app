@@ -17,13 +17,13 @@
 <ion-content fullscreen>
 
   <!-- <div *ngIf="num == 0"> -->
-  <form *ngIf="num == 0 && band" padding   [formGroup]="directionForm">
+  <form *ngIf="num == 0 " padding   [formGroup]="directionForm">
       <ion-item>
-          <ion-input  formControlName="source" id="pac-input-create" #autoCompleteInput placeholder="Begin"
+          <ion-input  formControlName="source" id="pac-input-create" [(ngModel)]="start" #autoCompleteInput placeholder="Begin"
           type="text"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-input  formControlName="destination" id="pac-input-create2" #autoCompleteInput2
+          <ion-input  formControlName="destination" id="pac-input-create2" [(ngModel)]="destine" #autoCompleteInput2
           placeholder="Destine" type="text"></ion-input>
       </ion-item>
       
@@ -99,7 +99,7 @@
         </ion-col>
         <ion-col size="6" size-md>
 
-            <ion-item id="rounded"   *ngIf="rutine" >
+            <ion-item id="rounded"   >
 
                 <ion-label style="color:grey;">Hour ride start</ion-label>
                 <ion-datetime [(ngModel)]="hour"  display-format="HH:mm"></ion-datetime>

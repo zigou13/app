@@ -2,10 +2,13 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServicesService } from 'src/app/services/services.service';
+
+
+declare var google;
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,6 +17,11 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class EditProfilePage implements OnInit {
   @ViewChild('imageProd') inputimageProd: ElementRef;
+  @ViewChild('autoCompleteInput2') inputNativeElement2: ElementRef;
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+
+
   id: any;
   uid: string;
   name: any;
@@ -25,6 +33,12 @@ export class EditProfilePage implements OnInit {
   urlImage: Observable<string>;
   item: any;
 
+  zone: any;
+
+  lugar1: any;
+  lugar2: any;
+
+
   cp: Boolean;
 
   constructor(private rout: Router,
@@ -32,11 +46,13 @@ export class EditProfilePage implements OnInit {
     private services: ServicesService,
     private afs: AngularFireStorage,
     public loadingController: LoadingController,
-    private aut: AngularFireAuth) {
+    private aut: AngularFireAuth ,
+    private alertCtrl: AlertController) {
   }
 
   ngOnInit() {
     this.logueado();
+    this.initMap();
   }
 
 
@@ -65,6 +81,8 @@ export class EditProfilePage implements OnInit {
         this.phone = data[0].payload.doc.data().phone;
         this.adress = data[0].payload.doc.data().adress;
         this.img = data[0].payload.doc.data().img;
+        this.zone = data[0].payload.doc.data().zone;
+
         console.log('profil full');
       } else {
         this.cp = false;
@@ -96,9 +114,10 @@ export class EditProfilePage implements OnInit {
       name: name,
       phone: phone,
       mail: this.mail,
-      img: image || 'assets/user.svg',
+      img: image || this.img,
       adress: adress,
-      uid: this.uid
+      uid: this.uid,
+      zone:  localStorage.getItem('zone') || this.zone,
     };
     console.log(data);
     if (this.cp === false) {
@@ -131,6 +150,75 @@ export class EditProfilePage implements OnInit {
   }
   moveFocus(nextElement) {
     nextElement.setFocus();
+  }
+
+
+  initMap() {
+    const input = <HTMLInputElement>document.getElementById('pac-input-create');
+    const input2 = <HTMLInputElement>document.getElementById('pac-input-create2');
+
+    this.adress = input.value;
+
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.setFields(
+      ['address_components', 'geometry', 'icon', 'name']);
+    const infowindow = new google.maps.InfoWindow();
+
+    const infowindowContent = document.getElementById('infowindow-content');
+    const infowindowContent2 = document.getElementById('infowindow-content2');
+    const infowindowContent3 = document.getElementById('infowindow-content3');
+
+    infowindow.setContent(infowindowContent);
+    infowindow.setContent(infowindowContent2);
+    infowindow.setContent(infowindowContent3);
+
+    autocomplete.addListener('place_changed', () => {
+      infowindow.close();
+      const place = autocomplete.getPlace();
+
+
+
+      if (!place.geometry) {
+        this.error('error');
+        return;
+      }
+
+      let address = '';
+      if (place.address_components) {
+        address = [
+          (place.address_components[0] && place.address_components[0].short_name || ''),
+          (place.address_components[1] && place.address_components[1].short_name || ''),
+          (place.address_components[2] && place.address_components[2].short_name || '')
+        ].join(' ');
+      }
+
+      infowindowContent.children['place-icon'].src = place.icon;
+      infowindowContent.children['place-name'].textContent = place.name;
+      infowindowContent.children['place-address'].textContent = address;
+
+
+
+      if (place.address_components[place.address_components.length - 1].types[0] === 'postal_code') {
+        // console.log('tiene codigo postal');
+        localStorage.setItem('ubic1', input.value);
+        infowindowContent2.children['place-ub1'].textContent = input.value;
+        infowindowContent2.children['place-code'].textContent =
+          place.address_components[place.address_components.length - 1].long_name;
+        localStorage.setItem('zone', place.address_components[place.address_components.length - 1].long_name);
+      } else {
+        input.value = '';
+        this.error('error');
+      }
+    });
+
+  }
+
+  async error(mensaje: string) {
+    const alert = await this.alertCtrl.create({
+      message: 'Direcction not valid please be more specific',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 }

@@ -17,9 +17,7 @@
         src="assets/chat.svg">
       <h1 class="ion-text-center font">No chats 😥</h1>
     </div>
-  
-  
-    <div *ngIf="(chats)?.length > 0">
+
       <div *ngFor="let item of chats">
   
         <ion-item (click)="ira(item)">
@@ -32,7 +30,6 @@
           </ion-label>
         </ion-item>
       </div>
-    </div>
   
     <!-- <ion-refresher  color="primary" slot="fixed" (ionRefresh)="doRefresh($event)">
           <ion-refresher-content></ion-refresher-content>

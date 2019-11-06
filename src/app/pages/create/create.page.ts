@@ -40,7 +40,7 @@ export class CreatePage implements OnInit, AfterViewInit {
   lugar2: string;
 
   seats: number;
-  car: string = 'suv';
+  car: any;
 
   information: string;
 
@@ -111,9 +111,9 @@ export class CreatePage implements OnInit, AfterViewInit {
   async getProfile(id) {
     await this.service.getProfile(id).subscribe((data: any) => {
       console.log(data[0].payload.doc.data().car);
-      this.ubic = data[0].payload.doc.data().adress;
-      this.car = data[0].payload.doc.data().car || 'suv';
-      this.createDirectionForm(this.ubic);
+      // this.ubic = data[0].payload.doc.data().adress;
+      this.car = data[0].payload.doc.data().car ;
+     // this.createDirectionForm(this.ubic);
     });
   }
 
@@ -330,10 +330,8 @@ export class CreatePage implements OnInit, AfterViewInit {
     console.log(data);
     // alert( this.start + this.destine + localStorage.getItem('cod1') + localStorage.getItem('cod2') +
     //  this.rutine + this.hour + this.ridedate + this.uid );
-    this.service.createride(data).then(data => {
-      console.log(data);
-    });
-    // this.presentLoading('Creating ride');
+    this.service.createride(data);
+    this.presentLoading('Creating ride');
   }
   back() {
     this.num = 0;

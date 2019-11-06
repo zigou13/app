@@ -6,10 +6,6 @@
     font-weight: bold;
 }
 
-.labe {
-    border-bottom: 5px solid #E45454;
-    border-spacing: 4px;
-}
 
 .myselect {
     max-width: 60% !important;
@@ -57,4 +53,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.map {
+    width: 100%;
+    height: 100%;
 }

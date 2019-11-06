@@ -25,10 +25,28 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  async logueado() {
+    await this.aut.authState
+      .subscribe(
+        user => {
+          if (user) {
+            console.log('loged');
+
+          } else {
+            this.rout.navigateByUrl('/register');
+          }
+        },
+        () => {
+          this.rout.navigateByUrl('/register');
+        }
+      );
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.logueado();
     });
   }
 

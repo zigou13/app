@@ -49,14 +49,35 @@
   </ion-item>
 
   <ion-item margin-bottom margin-bottom >
-    <ion-input #d (keyup.enter)="save(name, phone,adress)" type="text" placeholder="City" [(ngModel)]="adress">
+    <ion-input  id="pac-input-create"  #autoCompleteInput  #d  type="text" placeholder="Direcction" [(ngModel)]="adress">
     </ion-input>
   </ion-item>
 
   <input #imageProd type="hidden" [value]="urlImage | async" style="color:black;">
   <br><br>
-  <ion-button mode="ios" size="large" (click)="save(name, phone,adress)" class="main-container" color="primary" expand="block">
+  <ion-button  size="large" (click)="save(name, phone,adress)" class="main-container" color="primary" expand="block">
     Save</ion-button>
   </div>
   <br>
+  <div style="display: none" class="ion-margin-top" id="infowindow-content">
+      <img src="" width="16" height="16" id="place-icon">
+      <span id="place-name" class="title"></span><br>
+      <span id="place-address"></span>
+    </div>
+  
+    <div style="display: none"  id="infowindow-content2">
+      Ubicacion inicio:
+      <img src="" width="16" height="16" id="place-icon">
+      <h3 id="place-ub1"></h3>
+      Codigo postal inicio:
+      <h3 id="place-code"></h3>
+    </div>
+  
+    <div style="display: none"  id="infowindow-content3">
+      Ubicacion destino:
+      <img src="" width="16" height="16" id="place-icon">
+      <h3 id="place-ub2"></h3>
+      Codigo postal destino:
+      <h3 id="place-code2"></h3>
+    </div>
 </ion-content>

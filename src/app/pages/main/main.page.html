@@ -6,12 +6,12 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content fullscreen *ngIf="item?.length>0 && rides?.length>0">
+<ion-content fullscreen >
 
 
 
     <div margin-bottom #map class="map" id="map" style="position: relative;margin-top: -62px"></div>
-    <div (click)="goto()">
+    <div (click)="presentModal()">
 
         <div class="input-good" type="text" placeholder="Where are you going?" text-center>Where do you want to go?
         </div>
@@ -20,10 +20,17 @@
 
     <div padding>
         <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }}</h1>
-        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you {{ item[0].payload.doc.data().zone }}
+        <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you 
             {{ item[0].payload.doc.data().zone }}</h5>
     </div>
-    <div *ngFor="let item of rides">
+    <div *ngIf="this.rides2.length === 0" text-center>
+        <br>
+        <h2 class="goodfont">Any rides close to you</h2> <br>
+        <img width="400px" src="assets/map.svg">
+        <br>
+  
+    </div>
+    <div *ngFor="let item of rides2">
         <ion-card (click)="gotoride(item[0].payload.doc.data().id)" mode="ios"
             *ngIf="item[0].payload.doc.data().start !== null">
             <ion-card-content style="height: 110px;border-radius: 100px !important">

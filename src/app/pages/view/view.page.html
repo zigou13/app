@@ -18,9 +18,10 @@
   
   <ion-content  *ngFor="let item of userdata">
       <div class="form" >
-      <div text-center>
+      <div *ngIf="item.payload.doc.data().img !== 'assets/user.svg'" text-center>
         <img text-center style=" width: 100%;height: 450px;object-fit: cover;" [src]="item.payload.doc.data().img" alt="">
       </div>
+
   
    
   
@@ -32,7 +33,7 @@
                   <ion-icon color="secondary" name="pin" size="large"></ion-icon>
                 </ion-avatar>
                 <ion-label>
-                  <h1 color="var(--ion-color-medium)">{{item.payload.doc.data().adress}}</h1>
+                  <h1 class="cut" color="var(--ion-color-medium)">{{item.payload.doc.data().adress}}</h1>
                   
                 </ion-label>
                 <ion-button size="large" slot="end">
@@ -59,7 +60,7 @@
                 <ion-card mode="ios" color="primary" >
                     <ion-card-header>
                         <ion-card-title style="color:var(--ion-color-light)" class="goodfont">Rides</ion-card-title>
-                        <ion-card-subtitle style="font-size:40px;color:var(--ion-color-light)!important" class="goodfont">{{item.payload.doc.data().weight}}10</ion-card-subtitle>
+                        <ion-card-subtitle style="font-size:40px;color:var(--ion-color-light)!important" class="goodfont">{{ rides.length }}</ion-card-subtitle>
                         
                       </ion-card-header>
                     
@@ -99,14 +100,51 @@
           <div >
           <h2 class="goodfont" style="font-size:38px;" padding>Rides</h2>
           <br>
-            <div *ngIf="!rides" text-center>
-              <img width="400px" src="assets/map.svg">
-            </div>
-          <br>
+          <div padding *ngIf="rides.length === 0" text-center>
+            <img width="400px" src="assets/map.svg">
+            <h3 color="secondary" text-center class="goodfont">You don't have any ride <a [routerLink]="['/create']">create one</a></h3>
+
           </div>
-  
           <br>
-          <br>
+        <br>
+        </div>
+
+        <div *ngFor="let item of rides">
+          <ion-card (click)="gotoride(item[0].payload.doc.data().id)"   mode="ios" *ngIf="item[0].payload.doc.data().inicio !== null" >
+              <ion-card-content style="height: 110px;border-radius: 100px !important">
+                  <ion-row class="carta">
+                      <ion-col class="cut" size="5">
+                          {{ item[0].payload.doc.data().start }}
+                      </ion-col>
+                      <ion-col size="2">
+                          <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
+                          </ion-icon>
+                      </ion-col>
+                      <ion-col class="cut" size="5">
+                          {{ item[0].payload.doc.data().destine }}
+                      </ion-col>
+      
+                  </ion-row>
+      
+                  <ion-row class="cartadesc">
+                      <ion-col size="5">
+                          {{ item[0].payload.doc.data().hour }} Hour
+                      </ion-col>
+                      <ion-col size="2">
+      
+                      </ion-col>
+                      <ion-col style="font-size: 12px;text-align: center" size="3">
+                          {{ item[0].payload.doc.data().seats }} <br> Seats
+                      </ion-col>
+                      <ion-col size="2">
+                          <br>
+                          <img style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='/assets/{{ item[0].payload.doc.data().car }}.png'>
+                      </ion-col>
+      
+                  </ion-row>
+              </ion-card-content>
+          </ion-card>
+      </div>
           <br>
           <br>
           <br>

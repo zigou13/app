@@ -39,6 +39,8 @@ export class MainPage implements OnInit, AfterViewInit {
   lng: number;
 
   rides: any[] = [];
+  rides2: any[] = [];
+
 
   rideszone: any;
 
@@ -52,9 +54,21 @@ export class MainPage implements OnInit, AfterViewInit {
     private ridesservice: RidesService,
     private modalController: ModalController) {
 
-    // setTimeout(() => {
-    //   this.rutes();
-    // }, 3000);
+      this.getrides(this.zone);
+
+      setTimeout(() => {
+        this.rutes();
+        this.getrides(this.zone);
+      }, 2000);
+      setTimeout(() => {
+        this.rutes();
+      }, 3000);
+      setTimeout(() => {
+        if ( this.rides.length === 0 && this.rides2.length === 0) {
+           this.ubicacion();
+        }
+      }, 10000);
+
   }
 
   directionsService = new google.maps.DirectionsService();
@@ -66,18 +80,16 @@ export class MainPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.getrides();
   }
-
   gotoride(id) {
     console.log(id);
     this.router.navigateByUrl(`ride/${id}`);
   }
 
 
-  getrides() {
-    this.ridesservice.functiongetRides(this.zone).subscribe((data: any) => {
-      this.rides = data;
+  getrides(zone) {
+    this.ridesservice.functiongetRides(zone).subscribe((data: any) => {
+      this.rides2 = data;
     });
   }
   posicion() {
@@ -136,34 +148,13 @@ export class MainPage implements OnInit, AfterViewInit {
             console.log(this.id);
             this.getProfile(this.id);
           } else {
-            this.router.navigateByUrl('/login');
+            this.router.navigateByUrl('/register');
           }
         },
         () => {
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('/register');
         }
       );
-  }
-
-  async codeAddress(address) {
-    console.log(address);
-    var geocoder = new google.maps.Geocoder();
-    await geocoder.geocode({ 'address': address }, (results, status) => {
-      localStorage.setItem('direccion', results[0].formatted_address);
-      for (let i = 0; i < results.length; i++) {
-        for (let j = 0; j < results[i].address_components.length; j++) {
-          for (let k = 0; k < results[i].address_components[j].types.length; k++) {
-            const element = results[i].address_components[j].types[k];
-            if (element === 'postal_code') {
-              this.rutes(results[i].address_components[j].short_name);
-
-            } else {
-              // console.log('no tiene postal');
-            }
-          }
-        }
-      }
-    });
   }
 
   async signOut() {
@@ -174,7 +165,7 @@ export class MainPage implements OnInit, AfterViewInit {
 
   async getProfile(id) {
     await this.services.getProfile(id).subscribe((data: any) => {
-      console.log(data[0].payload.doc.data().zone);
+      // console.log(data[0].payload.doc.data().zone);
       if (data.length === 0) {
         console.log('profile empty');
         this.router.navigateByUrl(`edit-profile`);
@@ -184,10 +175,11 @@ export class MainPage implements OnInit, AfterViewInit {
         this.item = data;
         if (data[0].payload.doc.data().zone === null) {
           console.log('No zone');
+          this.ubicacion();
         } else {
-          // this.zone = data[0].payload.doc.data().zone;
-          // console.log(this.zone);
-          this.codeAddress(data[0].payload.doc.data().adress);
+
+          this.zone = data[0].payload.doc.data().zone;
+
         }
       }
     });
@@ -208,77 +200,63 @@ export class MainPage implements OnInit, AfterViewInit {
     return await modal2.present();
   }
 
-  // Maps
-  async rutes(zone) {
-
-    await this.ridesservice.functiongetRides(zone).subscribe((data: any) => {
-      console.log(data);
-
-      if (data.length === 0) {
-        this.ubicacion();
-      } else {
-        for (let i = 0; i < data.length; i++) {
-          this.directionsService.route({
-            origin: data[i][0].payload.doc.data().start,
-            destination: data[i][0].payload.doc.data().destine,
-            travelMode: 'DRIVING'
-          }, (response, status) => {
-            const waypoint_markers = [];
-            if (status === 'OK') {
-              this.directionsDisplay.setDirections(response);
-
-              this.directionsDisplay = new google.maps.DirectionsRenderer({
-                suppressBicyclingLayer: true,
-                suppressMarkers: true,
-                // polylineOptions: {
-                //   strokeColor: 'black'
-                // }
-              });
-              const myRoute = response.routes[0].legs[0];
-              const marker = new google.maps.Marker({
-                position: myRoute.steps[0].start_point,
-                map: this.map,
-                id: data[i][0].payload.doc.data().id,
-                zIndex: 999999,
-              });
-              this.attachInstructionText(marker);
-              const marker1 = new google.maps.Marker({
-                position: myRoute.steps[myRoute.steps.length - 1].end_point,
-                map: this.map,
-                id: data[i][0].payload.doc.data().id,
-                zIndex: 999999,
-              });
-              this.attachInstructionText(marker1);
-              this.directionsDisplay.setMap(this.map);
-            } else {
-              // window.alert('Directions request failed due to ' + status);
-            }
-          });
-          this.directionsDisplay = new google.maps.DirectionsRenderer();
-          this.map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 13,
-            mapTypeId: 'roadmap',
-            styles: this.style,
-            center: { lat: this.lat, lng: this.lng },
-          });
-          this.directionsDisplay.setMap(this.map);
-
-        }
-      }
-
-    });
-  }
 
 
+  async rutes() {
 
-  emptymap() {
-    this.directionsDisplay = new google.maps.DirectionsRenderer();
-    this.map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 11,
-      mapTypeId: 'roadmap',
-      styles: this.style
-    });
-  }
+    this.ridesservice.functiongetRides2(this.zone).subscribe((data: any) => {
+     console.log(data);
+       for (let i = 0; i < data.length; i++) {
+         console.log(data[i][0].payload.doc.data().id);
+
+           this.directionsService.route({
+               origin: data[i][0].payload.doc.data().start,
+               destination: data[i][0].payload.doc.data().destine,
+               travelMode: 'DRIVING'
+           }, (response, status) => {
+               const waypoint_markers = [];
+               if (status === 'OK') {
+                   this.directionsDisplay.setDirections(response);
+
+                   this.directionsDisplay = new google.maps.DirectionsRenderer({
+                       suppressBicyclingLayer: true,
+                       // suppressMarkers: true,
+                       strokeColor: 'black'
+                       // }
+                   });
+                   const myRoute = response.routes[0].legs[0];
+                   const marker = new google.maps.Marker({
+                       position: myRoute.steps[0].start_point,
+                       map: this.map,
+                       id: data[i][0].payload.doc.data().id,
+                       zIndex: 999999,
+                   });
+                   this.attachInstructionText(marker);
+                   const marker1 = new google.maps.Marker({
+                       position: myRoute.steps[myRoute.steps.length - 1].end_point,
+                       map: this.map,
+                       id: data[i][0].payload.doc.data().id,
+                       zIndex: 999999,
+                   });
+                   this.attachInstructionText(marker1);
+                   this.directionsDisplay.setMap(this.map);
+               } else {
+                   // window.alert('Directions request failed due to ' + status);
+                   this.ubicacion();
+               }
+           });
+       this.directionsDisplay = new google.maps.DirectionsRenderer();
+       this.map = new google.maps.Map(document.getElementById('map'), {
+           zoom: 13,
+           mapTypeId: 'roadmap',
+           styles: this.style,
+           center: {lat: this.lat, lng: this.lng},
+       });
+       this.directionsDisplay.setMap(this.map);
+
+       }
+   });
+}
 
   attachInstructionText(marker) {
     const self = this;
@@ -288,8 +266,7 @@ export class MainPage implements OnInit, AfterViewInit {
 
     google.maps.event.addListener(marker, 'click', function () {
       console.log(marker.id);
-      this.router.navigateByUrl('/ride', marker.id),
-        console.log(marker.id);
+      self.gotoride(marker.id);
     });
   }
 

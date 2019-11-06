@@ -11,21 +11,21 @@ export class LoginGuard implements CanActivate {
   constructor(
     public aut: AngularFireAuth,
     private rout: Router) { }
-    
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
 
 
-    if (state.url === '/login') {
+    if (state.url === '') {
       this.aut.authState
         .subscribe(
           user => {
             if (user) {
               // this.rout.navigateByUrl('');
             } else {
-              this.rout.navigateByUrl('/login');
+              this.rout.navigateByUrl('/register');
             }
           },
           () => {

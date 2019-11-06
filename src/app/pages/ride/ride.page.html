@@ -8,31 +8,38 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<div no-padding margin-bottom #map class="map" id="map3" style="position: relative"></div>
 
-
-<ion-content padding *ngIf="ride?.length>0">
+<ion-content >
    
-    
-  
+   <div  margin-bottom #map class="map" id="map3" style="position: relative"></div>
+
+
+    <div padding>
     <h2 class="goodfont"><strong>Ride to  :</strong> {{ride[0].payload.doc.data().start}} </h2>
     <br>
-    <ion-item >
-        <ion-label>
-         <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
-        </ion-label>
-        <ion-chip *ngIf="ride[0].payload.doc.data().rutine === true" color="dark">
-            <ion-icon color="primary" name="refresh-circle"></ion-icon>
-            <ion-label color="primary">Rutine</ion-label>
-           
-        </ion-chip>
+        <ion-item>
+            <ion-label>
+                <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
+               </ion-label>
+               <ion-chip *ngIf="ride[0].payload.doc.data().rutine === true" color="dark">
+                   <ion-icon color="primary" name="refresh-circle"></ion-icon>
+                   <ion-label color="primary">Rutine</ion-label>
+                  
+               </ion-chip>
+       
+               <ion-chip *ngIf="ride[0].payload.doc.data().rutine === false" color="dark">
+                   <ion-icon color="primary" name="calendar"></ion-icon>
+                   <ion-label color="primary">One time ride </ion-label>
+                  
+               </ion-chip>
+    
+                <ion-button *ngIf="ride[0].payload.doc.data().uid !== uid" (click)="chatservice.checkchatexistence(uid , ride[0].payload.doc.data().uid)" slot="end" color="secondary" size="large" slot="end">
+                  <ion-icon mode="ios" name="chatbubbles" size="large"></ion-icon>
+                  Chat
+                </ion-button>
 
-        <ion-chip *ngIf="ride[0].payload.doc.data().rutine === false" color="dark">
-            <ion-icon color="primary" name="calendar"></ion-icon>
-            <ion-label color="primary">{{ride[0].payload.doc.data().date }}</ion-label>
-           
-        </ion-chip>
-    </ion-item>
+        </ion-item>
+
     <br>
     <br>
 
@@ -45,10 +52,10 @@
         
           </ion-col>
           <ion-col size="6">
-              <h1  class="goodfont" padding> {{item[0].payload.doc.data().name }} </h1>
+              <h1  class="goodfont cut" padding> {{item[0].payload.doc.data().name }} </h1>
               <ion-item  style="margin-top: -15px;">
                 <ion-icon  name="pin" size="large"></ion-icon>
-                <h3 style="margin-left: 10px">{{item[0].payload.doc.data().adress}}</h3>
+                <h3 class="cut" style="margin-left: 10px">{{item[0].payload.doc.data().adress}}</h3>
                 
                 
             </ion-item>
@@ -67,5 +74,6 @@
       </ion-row>
 
     </ion-card>
+  </div>
  
 </ion-content>

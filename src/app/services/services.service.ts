@@ -56,7 +56,8 @@ export class ServicesService {
         uid: value.uid,
         adress: value.adress,
         date: Date.now(),
-        stars: 5
+        stars: 5,
+        zone: value.zone
 
       });
       this.rout.navigateByUrl(`fill`);

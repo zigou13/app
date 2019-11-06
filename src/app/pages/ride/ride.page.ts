@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
+import { ChatService } from 'src/app/services/chat.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 declare var google;
 
@@ -20,7 +22,7 @@ export class RidePage implements OnInit {
   uid: string;
 
   constructor(private rout: Router, private services: ServicesService
-    , public active: ActivatedRoute) {
+    , public active: ActivatedRoute , public chatservice: ChatService , private auth: AngularFireAuth) {
     this.id = this.active.snapshot.paramMap.get('id');
   }
 
@@ -29,9 +31,26 @@ export class RidePage implements OnInit {
 
 
   ngOnInit() {
+    this.logueado();
     this.getride();
   }
 
+  async logueado() {
+    await this.auth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            console.log('loged');
+            this.uid = user.uid;
+          } else {
+            // this.router.navigateByUrl('/login');
+          }
+        },
+        () => {
+          // this.router.navigateByUrl('/login');
+        }
+      );
+  }
   gotoprofile(uid) {
     this.rout.navigateByUrl(`view/${uid}`);
   }
