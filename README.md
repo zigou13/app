@@ -1,6 +1,6 @@
 # Uicar   <img src="http://uicar.io/images/favicon.png">
 
-It is a multiplafroma application to share a car in everyday journeys, developed by the uicar.io team, directed by David Barrero
+It is a multiplatfrom application to share a car in everyday journeys, developed by the uicar.io team, directed by David Barrero
 
 
 
@@ -18,7 +18,7 @@ It is a multiplafroma application to share a car in everyday journeys, developed
 ## Car sharing
 
 
-<img src="http://uicar.io/images/Artboard-en.png">
+<img src="http://uicar.io/images/Artboarden.png">
 
 
 
