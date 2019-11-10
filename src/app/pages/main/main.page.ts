@@ -86,6 +86,10 @@ export class MainPage implements OnInit, AfterViewInit {
 
   }
 
+  refresh() {
+    this.rutes();
+  }
+
   ngAfterViewInit() {
   }
   gotoride(id) {

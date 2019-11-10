@@ -15,11 +15,11 @@
 
 
     <div padding>
-    <h2 class="goodfont"><strong>Ride to  :</strong> {{ride[0].payload.doc.data().start}} </h2>
+    <!-- <h2 class="goodfont"><strong>Ride to  :</strong> {{ride[0].payload.doc.data().start}} </h2>
     <br>
         <ion-item>
             <ion-label>
-                <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
+                <strong class="">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
                </ion-label>
                <ion-chip *ngIf="ride[0].payload.doc.data().rutine === true" color="dark">
                    <ion-icon color="primary" name="refresh-circle"></ion-icon>
@@ -40,25 +40,86 @@
 
         </ion-item>
 
+    <br> -->
     <br>
-    <br>
+    <ion-card mode="ios">
+      <ion-card-header>
+
+          <ion-card-title class="goodfont">Info ride</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+          <ion-card-subtitle>Start</ion-card-subtitle>
+          {{ride[0].payload.doc.data().start }}
+          <br><br>
+          <ion-card-subtitle> Destine</ion-card-subtitle>
+          {{ride[0].payload.doc.data().destine }}
+          <br><br><br>
+          <ion-card-subtitle  *ngIf="!item.rutine">{{ ride[0].payload.doc.data().hour  | date:'short' }} </ion-card-subtitle>
+
+              <ion-label>
+                <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
+                
+               </ion-label>
+            <br>
+            <br>
+               
+
+              <ion-chip *ngIf="ride[0].payload.doc.data().rutine === true" slot="end"  color="dark">
+                <ion-icon color="primary" name="refresh-circle"></ion-icon>
+                <ion-label color="primary">Rutine</ion-label>
+               
+            </ion-chip>
+            <ion-chip *ngIf="ride[0].payload.doc.data().rutine === false " slot="end" color="dark">
+              <ion-icon color="primary" name="calendar"></ion-icon>
+              <ion-label color="primary">One time ride </ion-label>
+             
+          </ion-chip>
+            <br><br>
+           <ion-button *ngIf="ride[0].payload.doc.data().uid !== uid" (click)="chatservice.checkchatexistence(uid , ride[0].payload.doc.data().uid)" slot="end" color="secondary" size="large" slot="end">
+            <ion-icon mode="ios" name="chatbubbles" size="large"></ion-icon>
+            Chat
+          </ion-button>
+     
+      </ion-card-content>
+
+      <ion-row class="cartadesc">
+          <ion-col size="5">
+           
+            <!-- *ngIf="ride[0].payload.doc.data().uid !== uid"  -->
+
+          </ion-col>
+          <ion-col size="2">   
+
+          </ion-col>
+          <ion-col size="5">
+            
+              <img style=" font-size: 45px;color: #3B455A;" src='assets/{{ ride[0].payload.doc.data().car}}.png'>
+          </ion-col>
+          <br>
+         
+
+      </ion-row>
+   
+  </ion-card>
 
     <ion-card *ngIf="item?.length>0" (click)="gotoprofile(item[0].payload.doc.data().uid)" mode="ios">
     
       <ion-row no-padding> 
   
         <ion-col no-padding size="6">
-            <img  text-center style=" width: 100%;height: 200px;object-fit: cover;" src="{{item[0].payload.doc.data().img}}" alt="">
+            <img  text-center style=" width: 100%;height: 160px;object-fit: cover;" src="{{item[0].payload.doc.data().img}}" alt="">
         
           </ion-col>
           <ion-col size="6">
               <h1  class="goodfont cut" padding> {{item[0].payload.doc.data().name }} </h1>
-              <ion-item  style="margin-top: -15px;font-size: 64px!important;">
-                <ion-icon style="font-size: 64px!important;" name="pin" size="normal"></ion-icon>
+           
+              <!-- <ion-item  style="margin-top: -15px;font-size: 64px!important;">
+                <ion-icon  name="pin" size="normal"></ion-icon>
                 <h3 class="cut" style="margin-left: 10px">{{item[0].payload.doc.data().adress}}</h3>
                 
                 
-            </ion-item>
+            </ion-item> -->
         
               <ion-card-subtitle style="font-size:40px;color:var(--ion-color-tertiary)!important;text-align: center" class="goodfont">
                 <ion-icon size="small" color="warning" name="star"></ion-icon>
