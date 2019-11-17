@@ -54,27 +54,26 @@ export class MainPage implements OnInit, AfterViewInit {
     private ridesservice: RidesService,
     private modalController: ModalController) {
 
-      this.getrides(this.zone);
+     // this.getrides(this.zone);
 
-      // setTimeout(() => {
-      //   this.rutes();
-      //   this.getrides(this.zone);
-      // }, 2000);
+      setTimeout(() => {
+        this.rutes();
+       // this.getrides(this.zone);
+
+      }, 3000);
+
       setTimeout(() => {
         this.rutes();
         this.getrides(this.zone);
-      }, 3000);
-      // setTimeout(() => {
-      //   this.rutes();
-      // }, 6000);
-      setTimeout(() => {
-        this.rutes();
+
       }, 9000);
       setTimeout(() => {
         if ( this.rides.length === 0 && this.rides2.length === 0) {
-           this.rutes();
+         // this.posicion();
+       //   this.getrides(this.zone);
+
         }
-      }, 10000);
+      }, 12000);
 
   }
 
@@ -86,8 +85,27 @@ export class MainPage implements OnInit, AfterViewInit {
 
   }
 
+  cleanvariable() {
+    this.ridesservice.users1 = [];
+    this.ridesservice.users2 = [];
+    this.ridesservice.users3 = [];
+    this.ridesservice.users12 = [];
+    this.ridesservice.users22 = [];
+    this.ridesservice.users32 = [];
+    this.ridesservice.users123 = [];
+    this.ridesservice.users223 = [];
+    this.ridesservice.users323 = [];
+    setTimeout(() => {
+      this.rutes();
+      this.getrides(this.zone);
+    }, 1500);
+  }
+
   refresh() {
+
+    this.cleanvariable();
     this.rutes();
+    this.getrides(this.zone);
   }
 
   ngAfterViewInit() {
