@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canActivate: [LoginGuard] },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-  { path: 'edit-profile/:new?', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
+  { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'main', loadChildren: './pages/main/main.module#MainPageModule', canActivate: [AuthGuard] },
   { path: 'fill', loadChildren: './pages/fill/fill.module#FillPageModule' },
   { path: 'ride/:id', loadChildren: './pages/ride/ride.module#RidePageModule' },

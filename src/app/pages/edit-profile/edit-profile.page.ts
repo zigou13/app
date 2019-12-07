@@ -49,7 +49,7 @@ export class EditProfilePage implements OnInit {
     public loadingController: LoadingController,
     private aut: AngularFireAuth ,
     private alertCtrl: AlertController , public activateroute: ActivatedRoute) {
-      this.new = this.activateroute.snapshot.paramMap.get('new');
+     
   }
 
   ngOnInit() {
