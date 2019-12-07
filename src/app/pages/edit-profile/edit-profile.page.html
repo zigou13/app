@@ -41,17 +41,17 @@
     <ion-input (keyup.enter)="moveFocus(b)" type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
   </ion-item>
   <ion-item margin-bottom margin-bottom  >
-    <ion-input #b (keyup.enter)="moveFocus(d)" type="text" placeholder="Phone" [(ngModel)]="phone"></ion-input>
+    <ion-input #b ((click)="save(name, phone)" type="text" placeholder="Phone" [(ngModel)]="phone"></ion-input>
   </ion-item>
 
   <ion-item margin-bottom margin-bottom  >
     <ion-input [(ngModel)]="mail" disabled></ion-input>
   </ion-item>
 
-  <ion-item margin-bottom margin-bottom >
+  <!-- <ion-item margin-bottom margin-bottom >
     <ion-input  id="pac-input-create"  #autoCompleteInput  #d  type="text" placeholder="Direcction" [(ngModel)]="adress">
     </ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <input #imageProd type="hidden" [value]="urlImage | async" style="color:black;">
   <br><br>

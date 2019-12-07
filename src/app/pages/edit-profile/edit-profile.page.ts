@@ -38,6 +38,7 @@ export class EditProfilePage implements OnInit {
   lugar1: any;
   lugar2: any;
 
+  new: any;
 
   cp: Boolean;
 
@@ -47,7 +48,8 @@ export class EditProfilePage implements OnInit {
     private afs: AngularFireStorage,
     public loadingController: LoadingController,
     private aut: AngularFireAuth ,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController , public activateroute: ActivatedRoute) {
+      this.new = this.activateroute.snapshot.paramMap.get('new');
   }
 
   ngOnInit() {
@@ -107,7 +109,7 @@ export class EditProfilePage implements OnInit {
   }
 
 
-  save(name, phone, adress) {
+  save(name, phone) {
     console.log(this.cp);
     const image = this.inputimageProd.nativeElement.value;
     const data = {
@@ -115,16 +117,16 @@ export class EditProfilePage implements OnInit {
       phone: phone,
       mail: this.mail,
       img: image || this.img,
-      adress: adress,
+      adress:   this.adress || 'new' ,
       uid: this.uid,
-      zone:  localStorage.getItem('zone') || this.zone,
+      zone: this.zone || 'new',
     };
     console.log(data);
     if (this.cp === false) {
       this.services.crearUser(data).then(
         res => {
           console.log('Upload' + res);
-          this.rout.navigateByUrl(`profile`);
+          this.rout.navigateByUrl(`location`);
         });
     } else {
       this.services.updateUser(data, this.id).then(

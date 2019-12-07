@@ -9,6 +9,7 @@ import { MainPage } from './main.page';
 import { ModalPage } from '../modal/modal.page';
 
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { LoadingcardComponent } from '../../components/loadingcard/loadingcard.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MainPage, ModalPage],
+  declarations: [MainPage, ModalPage, LoadingcardComponent],
   entryComponents: [ModalPage],
   providers: [
     NativeGeocoder

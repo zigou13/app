@@ -64,6 +64,13 @@ export class ServicesService {
     });
   }
 
+  review(text) {
+    return this.afs.collection('reviews').doc(Date.now().toString()).set({
+      text: text,
+      user: localStorage.getItem('uid'),
+    });
+   }
+ 
 
 
   updateUser(value, id?) {
@@ -75,6 +82,17 @@ export class ServicesService {
       this.afs.collection(`users/${uid}/profile`).doc(uid).update({
         car: car,
         mode: mode,
+      });
+
+      this.rout.navigateByUrl(`profile`);
+    });
+  }
+
+  userlocation(adress, zone , uid) {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection(`users/${uid}/profile`).doc(uid).update({
+        zone: zone,
+        adress: adress,
       });
 
       this.rout.navigateByUrl(`profile`);
@@ -119,6 +137,8 @@ export class ServicesService {
         creationdate: Date.now(),
         uid: data.uid,
         destine: data.destine,
+        start: data.start,
+
         rutine: data.rutine,
         id: id,
       });

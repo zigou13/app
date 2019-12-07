@@ -30,7 +30,7 @@
                 <ion-icon  name="pin" size="large"></ion-icon>
               </ion-avatar>
               <ion-label>
-                <h1>{{item[0].payload.doc.data().adress}}</h1>
+                <h1 [routerLink]="['/location']" >{{item[0].payload.doc.data().adress}}</h1>
                 
               </ion-label>
                 <ion-button [routerLink]="['/fill']"   size="large" slot="end">
@@ -169,8 +169,10 @@
                       </ion-col>
                       <ion-col size="2">
                           <br>
-                          <img style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;" src='/assets/{{ item[0].payload.doc.data().car }}.png'>
-                      </ion-col>
+                          <ion-icon *ngIf="item[0].payload.doc.data().car === 'none'" style="font-size: 45px;color: #3B455A;" src='assets/rider.svg'></ion-icon>
+         
+                          <img  *ngIf="item[0].payload.doc.data().car !== 'none'" style="font-size: 45px;color: #3B455A;" src='assets/{{ item[0].payload.doc.data().car}}.png'>
+                         </ion-col>
       
                   </ion-row>
               </ion-card-content>

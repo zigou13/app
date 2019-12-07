@@ -5,26 +5,68 @@
             <ion-icon mode="ios" color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
          </ion-button>
       </ion-buttons>
-    <ion-title color="primary">Terms & conditions</ion-title>
+    <ion-title color="primary">Help</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <h2 text-center class="goodfont">You can check Uicar.io terms and conditions in : </h2>
-    <br>
-    <h3 text-center class="goodfont"><a>https://uicar.io/terms</a></h3>
+<ion-content>
+    <div class="hero-image">
+        <div class="hero-text">
+          <h1 class="goodfont">Help center</h1>
+          <p style="color:white">contact us if you have any questions or reports</p>
+          
+        </div>
+      </div>
 
-    <br>
-    <br>
-    <br>
-    <h2 text-center class="goodfont">If you need any help or contact to help you can go here :</h2>
-    <br>
-    <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/help']" 
-            fill="outline" size="large" expand="block" >
-              Help
-    </ion-button>
-    <br><br>
-    <div text-center>
-        <img width="400px" src="assets/question.svg">
+    <div class="input-good" type="text" placeholder="Where are you going?" text-center>Do you have questions?
     </div>
+   
+    <br>
+    <div padding>
+    <h1 text-center class="goodfont">Common questions</h1>
+    <!-- Need to add ARIA -->
+<div class="accordion accordion--faq">
+    <section class="accordion__question">
+      <header class="accordion__header">
+        <h5 class="accordion__heading">How to change the place?</h5>
+        <span class="icon-arrow-down"></span>
+      </header>
+      <div class="accordion__content">
+        <p>If you want to change your current location in the side menu the element "Update location"</p>
+      </div>
+     </section>
+    <section class="accordion__question">
+      <header class="accordion__header">
+        <h5 class="accordion__heading">How to get a ride?</h5>
+        <span class="icon-arrow-down"></span>
+      </header>
+      <div class="accordion__content">
+       <p>To get a ride get in contact with the person that you are interested and send them a message by opening a chat</p>
+      </div>
+     </section>
+   <section class="accordion__question">
+      <header class="accordion__header">
+        <h5 class="accordion__heading">How much i paid?</h5>
+        <span class="icon-arrow-down"></span>
+      </header>
+      <div class="accordion__content">
+      <p>The cost of the ride is trade by the users, so you can deal how much with the driver or the rides</p>
+      </div>
+     </section>
+  </div>
+  <br>
+  <br>
+  <br>
+  <h1 text-center class="goodfont">Leave a review</h1>
+  <br>
+  <ion-item>
+    <ion-textarea  [(ngModel)]="text" placeholder="Leave a review or a comment of Uicar">
+
+    </ion-textarea>
+  </ion-item>
+  <br>
+  <ion-button color="dark" mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center  
+  size="large" expand="block" (click)="service.review(text)">Send review</ion-button>
+    </div>
+    <br> <br>
 </ion-content>

@@ -171,4 +171,16 @@ export class RidesService {
       return this.users223;
     }));
   }
+
+  cleanvariable() {
+    this.users1 = [];
+    this.users2 = [];
+    this.users3 = [];
+    this.users12 = [];
+    this.users22 = [];
+    this.users32 = [];
+    this.users123 = [];
+    this.users223 = [];
+    this.users323 = [];
+  }
 }

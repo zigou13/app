@@ -32,7 +32,7 @@ export class AppComponent {
         user => {
           if (user) {
             console.log('loged');
-
+            localStorage.setItem('uid' , user.uid);
           } else {
             this.rout.navigateByUrl('/register');
           }

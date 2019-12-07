@@ -19,59 +19,79 @@
     </div>
 
     <div padding>
-        <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }}</h1>
+        <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }} </h1>
         <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you 
-            {{ item[0].payload.doc.data().zone }}</h5>
+           </h5>
     </div>
-    <div *ngIf="this.rides2.length === 0" text-center>
+    <div *ngIf="empty == true" text-center>
+            <!-- *ngIf="rides2.length === 0" -->
         <br>
         <h2 class="goodfont">Any rides close to you</h2> <br>
-        <img width="400px" src="assets/map.svg">
+        <img width="200px" src="assets/map.svg">
         <br>
+        <br><br><br>
   
     </div>
+
+    <app-loadingcard *ngIf="loading"></app-loadingcard>
+
     <div *ngFor="let item of rides2">
-        <ion-card (click)="gotoride(item[0].payload.doc.data().id)" mode="ios"
-            *ngIf="item[0].payload.doc.data().start !== null">
+        <ion-card (click)="gotoride(item.id)" mode="ios">
+            <!-- *ngIf="item.start !== null"> -->
             <ion-card-content style="height: 110px;border-radius: 100px !important">
                 <ion-row class="carta">
                     <ion-col class="cut" size="5">
-                        {{ item[0].payload.doc.data().start }}
+                        {{ item.start }}
                     </ion-col>
                     <ion-col size="2">
                         <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
                         </ion-icon>
                     </ion-col>
                     <ion-col class="cut" size="5">
-                        {{ item[0].payload.doc.data().destine }}
+                        {{ item.destine }}
                     </ion-col>
 
                 </ion-row>
 
                 <ion-row class="cartadesc">
                     <ion-col size="5">
-                        {{ item[0].payload.doc.data().hour }} Hour
+                        {{ item.hour }} Hour
                     </ion-col>
                     <ion-col size="2">
 
                     </ion-col>
                     <ion-col style="font-size: 12px;text-align: center" size="3">
-                        {{ item[0].payload.doc.data().seats }} <br> Seats
+                        {{ item.seats }} <br> Seats
                     </ion-col>
                     <ion-col size="2">
                         <br>
-                        <img style=" font-size: 45px;color: #3B455A;margin-bottom: 0%;"
-                            src='/assets/{{ item[0].payload.doc.data().car }}.png'>
+                        <ion-icon *ngIf="item.car === 'none'" style="font-size: 45px;color: #3B455A;" src='assets/rider.svg'></ion-icon>
+         
+                        <img  *ngIf="item.car !== 'none'" style="font-size: 45px;color: #3B455A;" src='assets/{{ item.car}}.png'>
+                   
                     </ion-col>
 
                 </ion-row>
             </ion-card-content>
         </ion-card>
+        
     </div>
+   <div padding>
+    <br>
+    <br>
+    <ion-button  mode="ios" size="large" (click)="refresh()" class="main-container goodfont" color="dark" expand="block">
+            <ion-icon name="refresh" size="large" slot="end"></ion-icon> Refresh rides
+     </ion-button>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+   </div>
 </ion-content>
-
+<!-- 
 <ion-fab color="secondary"  vertical="bottom" horizontal="end" >
     <ion-fab-button (click)="refresh()">
         <ion-icon mode="ios" color="light" name="refresh"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->

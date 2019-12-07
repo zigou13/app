@@ -19,6 +19,10 @@
               <ion-icon name="add-circle-outline"  color="secondary"mode="ios"slot="start"></ion-icon>
               <p class="goodfont">Create ride</p>
           </ion-item> 
+          <ion-item (click)="open('location')"  >
+                <ion-icon name="pin"  color="secondary"mode="ios"slot="start"></ion-icon>
+                <p class="goodfont">Update location</p>
+            </ion-item> 
           <ion-item (click)="open('terms')"  >
               <ion-icon name="help-circle-outline"  color="secondary" mode="ios"slot="start"></ion-icon>
               <p class="goodfont">Help</p>
@@ -35,8 +39,8 @@
           </ion-list>
         </ion-content>
         <ion-footer>
-            <p class="menufooter" text-center>Version 1.0.0</p>
-            <p class="menufooter" text-center>Copyright Uicar.io 2019</p>
+            <p class="menufooter" text-center>Version 1.0.1</p>
+            <p class="menufooter" text-center>Copyright Uicar.io 2020</p>
         </ion-footer>
       </ion-menu>
       <ion-router-outlet id="content1" main></ion-router-outlet>

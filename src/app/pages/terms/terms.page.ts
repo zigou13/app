@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from '../../services/services.service';
 
 @Component({
   selector: 'app-terms',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsPage implements OnInit {
 
-  constructor() { }
+  text:string;
+  constructor(public service: ServicesService) { }
 
   ngOnInit() {
   }
