@@ -110,17 +110,17 @@
 
         </div>
         <br> 
-        <div text-center *ngIf="item[0].payload.doc.data().mode == 'driver'" >
+        <div padding text-center *ngIf="item[0].payload.doc.data().mode == 'driver'" >
             <img height="150px"  src='/assets/{{item[0].payload.doc.data().car}}.png'>
-            <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/fill']" 
+            <ion-button color="secondary" mode="ios"  class="form goodfont" text-center [routerLink]="['/fill']" 
             fill="outline" size="large" expand="block" >
-              Change
+              Change car
             </ion-button>
         </div>
 
-        <div text-center *ngIf="item[0].payload.doc.data().mode !== 'driver'" >
+        <div  padding text-center *ngIf="item[0].payload.doc.data().mode !== 'driver'" >
            
-            <ion-button  mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center [routerLink]="['/fill']" 
+            <ion-button color="secondary"  mode="ios" class="form goodfont" text-center [routerLink]="['/fill']" 
             fill="outline" size="large" expand="block" >
               Change to driver
             </ion-button>

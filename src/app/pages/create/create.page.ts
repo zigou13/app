@@ -324,7 +324,7 @@ export class CreatePage implements OnInit, AfterViewInit {
       rutine: this.rutine,
       hour: this.hour,
       seats: this.seats,
-      car: this.car,
+      car: this.car || 'none',
     };
 
     console.log(data);

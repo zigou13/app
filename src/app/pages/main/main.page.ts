@@ -13,6 +13,7 @@ import { RidesService } from 'src/app/services/rides.service';
 import { ServicesService } from 'src/app/services/services.service';
 
 import {HttpClient} from '@angular/common/http';
+import { GetService } from '../../services/get.service';
 
 declare var google;
 
@@ -58,34 +59,10 @@ export class MainPage implements OnInit {
     private ridesservice: RidesService,
     private modalController: ModalController,
     public alertController: AlertController,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private bs: GetService) {
 
 
-  }
-
-  async presentAlertMultipleButtons() {
-    const alert = await this.alertController.create({
-      header: 'Update location',
-      message: 'If you are in a new location you should change the current one to find rides close to you',
-      buttons: [
-        {
-          text: 'No change',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Change location',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.router.navigateByUrl('location');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
   }
 
 
@@ -108,7 +85,8 @@ export class MainPage implements OnInit {
     setTimeout(() => {
         this.zone =  this.item[0].payload.doc.data().zone;
         this.rutes();
-        this.presentAlertMultipleButtons();
+        this.bs.ridesload(this.zone);
+        // this.presentAlertMultipleButtons();
     }, 3000);
 
 }

@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'modal', loadChildren: './pages/modal/modal.module#ModalPageModule' },
   { path: 'create', loadChildren: './pages/create/create.module#CreatePageModule' },
   { path: 'location', loadChildren: './pages/location/location.module#LocationPageModule' },
+  { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

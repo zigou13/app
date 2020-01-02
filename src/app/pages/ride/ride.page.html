@@ -30,9 +30,12 @@
           <br><br>
           <ion-grid>
               <ion-row>
-                <ion-col *ngIf="!item.rutine">
-                    {{ ride[0].payload.doc.data().hour  | date:'short' }}    <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
-                
+                <ion-col >
+                  <div *ngIf="!item.rutine">
+                      {{ ride[0].payload.doc.data().hour  | date:'short' }}    <strong class="goodfont">Hour :  </strong> {{ride[0].payload.doc.data().hour }}
+
+                  </div>
+         
                 </ion-col>
                 <ion-col>
                     <ion-chip *ngIf="ride[0].payload.doc.data().rutine === true" slot="end"  color="dark">
@@ -54,7 +57,8 @@
               
               </ion-row>
             </ion-grid>
-    
+            <h5>{{ ride[0].payload.doc.data().information  }} </h5>  
+                
             <br><br>
            <ion-button *ngIf="ride[0].payload.doc.data().uid !== uid" (click)="chatservice.checkchatexistence(uid , ride[0].payload.doc.data().uid)" slot="end" color="secondary" size="large" slot="end">
             <ion-icon mode="ios" name="chatbubbles" size="large"></ion-icon>
