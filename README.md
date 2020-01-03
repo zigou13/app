@@ -12,6 +12,7 @@ It is a multiplatfrom application to share a car in everyday journeys, developed
 * Personas cercas tuya ( gente que este en el mismo codigo postal )
 * Notificaciones en el chat ( al recibir mensaje )
 * Publicidad 
+* Sistema de estrellas
 
 ## BUGS
 
