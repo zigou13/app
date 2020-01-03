@@ -2,7 +2,16 @@
 
 It is a multiplatfrom application to share a car in everyday journeys, developed by the uicar.io team, directed by David Barrero
 
+## TODO : 
 
+* Mejoras en el main
+* Carga automatica del codigo postal
+* Automatizar cambio de codigo postal
+* Eventos 
+* Borrar los trayectos antiguos 
+* Personas cercas tuya
+* Notificaciones en el chat 
+* Publicidad 
 
  
 ## Developing Setup 
