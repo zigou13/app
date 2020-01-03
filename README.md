@@ -16,7 +16,7 @@ It is a multiplatfrom application to share a car in everyday journeys, developed
 
 ## BUGS
 
-* Duplicacion de trayectos en la pagina view
+* Duplicacion de trayectos en la pagina view *** Solved
 * En view no abre siempre el chat
 * Boton del main del centro que no se meta para abajo 
  
