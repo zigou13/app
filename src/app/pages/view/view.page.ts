@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from '@ionic/angular';
 import { ChatService } from 'src/app/services/chat.service';
 import { ServicesService } from 'src/app/services/services.service';
+import { GetService } from '../../services/get.service';
 
 @Component({
   selector: 'app-view',
@@ -29,7 +30,9 @@ export class ViewPage implements OnInit {
 
 
   constructor(public active: ActivatedRoute , public services: ServicesService , public aut: AngularFireAuth ,
-    public chatservice: ChatService , private alertController: AlertController , private router: Router) {
+    public chatservice: ChatService , private alertController: AlertController , private router: Router, public bs: GetService) {
+    this.getrides();
+      
     }
 
   async getProfile(id) {
@@ -56,12 +59,10 @@ export class ViewPage implements OnInit {
           }
         );
     }
+    
     getrides() {
-      this.services.functiongetRides(this.useruid).subscribe((data: any) => {
-       console.log(data);
-       this.rides = data;
-     });
-   }
+      this.bs.viewridesuid(this.useruid);
+    }
 
    gotoride(id) {
     this.router.navigateByUrl(`ride/${id}`);

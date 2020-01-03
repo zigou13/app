@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ServicesService } from 'src/app/services/services.service';
+import { GetService } from '../../services/get.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ProfilePage implements OnInit {
 
   numbers: any;
 
-  constructor(private rout: Router, private services: ServicesService, private aut: AngularFireAuth) {
+  constructor(private rout: Router, private services: ServicesService, private aut: AngularFireAuth , private bs: GetService) {
 
   }
 
@@ -70,6 +71,7 @@ export class ProfilePage implements OnInit {
   }
 
 
+
   async signOut() {
     const res = await this.aut.auth.signOut();
     console.log(res);
@@ -77,10 +79,7 @@ export class ProfilePage implements OnInit {
   }
 
   getrides() {
-    this.services.functiongetRides(this.uid).subscribe((data: any) => {
-     console.log(data);
-     this.rides = data;
-   });
+    this.bs.ridesuid(this.uid);
  }
  gotoride(id) {
   this.rout.navigateByUrl(`ride/${id}`);
