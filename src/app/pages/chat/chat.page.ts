@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { IonContent } from '@ionic/angular';
 import { ServicesService } from 'src/app/services/services.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { Storage } from '@ionic/storage';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-chat',
@@ -22,6 +24,7 @@ export class ChatPage implements OnInit {
   message: string;
   nombre: string;
   img: string;
+  token:string;
 
   messages = [];
 
@@ -29,7 +32,9 @@ export class ChatPage implements OnInit {
     public service: ServicesService,
     public active: ActivatedRoute,
     public chatservice: ChatService,
+    private notifService:NotificationsService,
     private aut: AngularFireAuth,
+    private storage: Storage,
     private router: Router) {
     this.uid = this.aut.auth.currentUser.uid;
     this.id = this.active.snapshot.paramMap.get('id');
@@ -37,6 +42,9 @@ export class ChatPage implements OnInit {
 
 
   ngOnInit() {
+    this.storage.get('notif').then((val) => {
+      this.token=val;
+    });
     this.getUsers();
     this.getmessages();
   }
@@ -55,6 +63,11 @@ export class ChatPage implements OnInit {
   }
   async getmessages() {
     await this.chatservice.getmessages(this.id).subscribe((data => {
+
+      this.notifService.mandarNot(this.token, data).subscribe((dat2:any)=>{
+        console.log(dat2);
+        console.log('listo');
+      });
       this.messages = data;
     }
     ));

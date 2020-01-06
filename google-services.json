@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "465417573805",
+    "firebase_url": "https://uicarapp.firebaseio.com",
+    "project_id": "uicarapp",
+    "storage_bucket": "uicarapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465417573805:android:d1886f00ff95d7a6",
+        "android_client_info": {
+          "package_name": "io.uicar.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465417573805-3sb8d8guk87f4acvcvh8cjjhvttltve8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.uicar.app",
+            "certificate_hash": "95ad76cc15b090da3661678e9fdd757509849cdc"
+          }
+        },
+        {
+          "client_id": "465417573805-k9hd8jmbqic6ajn6ckn93j7q3l1h873o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX2_VMvECgb1jfVN4Vi9Aw814GYttxTY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465417573805-k9hd8jmbqic6ajn6ckn93j7q3l1h873o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

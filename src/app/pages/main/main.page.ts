@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-
+import { FCM } from '@ionic-native/fcm/ngx';
 
 import { ActionSheetController, AlertController } from '@ionic/angular';
 
@@ -14,6 +14,7 @@ import { ServicesService } from 'src/app/services/services.service';
 
 import {HttpClient} from '@angular/common/http';
 import { GetService } from '../../services/get.service';
+import { Storage } from '@ionic/storage';
 
 declare var google;
 
@@ -60,7 +61,9 @@ export class MainPage implements OnInit {
     private modalController: ModalController,
     public alertController: AlertController,
     private http: HttpClient,
-    private bs: GetService) {
+    private fcm: FCM,
+    private storage: Storage,
+    public bs: GetService) {
 
 
   }
@@ -70,6 +73,13 @@ export class MainPage implements OnInit {
 
   
   ngOnInit() {
+
+    this.fcm.getToken().then(token => {
+      console.log(token);
+      this.storage.set('notif', token);
+    });
+
+
     this.logueado();
     this.init();
 
@@ -77,19 +87,19 @@ export class MainPage implements OnInit {
 
   init() {
     setTimeout(() => {
-        this.getProfile(this.uid);
-        this.posicion();
+      this.getProfile(this.uid);
+      this.posicion();
     }, 2000);
 
 
     setTimeout(() => {
-        this.zone =  this.item[0].payload.doc.data().zone;
-        this.rutes();
-        this.bs.ridesload(this.zone);
-        // this.presentAlertMultipleButtons();
+      this.zone =  this.item[0].payload.doc.data().zone;
+      this.rutes();
+      this.bs.ridesload(this.zone);
+      // this.presentAlertMultipleButtons();
     }, 3000);
 
-}
+  }
 
 
 
@@ -121,8 +131,8 @@ export class MainPage implements OnInit {
 
     this.directionsDisplay = new google.maps.DirectionsRenderer();
     this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 11,
-        mapTypeId: 'roadmap'
+      zoom: 11,
+      mapTypeId: 'roadmap'
     });
     this.directionsDisplay.setMap(this.map);
     console.log(this.zone);
@@ -137,62 +147,62 @@ export class MainPage implements OnInit {
         console.log('not empty i guss' + this.rides2);
       }
       for (let i = 0; i < data.length; i++) {
-      
-            this.directionsService.route({
-                origin: data[i].start,
-                destination: data[i].destine,
-                travelMode: 'DRIVING'
-            }, (response, status) => {
-                const waypoint_markers = [];
-                if (status === 'OK') {
-                    this.directionsDisplay.setDirections(response);
 
-                    this.directionsDisplay = new google.maps.DirectionsRenderer({
-                        suppressBicyclingLayer: true
-                        // suppressMarkers: true
-                    });
-                    const myRoute = response.routes[0].legs[0];
-                    const marker = new google.maps.Marker({
-                        position: myRoute.steps[0].start_point,
-                        map: this.map,
-                        id: data[i].id,
-                        zIndex: 999999,
+        this.directionsService.route({
+          origin: data[i].start,
+          destination: data[i].destine,
+          travelMode: 'DRIVING'
+        }, (response, status) => {
+          const waypoint_markers = [];
+          if (status === 'OK') {
+            this.directionsDisplay.setDirections(response);
 
-                    });
-                    this.attachInstructionText(marker);
-                    const marker1 = new google.maps.Marker({
-                        position: myRoute.steps[myRoute.steps.length - 1].end_point,
-                        map: this.map,
-                        id: data[i].id,
-                        zIndex: 999999,
-                    });
-                    this.attachInstructionText(marker1);
-                    this.directionsDisplay.setMap(this.map);
-                } else {
-                    // window.alert('Directions request failed due to ' + status);
-                }
+            this.directionsDisplay = new google.maps.DirectionsRenderer({
+              suppressBicyclingLayer: true
+              // suppressMarkers: true
             });
-        }
-       this.loading = false;
+            const myRoute = response.routes[0].legs[0];
+            const marker = new google.maps.Marker({
+              position: myRoute.steps[0].start_point,
+              map: this.map,
+              id: data[i].id,
+              zIndex: 999999,
+
+            });
+            this.attachInstructionText(marker);
+            const marker1 = new google.maps.Marker({
+              position: myRoute.steps[myRoute.steps.length - 1].end_point,
+              map: this.map,
+              id: data[i].id,
+              zIndex: 999999,
+            });
+            this.attachInstructionText(marker1);
+            this.directionsDisplay.setMap(this.map);
+          } else {
+            // window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      this.loading = false;
     });
-}
+  }
 
 
 
   async logueado() {
     await this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            console.log('loged');
-            this.uid = user.uid;
-          } else {
-            this.router.navigateByUrl('/register');
-          }
-        },
-        () => {
+    .subscribe(
+      user => {
+        if (user) {
+          console.log('loged');
+          this.uid = user.uid;
+        } else {
           this.router.navigateByUrl('/register');
         }
+      },
+      () => {
+        this.router.navigateByUrl('/register');
+      }
       );
   }
 
@@ -201,13 +211,13 @@ export class MainPage implements OnInit {
 
       if (data.length === 0) {
         console.log('profile empty');
-       //  this.router.navigateByUrl(`edit-profile`);
+        //  this.router.navigateByUrl(`edit-profile`);
       } else {
 
         this.item = data;
         this.zone = data[0].payload.doc.data().zone;
 
-        }
+      }
 
     });
   }
@@ -242,7 +252,7 @@ export class MainPage implements OnInit {
   async mapempty() {
     await this.geolocation.getCurrentPosition().then((resp) => {
       console.log(resp);
-  
+
       const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
         zoom: 16,
         center: { lat: this.lat, lng: this.lng }
