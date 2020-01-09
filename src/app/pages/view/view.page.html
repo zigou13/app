@@ -42,7 +42,7 @@
                    Rider 🚶
                  </div>
                  <div *ngIf="item.payload.doc.data().mode == 'driver'">
-                    Driver 🚗 
+                  Conductor 🚗 
                   </div>
                   </ion-button>
               </ion-item>
@@ -59,7 +59,7 @@
             <ion-col size="6">
                 <ion-card mode="ios" color="primary" >
                     <ion-card-header>
-                        <ion-card-title style="color:var(--ion-color-light)" class="goodfont">Rides</ion-card-title>
+                        <ion-card-title style="color:var(--ion-color-light)" class="goodfont">Trayectos</ion-card-title>
                         <ion-card-subtitle style="font-size:40px;color:var(--ion-color-light)!important" class="goodfont">{{ bs.viewuserrides.length }}</ion-card-subtitle>
                         
                       </ion-card-header>
@@ -70,7 +70,7 @@
             <ion-col size="6">
                 <ion-card mode="ios"  color="secondary" >
                     <ion-card-header>
-                        <ion-card-title style="color:var(--ion-color-medium)" class="goodfont">Stars</ion-card-title>
+                        <ion-card-title style="color:var(--ion-color-medium)" class="goodfont">Estrellas</ion-card-title>
                         <ion-card-subtitle style="font-size:40px;color:var(--ion-color-tertiary)!important" class="goodfont">
                           <ion-icon size="small" color="warning" name="star"></ion-icon>
                           <ion-icon size="small" color="warning" name="star"></ion-icon>
@@ -98,11 +98,11 @@
         
           <br>
           <div >
-          <h2 class="goodfont" style="font-size:38px;" padding>Rides</h2>
+          <h2 class="goodfont" style="font-size:38px;" padding>Trayectos</h2>
           <br>
           <div padding *ngIf="bs.viewuserrides.length === 0" text-center>
             <img width="400px" src="assets/map.svg">
-            <h3 color="secondary" text-center class="goodfont">You don't have any ride <a [routerLink]="['/create']">create one</a></h3>
+            <h3 color="secondary" text-center class="goodfont">No tiene ningun trayecto</h3>
 
           </div>
           <br>
@@ -128,13 +128,13 @@
       
                   <ion-row class="cartadesc">
                       <ion-col size="5">
-                          {{ item.hour }} Hour
+                          {{ item.hour }} Hora
                       </ion-col>
                       <ion-col size="2">
       
                       </ion-col>
                       <ion-col style="font-size: 12px;text-align: center" size="3">
-                          {{ item.seats }} <br> Seats
+                          {{ item.seats }} <br> Asientos
                       </ion-col>
                       <ion-col size="2">
                           <br>

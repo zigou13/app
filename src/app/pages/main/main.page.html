@@ -11,23 +11,23 @@
     <div margin-bottom #map class="map" id="map" style="position: relative;margin-top: -92px"></div>
     <div (click)="presentModal()">
 
-        <div class="input-good" type="text" placeholder="Where are you going?" text-center>Where do you want to go?
+        <div class="input-good" type="text" placeholder="Where are you going?" text-center>Donde quieres ir?
         </div>
 
     </div>
 
     <div padding>
-        <h1 class="goodfont" style=" color: #3B455A;">Welcome back {{ item[0].payload.doc.data().name }} </h1>
+        <h1 class="goodfont" style=" color: #3B455A;">Bienvenido {{ item[0].payload.doc.data().name }} </h1>
 
         <ion-row>
             <ion-col size="6">
-            <h5 class="goodfont" style="color:var(--ion-color-medium)">Rides close to you {{ item[0].payload.doc.data().zone }}</h5>
+            <h5 class="goodfont" style="color:var(--ion-color-medium)">Trayectos cerca tuya {{ item[0].payload.doc.data().zone }}</h5>
       
             </ion-col>
             <ion-col size="6" padding >
                 <ion-chip [routerLink]="['/location']" routerLinkActive="router-link-active"  outline padding  color="primary">
                     <ion-icon  color="primary" name="pin"></ion-icon>
-                    <ion-label style="font-size:10px;">Change zone</ion-label>
+                    <ion-label style="font-size:10px;">Cambiar zona</ion-label>
                   </ion-chip>
             </ion-col>
         </ion-row>
@@ -35,7 +35,7 @@
     <div *ngIf="empty == true" text-center>
             <!-- *ngIf="rides2.length === 0" -->
         <br>
-        <h2 class="goodfont">Any rides close to you</h2> <br>
+        <h2 class="goodfont">No hay trayectos cerca tuya</h2> <br>
         <img width="200px" src="assets/map.svg">
         <br>
         <br><br><br>
@@ -64,13 +64,13 @@
 
                 <ion-row class="cartadesc">
                     <ion-col size="5">
-                        {{ item.hour }} Hour
+                        {{ item.hour }} Hora
                     </ion-col>
                     <ion-col size="2">
 
                     </ion-col>
                     <ion-col style="font-size: 12px;text-align: center" size="3">
-                        {{ item.seats }} <br> Seats
+                        {{ item.seats }} <br> Asientos
                     </ion-col>
                     <ion-col size="2">
                         <br>
@@ -89,7 +89,7 @@
     <br>
     <br>
     <ion-button  mode="ios" size="large" (click)="refresh()" class="main-container goodfont" color="dark" expand="block">
-            <ion-icon name="refresh" size="large" slot="end"></ion-icon> Refresh rides
+            <ion-icon name="refresh" size="large" slot="end"></ion-icon> Actualizar trayecto
      </ion-button>
     <br>
     <br>

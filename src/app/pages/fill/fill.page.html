@@ -12,7 +12,7 @@
   <ion-content padding >
     
       <div *ngIf="num === 0">
-      <h1 text-center color="medium" class="goodfont">Select your mode</h1> 
+      <h1 text-center color="medium" class="goodfont">Seleciona tu modo</h1> 
       <br>
       <br>
       <br>
@@ -31,7 +31,7 @@
           </ion-col>
           <ion-col >
             <img height="150px"  (click)="setmode('driver')" src="assets/driver.svg">
-             <h2 text-center  class="goodfont">Driver</h2>
+             <h2 text-center  class="goodfont">Conductor</h2>
   
           </ion-col>
         
@@ -40,7 +40,7 @@
       </div>
   
       <div *ngIf="num >= 1">
-          <h1 text-center class="goodfont">Select your car type</h1> 
+          <h1 text-center class="goodfont">Selecciona el tipo de coche</h1> 
           <br>
           <br>
           <br>
@@ -56,7 +56,7 @@
               <ion-col no-padding size="6">
                 
                 <img (click)="setcar('compact')"    height="100px"  src="assets/compact.png">
-                <h5 class="goodfont" text-center >Compact car</h5>
+                <h5 class="goodfont" text-center >Compact</h5>
               
               </ion-col>
               <ion-col no-padding size="6">
@@ -91,7 +91,7 @@
       <br>
       
       <ion-button class="goodfont"  expand="block" size="large"  color="light" *ngIf="num == 2 " (click)="service.userdata(car, mode, uid)"  mode="ios" text-center  >
-          <ion-icon color="primary" name="checkmark-circle"></ion-icon>  Done
+          <ion-icon color="primary" name="checkmark-circle"></ion-icon>  Hecho
         </ion-button>  
   
       <ion-button  color="primary" *ngIf="num > 0  " (click)="num = num - 1" mode="ios" text-center  >

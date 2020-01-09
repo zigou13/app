@@ -5,68 +5,69 @@
             <ion-icon mode="ios" color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
          </ion-button>
       </ion-buttons>
-    <ion-title color="primary">Help</ion-title>
+    <ion-title color="primary">Ayuda</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <div class="hero-image">
         <div class="hero-text">
-          <h1 class="goodfont">Help center</h1>
-          <p style="color:white">contact us if you have any questions or reports</p>
+          <h1 class="goodfont">Centro de ayuda</h1>
+          <p style="color:white">Contactanos si tien alguna duda o reporte</p>
           
         </div>
       </div>
 
-    <div class="input-good" type="text" placeholder="Where are you going?" text-center>Do you have questions?
+    <div class="input-good" type="text" placeholder="Where are you going?" text-center>Tienes preguntas?
     </div>
    
     <br>
     <div padding>
-    <h1 text-center class="goodfont">Common questions</h1>
+    <h1 text-center class="goodfont">Preguntas frecuentes</h1>
     <!-- Need to add ARIA -->
 <div class="accordion accordion--faq">
     <section class="accordion__question">
       <header class="accordion__header">
-        <h5 class="accordion__heading">How to change the place?</h5>
+        <h5 class="accordion__heading">Como cambio la zona?</h5>
         <span class="icon-arrow-down"></span>
       </header>
       <div class="accordion__content">
-        <p>If you want to change your current location in the side menu the element "Update location"</p>
+        <!-- <p>If you want to change your current location in the side menu the element "Update location"</p> -->
+        <p>Si quieres cambiar la zona deberás ir a la pagina de cambio de zona y añadir la zona que estes en ese momento</p>
       </div>
      </section>
     <section class="accordion__question">
       <header class="accordion__header">
-        <h5 class="accordion__heading">How to get a ride?</h5>
+        <h5 class="accordion__heading">Como conseguir un trayectp?</h5>
         <span class="icon-arrow-down"></span>
       </header>
       <div class="accordion__content">
-       <p>To get a ride get in contact with the person that you are interested and send them a message by opening a chat</p>
+       <p>Para poder conseguir un trayecto deberás ponerte en contacto tu directamente con el conductor por el chat y llegar a un trato con el</p>
       </div>
      </section>
    <section class="accordion__question">
       <header class="accordion__header">
-        <h5 class="accordion__heading">How much i paid?</h5>
+        <h5 class="accordion__heading">Cuanto cuesta el trayecto?</h5>
         <span class="icon-arrow-down"></span>
       </header>
       <div class="accordion__content">
-      <p>The cost of the ride is trade by the users, so you can deal how much with the driver or the rides</p>
+      <p>El coste del trayecto será entre tu y el conductor, podeis poner el precio o hacer el trato que querais</p>
       </div>
      </section>
   </div>
   <br>
   <br>
   <br>
-  <h1 text-center class="goodfont">Leave a review</h1>
+  <h1 text-center class="goodfont">Dejar una review o pregunta</h1>
   <br>
   <ion-item>
-    <ion-textarea  [(ngModel)]="text" placeholder="Leave a review or a comment of Uicar">
+    <ion-textarea  [(ngModel)]="text" placeholder="Si tienes alguna pregunta o algo que reportar introducelo aqui">
 
     </ion-textarea>
   </ion-item>
   <br>
   <ion-button color="dark" mode="ios" style="width: 50%;margin-left:25%;" class="form goodfont" text-center  
-  size="large" expand="block" (click)="service.review(text)">Send review</ion-button>
+  size="large" expand="block" (click)="service.review(text)">Enviar</ion-button>
     </div>
     <br> <br>
 </ion-content>

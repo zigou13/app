@@ -1,6 +1,6 @@
 <ion-header >
     <ion-toolbar>
-      <ion-title color="primary">Your Chats</ion-title>
+      <ion-title color="primary">Tus chats</ion-title>
       <ion-buttons slot="start">
         <ion-button [routerLink]="['/']">
           <ion-icon mode="ios" color="primary" slot="icon-only" name="arrow-back"></ion-icon>
@@ -15,7 +15,7 @@
     <div *ngIf="(chats)?.length === 0">
       <img class="ion-text-center" style="margin-top: 32px;margin-left:25%; margin-right: 25%;height: auto;max-height: 300px;" width="50%"
         src="assets/chat.svg">
-      <h1 class="ion-text-center font">No chats 😥</h1>
+      <h1 class="ion-text-center font">No tienes chats 😥</h1>
     </div>
 
       <div *ngFor="let item of chats">

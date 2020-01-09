@@ -269,7 +269,7 @@ export class CreatePage implements OnInit, AfterViewInit {
 
   async error(mensaje: string) {
     const alert = await this.alertCtrl.create({
-      message: 'Direcction not valid please be more specific',
+      message: 'Direccion no valida se más especifico',
       buttons: ['OK']
     });
     await alert.present();
@@ -282,7 +282,7 @@ export class CreatePage implements OnInit, AfterViewInit {
     this.start = localStorage.getItem('ubic1');
     this.destine = localStorage.getItem('ubic2');
     const that = this;
-    this.presentLoading('Loading route');
+    this.presentLoading('Cargando ruta');
     this.directionsService.route({
       origin: this.start,
       destination: this.destine,
@@ -331,7 +331,7 @@ export class CreatePage implements OnInit, AfterViewInit {
     // alert( this.start + this.destine + localStorage.getItem('cod1') + localStorage.getItem('cod2') +
     //  this.rutine + this.hour + this.ridedate + this.uid );
     this.service.createride(data);
-    this.presentLoading('Creating ride');
+    this.presentLoading('Creando trayecto');
   }
   back() {
     this.num = 0;

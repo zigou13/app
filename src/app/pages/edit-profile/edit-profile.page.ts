@@ -141,7 +141,7 @@ export class EditProfilePage implements OnInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      message: 'Loading image',
+      message: 'Cargando imagen',
       duration: 2000
     });
     await loading.present();
@@ -217,7 +217,7 @@ export class EditProfilePage implements OnInit {
 
   async error(mensaje: string) {
     const alert = await this.alertCtrl.create({
-      message: 'Direcction not valid please be more specific',
+      message: 'Direccion invalida se más especifico',
       buttons: ['OK']
     });
     await alert.present();

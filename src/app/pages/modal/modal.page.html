@@ -5,11 +5,11 @@
             <ion-icon mode="ios" color="secondary" size="large" slot="icon-only" name="close" ></ion-icon>
          </ion-button>
       </ion-buttons>
-    <ion-title>Search ride</ion-title>
+    <ion-title>Buscar trayecto</ion-title>
   </ion-toolbar>
   <div padding>
       <ion-item lines="medium">
-        <ion-input id="pac-input-create"  [(ngModel)]="adress" #autoCompleteInput  #d   type="text" placeholder="Where you want to go?"></ion-input>
+        <ion-input id="pac-input-create"  [(ngModel)]="adress" #autoCompleteInput  #d   type="text" placeholder="Donde quieres ir?"></ion-input>
       </ion-item>
       <br>
      
@@ -55,7 +55,7 @@
 
 <ion-footer padding class="bg-transparent" >
     <ion-button [disabled]="!adress"  mode="ios" size="large" (click)="search()" class="main-container" color="dark" expand="block">
-        Search
+        Buscar
     </ion-button>
 </ion-footer>
 

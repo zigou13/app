@@ -36,20 +36,20 @@ export class LoginPage {
     } catch (error) {
       console.log(error);
       if (error.code === 'auth/wrong-password') {
-        this.error('Incorrect Password');
+        this.error('Contraseña incorrecta');
       } if (error.code === 'auth/user-not-found') {
-        this.error('User dont found');
+        this.error('Usuario no encontrado');
       }
       if (error.code === 'auth/email-already-in-use') {
-        this.error('User already use');
+        this.error('Email ya usado');
       }
       if (error.code === 'auth/argument-error') {
-        this.error('Argument error');
+        this.error('Error de argumento');
       }
       if (error.code === 'auth/invalid-email') {
-        this.error('Invalid email');
+        this.error('Email invalido');
       } else {
-        this.error('Something went wrong try later');
+        this.error('Algo ha ido mal intententalo despues');
       }
     }
   }
@@ -60,18 +60,18 @@ export class LoginPage {
       this.rout.navigateByUrl('/');
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
-        this.error('Incorrect Password');
+        this.error('Contraseña incorrecta');
       } if (error.code === 'auth/user-not-found') {
-        this.error('User dont found');
+        this.error('Usuario no encontrado');
       }
       if (error.code === 'auth/email-already-in-use') {
-        this.error('User already use');
+        this.error('Usuario ya usado');
       }
       if (error.code === 'auth/argument-error') {
-        this.error('Argument error');
+        this.error('Error de argumento');
       }
       if (error.code === 'auth/invalid-email') {
-        this.error('Invalid error');
+        this.error('Email invalido');
       }
       console.log(error);
     }
@@ -83,7 +83,7 @@ export class LoginPage {
 
   async presentAlert(username) {
     const alert = await this.alertController.create({
-      header: 'Loged as: ',
+      header: 'Registrado: ',
       message: `${username}`,
       buttons: ['OK']
     });
@@ -102,7 +102,7 @@ export class LoginPage {
 
   async erroruser() {
     const alert = await this.alertController.create({
-      message: 'User not found',
+      message: 'Usuario no encontrado',
     });
 
     await alert.present();

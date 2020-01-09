@@ -40,18 +40,18 @@ export class RegisterPage {
       } catch (error) {
         console.log(error);
         if (error.code === 'auth/wrong-password') {
-          this.error('Incorrect Password');
+          this.error('Contraseña incorrecta');
         }  if (error.code === 'auth/user-not-found') {
-          this.error('User dont found');
+          this.error('Usuario no encontrado');
         }
         if (error.code === 'auth/email-already-in-use') {
-          this.error('User already use');
+          this.error('Email ya usado');
         }
         if ( error.code === 'auth/argument-error') {
-          this.error('Argument error');
+          this.error('Error de argumento');
          }
          if ( error.code === 'auth/invalid-email') {
-          this.error('Invalid email');
+          this.error('Email invalido');
          }
       }
     }
@@ -62,7 +62,7 @@ export class RegisterPage {
 
   async errorpassIguales() {
     const alert = await this.alertController.create({
-      message: 'The password dont macth',
+      message: 'Las contraseñas no coenciden',
       buttons: ['OK']
     });
 
@@ -71,7 +71,7 @@ export class RegisterPage {
 
   async errorServ() {
     const alert = await this.alertController.create({
-      message: 'Something went wrong try later',
+      message: 'Algo ha ido mal intentalo más tarde',
       buttons: ['OK']
     });
 

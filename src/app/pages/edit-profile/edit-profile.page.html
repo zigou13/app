@@ -6,7 +6,7 @@
          </ion-button>
       </ion-buttons>
     
-    <ion-title color="primary" class="goodfont">Edit Profile</ion-title>
+    <ion-title color="primary" class="goodfont">Editar perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,19 +29,19 @@
       <label class="custom-file-upload" style="margin:auto;max-width:400px">
         <input id="file-upload" placeholder="Seleciona imagen" type="file" accept=".png, .jpg"
           (change)="onUpload($event)" />
-        <ion-icon margin-right name="cloud-download"></ion-icon> Select profile photo
+        <ion-icon margin-right name="cloud-download"></ion-icon> Seleccionar foto de perfil
       </label>
     </div>
   
 
-    <h3 padding class="goodfont">Profile info</h3>
+    <h3 padding class="goodfont">Informacion de perfil</h3>
 
   <br>
   <ion-item margin-bottom margin-bottom >
-    <ion-input (keyup.enter)="moveFocus(b)" type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
+    <ion-input (keyup.enter)="moveFocus(b)" type="text" placeholder="Nombre" [(ngModel)]="name"></ion-input>
   </ion-item>
   <ion-item margin-bottom margin-bottom  >
-    <ion-input #b ((click)="save(name, phone)" type="text" placeholder="Phone" [(ngModel)]="phone"></ion-input>
+    <ion-input #b ((click)="save(name, phone)" type="text" placeholder="Teléfono" [(ngModel)]="phone"></ion-input>
   </ion-item>
 
   <ion-item margin-bottom margin-bottom  >
@@ -56,7 +56,7 @@
   <input #imageProd type="hidden" [value]="urlImage | async" style="color:black;">
   <br><br>
   <ion-button  size="large" (click)="save(name, phone)" class="main-container" color="primary" expand="block">
-    Save</ion-button>
+    Guardar</ion-button>
   </div>
   <br>
   <div style="display: none" class="ion-margin-top" id="infowindow-content">
