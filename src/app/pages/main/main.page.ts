@@ -124,13 +124,35 @@ export class MainPage implements OnInit{
           console.log(resp);
           this.lat = resp.coords.latitude;
           this.lng = resp.coords.longitude;
+
+
+          this.obtenerCodigoPostal(this.lat, this.lng);
+        });
+      }
+
+
+
+      obtenerCodigoPostal(lat, lng){
+        // console.log(lat, lng);
+        this.services.obtenerCodigoPostal(lat,lng).subscribe((data:any)=>{
+          console.log(data.results[0].address_components);
+          const tam= data.results[0].address_components.length - 1;
+          console.log(data.results[0].address_components[tam]);
+          if(data.results[0].address_components[tam].types[0]==='postal_code'){
+
+            console.log('si tiene postal');
+            console.log(data.results[0].address_components[tam].long_name);
+            this.rutes(data.results[0].address_components[tam].long_name);
+          }else{
+            console.log('no tiene postal');
+          }
         });
       }
 
 
 
 
-      async rutes() {
+      async rutes(zone) {
 
         this.directionsDisplay = new google.maps.DirectionsRenderer();
         this.map = new google.maps.Map(document.getElementById('map'), {
@@ -138,16 +160,16 @@ export class MainPage implements OnInit{
           mapTypeId: 'roadmap'
         });
         this.directionsDisplay.setMap(this.map);
-        console.log(this.zone);
-        await this.http.get(`http://uicar.openode.io/zones/${this.zone}/3`).subscribe((data: any) => {
-          console.log(data);
+        console.log(zone);
+        await this.http.get(`http://uicar.openode.io/zones/${zone}/3`).subscribe((data: any) => {
+          // console.log(data);
           this.rides2 = data;
           if(   this.rides2.length === 0) {
             console.log('Data empty' + this.rides2);
             this.mapempty();
             this.empty = true;
           } else {
-            console.log('not empty i guss' + this.rides2);
+            // console.log('not empty i guss' + this.rides2);
           }
           for (let i = 0; i < data.length; i++) {
 
@@ -197,10 +219,10 @@ export class MainPage implements OnInit{
         .subscribe(
           user => {
             if (user) {
-              console.log('loged');
+              // console.log('loged');
               this.uid = user.uid;
               this.getProfile(this.uid);
-              console.log(this.uid);
+              // console.log(this.uid);
             } else {
               this.router.navigateByUrl('/register');
             }
@@ -214,7 +236,7 @@ export class MainPage implements OnInit{
       async getProfile(id) {
         console.log(id);
         await this.services.getProfile(id).subscribe((data: any) => {
-          console.log(data[0].payload.doc.data().zone);
+          // console.log(data[0].payload.doc.data().zone);
 
           if (data.length === 0) {
             console.log('profile empty');
@@ -226,7 +248,7 @@ export class MainPage implements OnInit{
             this.name= data[0].payload.doc.data().name;
 
             this.bs.ridesload(this.zone);
-            this.rutes();
+            // this.rutes(this.zone);
           }
 
         });
@@ -249,19 +271,19 @@ export class MainPage implements OnInit{
 
       attachInstructionText(marker) {
         const self = this;
-        console.log(marker.id);
+        // console.log(marker.id);
         const id = marker.id;
-        console.log(self.uid);
+        // console.log(self.uid);
 
         google.maps.event.addListener(marker, 'click', function () {
-          console.log(marker.id);
+          // console.log(marker.id);
           self.gotoride(marker.id);
         });
       }
 
       async mapempty() {
         await this.geolocation.getCurrentPosition().then((resp) => {
-          console.log(resp);
+          // console.log(resp);
 
           const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
             zoom: 16,

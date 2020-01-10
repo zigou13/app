@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { HttpClient} from '@angular/common/http';
 
 
 @Injectable({
@@ -20,7 +21,7 @@ export class ServicesService {
 
 
 
-  constructor(public afs: AngularFirestore, public rout: Router) {
+  constructor(public afs: AngularFirestore, public rout: Router, private http: HttpClient) {
   }
 
 
@@ -155,6 +156,13 @@ export class ServicesService {
       // return this.afs.collection('users').doc(data.uid).collection('rides').doc(id).set(data);
   });
 
+}
+
+
+//obtener codigo postal
+
+obtenerCodigoPostal(lat, lng){
+  return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyC6Zaf4zBj8h-RXCCIh6pPZn5hWK_OZVrg`);
 }
 
 
