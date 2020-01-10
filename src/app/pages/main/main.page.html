@@ -6,6 +6,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
+
 <ion-content fullscreen >
 
     <div margin-bottom #map class="map" id="map" style="position: relative;margin-top: -92px"></div>
@@ -16,91 +17,89 @@
 
     </div>
 
-    <div padding>
-        <h1 class="goodfont" style=" color: #3B455A;">Bienvenido {{ item[0].payload.doc.data().name }} </h1>
-
-        <ion-row>
-            <ion-col size="6">
-            <h5 class="goodfont" style="color:var(--ion-color-medium)">Trayectos cerca tuya {{ item[0].payload.doc.data().zone }}</h5>
-      
-            </ion-col>
-            <ion-col size="6" padding >
-                <ion-chip [routerLink]="['/location']" routerLinkActive="router-link-active"  outline padding  color="primary">
+    <div class="ion-padding">
+        <h3 class="ion-padding goodfont" style=" color: #3B455A;">Bienvenido {{ name }} </h3>
+        <ion-grid>
+            <ion-row>
+                <ion-col size="6">
+                    <h5 class="goodfont" style="color:var(--ion-color-medium)">Trayectos cerca tuya {{ zone }}</h5>
+                </ion-col>
+                <ion-col size="6" style="display: flex; justify-content: center; align-items: center;">
+                   <ion-chip [routerLink]="['/location']" routerLinkActive="router-link-active"  outline padding  color="primary">
                     <ion-icon  color="primary" name="pin"></ion-icon>
                     <ion-label style="font-size:10px;">Cambiar zona</ion-label>
-                  </ion-chip>
+                </ion-chip>
             </ion-col>
         </ion-row>
-    </div>
-    <div *ngIf="empty == true" text-center>
-            <!-- *ngIf="rides2.length === 0" -->
-        <br>
-        <h2 class="goodfont">No hay trayectos cerca tuya</h2> <br>
-        <img width="200px" src="assets/map.svg">
-        <br>
-        <br><br><br>
-  
-    </div>
+    </ion-grid>
+</div>
+<div *ngIf="empty == true" text-center>
+    <br>
+    <h2 class="goodfont">No hay trayectos cerca tuya</h2> <br>
+    <img width="200px" src="assets/map.svg">
+    <br>
+    <br><br><br>
 
-    <app-loadingcard *ngIf="loading"></app-loadingcard>
+</div>
 
-    <div *ngFor="let item of bs.rideszone">
-        <ion-card (click)="gotoride(item.id)" mode="ios">
-            <!-- *ngIf="item.start !== null"> -->
-            <ion-card-content style="height: 110px;border-radius: 100px !important">
-                <ion-row class="carta">
-                    <ion-col class="cut" size="5">
-                        {{ item.start }}
-                    </ion-col>
-                    <ion-col size="2">
-                        <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
-                        </ion-icon>
-                    </ion-col>
-                    <ion-col class="cut" size="5">
-                        {{ item.destine }}
-                    </ion-col>
+<app-loadingcard *ngIf="loading"></app-loadingcard>
 
-                </ion-row>
+<div *ngFor="let item of bs.rideszone">
+    <ion-card (click)="gotoride(item.id)" mode="ios">
+        <ion-card-content style="height: 110px;border-radius: 100px !important">
+            <ion-row class="carta">
+                <ion-col class="cut" size="5">
+                    {{ item.start }}
+                </ion-col>
+                <ion-col size="2">
+                    <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
+                    </ion-icon>
+                </ion-col>
+                <ion-col class="cut" size="5">
+                    {{ item.destine }}
+                </ion-col>
 
-                <ion-row class="cartadesc">
-                    <ion-col size="5">
-                        {{ item.hour }} Hora
-                    </ion-col>
-                    <ion-col size="2">
+            </ion-row>
 
-                    </ion-col>
-                    <ion-col style="font-size: 12px;text-align: center" size="3">
-                        {{ item.seats }} <br> Asientos
-                    </ion-col>
-                    <ion-col size="2">
-                        <br>
-                        <ion-icon *ngIf="item.car === 'none'" style="font-size: 45px;color: #3B455A;" src='assets/rider.svg'></ion-icon>
-         
-                        <img  *ngIf="item.car !== 'none'" style="font-size: 45px;color: #3B455A;" src='assets/{{ item.car}}.png'>
-                   
-                    </ion-col>
+            <ion-row class="cartadesc">
+                <ion-col size="5">
+                    {{ item.hour }} Hora
+                </ion-col>
+                <ion-col size="2">
 
-                </ion-row>
-            </ion-card-content>
-        </ion-card>
-        
-    </div>
-   <div padding>
+                </ion-col>
+                <ion-col style="font-size: 12px;text-align: center" size="3">
+                    {{ item.seats }} <br> Asientos
+                </ion-col>
+                <ion-col size="2">
+                    <br>
+                    <ion-icon *ngIf="item.car === 'none'" style="font-size: 45px;color: #3B455A;" src='assets/rider.svg'></ion-icon>
+
+                    <img  *ngIf="item.car !== 'none'" style="font-size: 45px;color: #3B455A;" src='assets/{{ item.car}}.png'>
+
+                </ion-col>
+
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+</div>
+<div padding>
     <br>
     <br>
     <ion-button  mode="ios" size="large" (click)="refresh()" class="main-container goodfont" color="dark" expand="block">
-            <ion-icon name="refresh" size="large" slot="end"></ion-icon> Actualizar trayecto
-     </ion-button>
+        <ion-icon name="refresh" size="large" slot="end"></ion-icon> Actualizar trayecto
+    </ion-button>
     <br>
     <br>
     <br>
     <br>
-    
-   </div>
+
+</div>
 </ion-content>
-<!-- 
+
 <ion-fab color="secondary"  vertical="bottom" horizontal="end" >
     <ion-fab-button (click)="refresh()">
         <ion-icon mode="ios" color="light" name="refresh"></ion-icon>
     </ion-fab-button>
-  </ion-fab> -->
+</ion-fab> 
