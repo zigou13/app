@@ -25,7 +25,7 @@
                     <h5 class="goodfont" style="color:var(--ion-color-medium)">Trayectos cerca tuya {{ zone }}</h5>
                 </ion-col>
                 <ion-col size="6" style="display: flex; justify-content: center; align-items: center;">
-                   <ion-chip [routerLink]="['/location']" routerLinkActive="router-link-active"  outline padding  color="primary">
+                 <ion-chip [routerLink]="['/location']" routerLinkActive="router-link-active"  outline padding  color="primary">
                     <ion-icon  color="primary" name="pin"></ion-icon>
                     <ion-label style="font-size:10px;">Cambiar zona</ion-label>
                 </ion-chip>
@@ -44,7 +44,9 @@
 
 <app-loadingcard *ngIf="loading"></app-loadingcard>
 
-<div *ngFor="let item of bs.rideszone">
+
+
+<div *ngFor="let item of rideszone">
     <ion-card (click)="gotoride(item.id)" mode="ios">
         <ion-card-content style="height: 110px;border-radius: 100px !important">
             <ion-row class="carta">
@@ -83,7 +85,9 @@
         </ion-card-content>
     </ion-card>
 
-</div>
+</div> 
+
+
 <div padding>
     <br>
     <br>

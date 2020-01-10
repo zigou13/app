@@ -98,7 +98,7 @@ export class MainPage implements OnInit{
 
         //   console.log(this.zone);
         //   this.rutes();
-        //   this.bs.ridesload(this.zone);
+
         //   // this.presentAlertMultipleButtons();
         // }, 3000);
 
@@ -110,7 +110,7 @@ export class MainPage implements OnInit{
       refresh() {
 
         this.ridesservice.cleanvariable();
-        this.rutes();
+        this.rutes(this.zone);
       }
 
 
@@ -143,9 +143,19 @@ export class MainPage implements OnInit{
             console.log('si tiene postal');
             console.log(data.results[0].address_components[tam].long_name);
             this.rutes(data.results[0].address_components[tam].long_name);
+            this.obtenerRutas(data.results[0].address_components[tam].long_name);
           }else{
             console.log('no tiene postal');
           }
+        });
+      }
+
+
+
+      obtenerRutas(zone){
+        this.bs.ridesload(zone).subscribe((data:any)=>{
+          console.log(data);
+          this.rideszone= data;
         });
       }
 
