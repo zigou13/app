@@ -64,6 +64,10 @@ export class ViewPage implements OnInit {
       this.bs.viewridesuid(this.useruid);
     }
 
+    rate() {
+      
+    }
+
    gotoride(id) {
     this.router.navigateByUrl(`ride/${id}`);
   }

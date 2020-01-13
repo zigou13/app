@@ -51,6 +51,17 @@ export class MainPage implements OnInit{
 
   rideszone: any;
 
+  segment: number;
+  @ViewChild('slides') slides;
+
+  slideOpts = {
+      initialSlide: 0,
+      speed: 400,
+  };
+  public async setSegment(activeIndex: Promise<number>) {
+    this.segment = await activeIndex;
+  }
+
   zone: any;
 
   constructor(

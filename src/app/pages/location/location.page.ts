@@ -262,7 +262,7 @@ gotoride(id) {
 
   async error(mensaje: string) {
     const alert = await this.alertCtrl.create({
-      message: 'Direcction not valid please be more specific',
+      message: 'Direccion invalida porfavor se más especifico',
       buttons: ['OK']
     });
     await alert.present();

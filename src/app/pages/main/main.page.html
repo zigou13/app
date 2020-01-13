@@ -22,7 +22,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col size="6">
-                    <h5 class="goodfont" style="color:var(--ion-color-medium)">Trayectos cerca tuya {{ zone }}</h5>
+                    <h5 class="goodfont" style="color:var(--ion-color-medium)">Trayectos cerca tuya </h5>
                 </ion-col>
                 <ion-col size="6" style="display: flex; justify-content: center; align-items: center;">
                  <ion-chip [routerLink]="['/location']" routerLinkActive="router-link-active"  outline padding  color="primary">
@@ -86,13 +86,93 @@
     </ion-card>
 
 </div> 
+<br>
+<ion-segment (ionChange)="slides.slideTo(segment)" [(ngModel)]="segment">
+    <ion-segment-button value="0">
+        <ion-label>Rutinarios</ion-label>
+      <ion-icon name="repeat"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="1">
+            <ion-label>Tablon</ion-label>
+      <ion-icon name="paper"></ion-icon>
+    </ion-segment-button>
 
+  </ion-segment>
 
+  <ion-slides style="margin-top:20px; margin-bottom:20px;" [options]="slideOpts" #slides
+  (ionSlideWillChange)="setSegment(slides.getActiveIndex())">
+  <ion-slide>
+      <ion-grid>
+          <ion-row>
+              <ion-col margin-bottom size="12" style="margin-bottom: 10px;">
+
+              
+<div *ngFor="let item of rideszone">
+    <ion-card (click)="gotoride(item.id)" mode="ios">
+        <ion-card-content style="height: 110px;border-radius: 100px !important">
+            <ion-row class="carta">
+                <ion-col class="cut" size="5">
+                    {{ item.start }}
+                </ion-col>
+                <ion-col size="2">
+                    <ion-icon style=" font-size: 25px;color: #3B455A" name="arrow-forward">
+                    </ion-icon>
+                </ion-col>
+                <ion-col class="cut" size="5">
+                    {{ item.destine }}
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row class="cartadesc">
+                <ion-col size="5">
+                    {{ item.hour }} Hora
+                </ion-col>
+                <ion-col size="2">
+
+                </ion-col>
+                <ion-col style="font-size: 12px;text-align: center" size="3">
+                    {{ item.seats }} <br> Asientos
+                </ion-col>
+                <ion-col size="2">
+                    <br>
+                    <ion-icon *ngIf="item.car === 'none'" style="font-size: 45px;color: #3B455A;" src='assets/rider.svg'></ion-icon>
+
+                    <img  *ngIf="item.car !== 'none'" style="font-size: 45px;color: #3B455A;" src='assets/{{ item.car}}.png'>
+
+                </ion-col>
+
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+
+</div> 
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+
+  </ion-slide>
+  <ion-slide>
+
+  
+    <ion-card mode="ios">
+        <ion-card-header>
+          <ion-card-subtitle></ion-card-subtitle>
+          <ion-card-title>Añade al tablon</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+            <img style="margin-left:40!important;width:20!important;" src="assets/location.svg">
+            Habla con la gente de tu zona, añade viajes rapidos y busca a alguien con quien compartir trayecto!
+        </ion-card-content>
+      </ion-card>
+  </ion-slide>
+</ion-slides>
 <div padding>
     <br>
     <br>
     <ion-button  mode="ios" size="large" (click)="refresh()" class="main-container goodfont" color="dark" expand="block">
-        <ion-icon name="refresh" size="large" slot="end"></ion-icon> Actualizar trayecto
+        <ion-icon name="refresh" size="large" slot="end"></ion-icon> Actualizar trayectos
     </ion-button>
     <br>
     <br>
@@ -101,9 +181,9 @@
 
 </div>
 </ion-content>
-
+<!-- 
 <ion-fab color="secondary"  vertical="bottom" horizontal="end" >
     <ion-fab-button (click)="refresh()">
         <ion-icon mode="ios" color="light" name="refresh"></ion-icon>
     </ion-fab-button>
-</ion-fab> 
+</ion-fab>  -->
