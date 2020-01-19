@@ -13,5 +13,8 @@ export class TermsPage implements OnInit {
 
   ngOnInit() {
   }
+  send(text) {
+    this.service.review(text);
+  }
 
 }

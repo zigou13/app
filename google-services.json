@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:465417573805:android:d1886f00ff95d7a6",
         "android_client_info": {
-          "package_name": "io.uicar.app"
+          "package_name": "io.uicar.ios"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "465417573805-3sb8d8guk87f4acvcvh8cjjhvttltve8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "io.uicar.app",
+            "package_name": "io.uicar.ios",
             "certificate_hash": "95ad76cc15b090da3661678e9fdd757509849cdc"
           }
         },
