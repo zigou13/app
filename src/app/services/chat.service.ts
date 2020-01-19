@@ -5,7 +5,6 @@ import { Route, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-
 @Injectable({
   providedIn: 'root'
 })

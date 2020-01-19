@@ -10,12 +10,11 @@ import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent{
+export class AppComponent {
 
   navigate: any;
   constructor(
@@ -26,7 +25,7 @@ export class AppComponent{
     private rout: Router,
     private menu: MenuController,
     private localNotifications: LocalNotifications
-    ) {
+  ) {
     this.initializeApp();
     this.logueado();
     this.delayed_notification();
@@ -45,18 +44,18 @@ export class AppComponent{
 
   async logueado() {
     await this.aut.authState
-    .subscribe(
-      user => {
-        if (user) {
-          console.log('loged');
-          localStorage.setItem('uid' , user.uid);
-        } else {
+      .subscribe(
+        user => {
+          if (user) {
+            console.log('loged');
+            localStorage.setItem('uid' , user.uid);
+          } else {
+            this.rout.navigateByUrl('/register');
+          }
+        },
+        () => {
           this.rout.navigateByUrl('/register');
         }
-      },
-      () => {
-        this.rout.navigateByUrl('/register');
-      }
       );
   }
 

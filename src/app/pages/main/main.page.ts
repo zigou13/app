@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { FCM } from '@ionic-native/fcm/ngx';
+// import { FCM } from '@ionic-native/fcm/ngx';
 
 import { ActionSheetController, AlertController } from '@ionic/angular';
 
@@ -14,7 +14,7 @@ import { ServicesService } from 'src/app/services/services.service';
 
 import {HttpClient} from '@angular/common/http';
 import { GetService } from '../../services/get.service';
-import { Storage } from '@ionic/storage';
+// import { Storage } from '@ionic/storage';
 
 declare var google;
 
@@ -73,8 +73,7 @@ export class MainPage implements OnInit{
     private modalController: ModalController,
     public alertController: AlertController,
     private http: HttpClient,
-    private fcm: FCM,
-    private storage: Storage,
+    // private fcm: FCM, 
     public bs: GetService) {
 
 
@@ -85,10 +84,10 @@ export class MainPage implements OnInit{
 
   
   ngOnInit() {
-    this.fcm.getToken().then(token => {
-      console.log(token);
-      this.storage.set('notif', token);
-    });
+    // this.fcm.getToken().then(token => {
+    //   console.log(token);
+    //   this.storage.set('notif', token);
+    // });
     this.logueado();
     this.posicion();
 

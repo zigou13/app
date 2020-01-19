@@ -67,6 +67,19 @@ export class ModalPage implements OnInit {
 
   }
 
+  async loading() {
+    const loading = await this.loadingcontroller.create({
+      message: 'Cargando trayectos',
+      duration: 1000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
+  }
+
+
   close() {
     this.modalCtrl.dismiss();
   }
@@ -82,12 +95,20 @@ export class ModalPage implements OnInit {
 }
 
   async search() {
+    this.loading();
     this.rutes();
-    this.presentLoading('Loading rides');
+   
     setTimeout(() => {
       this.rutes();
     }, 1000);
 
+    setTimeout(() => {
+      if( this.ridesservice.users323.length === 0) {
+        this.error2('Ningún trayecto encontrado en esa dirección :(');
+        console.log('None');
+        
+      }
+    }, 3000);
   }
 
   initMap() {
@@ -227,6 +248,8 @@ export class ModalPage implements OnInit {
                } else {
                    // window.alert('Directions request failed due to ' + status);
                    // this.ubicacion();
+                    console.log('no reselts');
+                    
                }
            });
        this.directionsDisplay = new google.maps.DirectionsRenderer();
@@ -265,6 +288,14 @@ gotoride(id) {
   async error(mensaje: string) {
     const alert = await this.alertCtrl.create({
       message: 'Direcction not valid please be more specific',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async error2(mensaje) {
+    const alert = await this.alertCtrl.create({
+      message: mensaje,
       buttons: ['OK']
     });
     await alert.present();
