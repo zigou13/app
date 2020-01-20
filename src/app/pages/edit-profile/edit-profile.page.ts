@@ -126,7 +126,7 @@ export class EditProfilePage implements OnInit {
       this.services.crearUser(data).then(
         res => {
           console.log('Upload' + res);
-          this.rout.navigateByUrl(`location`);
+          this.rout.navigateByUrl(`fill`);
         });
     } else {
       this.services.updateUser(data, this.id).then(

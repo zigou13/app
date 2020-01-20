@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ServicesService } from 'src/app/services/services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fill',
@@ -16,7 +17,7 @@ export class FillPage implements OnInit {
   weight = null ;
   uid: string;
 
-  constructor(public service: ServicesService , private aut: AngularFireAuth) { }
+  constructor(public service: ServicesService , private aut: AngularFireAuth, public router: Router) { }
 
   ngOnInit() {
     this.logueado();
@@ -49,6 +50,11 @@ export class FillPage implements OnInit {
   setcar(car: string) {
     this.car = car;
     this.num = 2;
+  }
+
+  set() {
+    this.service.userdata(this.car, this.mode, this.uid);
+    this.router.navigateByUrl('location');
   }
 
 

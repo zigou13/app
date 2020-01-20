@@ -118,9 +118,7 @@ export class MainPage implements OnInit{
 
 
       refresh() {
-
-        this.ridesservice.cleanvariable();
-        this.rutes(this.zone);
+        this.obtenerCodigoPostal(this.lat, this.lng);
       }
 
 

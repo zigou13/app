@@ -61,7 +61,7 @@ export class ServicesService {
         zone: value.zone
 
       });
-      this.rout.navigateByUrl(`location`);
+      this.rout.navigateByUrl(`fill`);
     });
   }
 

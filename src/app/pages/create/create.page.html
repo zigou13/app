@@ -19,12 +19,12 @@
   <!-- <div *ngIf="num == 0"> -->
   <form *ngIf="num == 0 " padding   [formGroup]="directionForm">
       <ion-item>
-          <ion-input  formControlName="source" id="pac-input-create" [(ngModel)]="start" #autoCompleteInput placeholder="Begin"
+          <ion-input  formControlName="source" id="pac-input-create" [(ngModel)]="start" #autoCompleteInput placeholder="Inicio de trayecto"
           type="text"></ion-input>
       </ion-item>
       <ion-item>
           <ion-input  formControlName="destination" id="pac-input-create2" [(ngModel)]="destine" #autoCompleteInput2
-          placeholder="Destine" type="text"></ion-input>
+          placeholder="Destino de trayecto" type="text"></ion-input>
       </ion-item>
       
       
@@ -61,7 +61,7 @@
 
 <div *ngIf="num === 1" padding>
     <br>
-    <h1 text-center class="goodfont">Introduce informacion de tu trayectp</h1> 
+    <h1 text-center class="goodfont">Introduce información de tu trayecto/h1> 
     <br>
 
     <ion-card mode="ios">
