@@ -85,7 +85,7 @@ export class ServicesService {
         mode: mode,
       });
 
-      this.rout.navigateByUrl(`profile`);
+      this.rout.navigateByUrl(`location`);
     });
   }
 

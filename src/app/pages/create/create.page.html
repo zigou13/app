@@ -31,7 +31,7 @@
     <!-- <ion-button expand="full" type="submit" [disabled]="directionForm.invalid">Get Direction</ion-button> -->
   </form>
 
-  <div *ngIf="num == 0" #mapElement class="map"></div>
+  <div *ngIf="num == 0" #mapElement class="map">
   
   
 
@@ -57,11 +57,11 @@
     Codigo postal destino:
     <h3 id="place-code2"></h3>
   </div>
-<!-- </div> -->
+</div>
 
 <div *ngIf="num === 1" padding>
     <br>
-    <h1 text-center class="goodfont">Introduce información de tu trayecto/h1> 
+    <h1 text-center class="goodfont">Introduce información de tu trayecto</h1> 
     <br>
 
     <ion-card mode="ios">
@@ -129,14 +129,14 @@
         <br>
       <ion-button  color="primary" *ngIf="num > 0  " (click)="back()" mode="ios" text-center  >
           <ion-icon mode="ios" name="arrow-back"></ion-icon> 
-        </ion-button>    
-</div>
+      </ion-button>   
+     </div> 
 </ion-content>
+
 
 <ion-footer *ngIf=" num == 0" padding class="bg-transparent" >
     <ion-button   class="form goodfont" text-center 
     size="large" (click)="num = 1 " expand="block" >
        Siguiente
-</ion-button>
-
+  </ion-button>
 </ion-footer>

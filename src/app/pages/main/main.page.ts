@@ -90,27 +90,26 @@ export class MainPage implements OnInit{
     // });
     this.logueado();
     this.posicion();
-
+    this.init();
     // this.init();
 
   }
 
   init() {
+      setTimeout(() => {
+          console.log(this.lat);
 
-    // setTimeout(() => {
-      //   this.getProfile(this.uid);
-      //   this.posicion();
-      // }, 2000);
+          if ( this.lat === undefined ) {
+            this.zone =  this.item[0].payload.doc.data().zone;
 
+            console.log(this.zone);
+            this.rutes(this.zone);
+            this.obtenerRutas(this.zone);
 
-      // setTimeout(() => {
-        //   this.zone =  this.item[0].payload.doc.data().zone;
+          }
 
-        //   console.log(this.zone);
-        //   this.rutes();
-
-        //   // this.presentAlertMultipleButtons();
-        // }, 3000);
+          // this.presentAlertMultipleButtons();
+        }, 3000);
 
       }
 
