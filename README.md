@@ -4,13 +4,9 @@ It is a multiplatfrom application to share a car in everyday journeys, developed
 
 ## TODO  
 
-* Mejoras en el main
-* Carga automatica del codigo postal
-* Automatizar cambio de codigo postal
 * Eventos  ( gente que va a los trayectos )
 * Borrar los trayectos antiguos  ( esconderlos ) 
 * Personas cercas tuya ( gente que este en el mismo codigo postal )
-* Notificaciones en el chat ( al recibir mensaje )
 * Publicidad 
 * Sistema de estrellas
 
