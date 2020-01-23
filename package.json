@@ -88,7 +88,10 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-telerik-imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
+      }
     },
     "platforms": [
       "ios",

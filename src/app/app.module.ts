@@ -17,7 +17,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,8 +38,10 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
   providers: [
     StatusBar,
     SplashScreen,
+    WebView,
+    ImagePicker,
     Geolocation,
-    LocalNotifications,
+    // LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

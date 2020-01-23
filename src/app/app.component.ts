@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @Component({
@@ -24,23 +24,23 @@ export class AppComponent {
     public aut: AngularFireAuth,
     private rout: Router,
     private menu: MenuController,
-    private localNotifications: LocalNotifications
+    // private localNotifications: LocalNotifications
   ) {
     this.initializeApp();
     this.logueado();
-    this.delayed_notification();
+    // this.delayed_notification();
   }
 
 
-  delayed_notification() {
-    // Schedule delayed notification
-    this.localNotifications.schedule({
-      text: 'Hay movientos en tu zona, echa un vistazo a la app!',
-      trigger: { at: new Date(new Date().getTime() + 3600) },
-      led: 'FF0000',
-      sound: null
-    });
-  }
+  // delayed_notification() {
+  //   // Schedule delayed notification
+  //   this.localNotifications.schedule({
+  //     text: 'Hay movientos en tu zona, echa un vistazo a la app!',
+  //     trigger: { at: new Date(new Date().getTime() + 3600) },
+  //     led: 'FF0000',
+  //     sound: null
+  //   });
+  // }
 
   async logueado() {
     await this.aut.authState

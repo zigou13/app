@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { HttpClient} from '@angular/common/http';
 
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -164,6 +165,38 @@ export class ServicesService {
 obtenerCodigoPostal(lat, lng){
   return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyC6Zaf4zBj8h-RXCCIh6pPZn5hWK_OZVrg`);
 }
+uploadImage(imageURI, randomId) {
+  return new Promise<any>((resolve, reject) => {
+    let storageRef = firebase.storage().ref();
+    let imageRef = storageRef.child('img').child(randomId);
+    this.encodeImageUri(imageURI, function (image64) {
+      imageRef.putString(image64, 'data_url')
+      .then(snapshot => {
+        snapshot.ref.getDownloadURL()
+        .then(res => resolve(res))
+      }, err => {
+        reject(err);
+      });
+    });
+  });
+}
+
+encodeImageUri(imageUri, callback) {
+  var c = document.createElement('canvas');
+  var ctx = c.getContext("2d");
+  var img = new Image();
+  img.onload = function () {
+    var aux: any = this;
+    c.width = aux.width;
+    c.height = aux.height;
+    ctx.drawImage(img, 0, 0);
+    var dataURL = c.toDataURL("image/jpeg");
+    callback(dataURL);
+  };
+  img.src = imageUri;
+}
+
+
 
 
 // OMG I AM SOME PROUD OF THIS NEXT 100 LINES OF CODE

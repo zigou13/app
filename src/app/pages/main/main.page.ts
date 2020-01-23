@@ -186,6 +186,7 @@ export class MainPage implements OnInit{
             this.mapempty();
             this.empty = true;
           } else {
+            this.empty = false;
             // console.log('not empty i guss' + this.rides2);
           }
           for (let i = 0; i < data.length; i++) {

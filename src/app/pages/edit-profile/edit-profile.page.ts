@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServicesService } from 'src/app/services/services.service';
-
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 declare var google;
 
@@ -43,12 +44,15 @@ export class EditProfilePage implements OnInit {
   cp: Boolean;
 
   constructor(private rout: Router,
-    private route: ActivatedRoute,
-    private services: ServicesService,
-    private afs: AngularFireStorage,
+    public route: ActivatedRoute,
+    public services: ServicesService,
+    public imagePicker: ImagePicker,
+    public toastCtrl: ToastController,
+    public afs: AngularFireStorage,
     public loadingController: LoadingController,
     private aut: AngularFireAuth ,
-    private alertCtrl: AlertController , public activateroute: ActivatedRoute) {
+    public webview: WebView,
+    public alertCtrl: AlertController , public activateroute: ActivatedRoute) {
      
   }
 
@@ -94,6 +98,59 @@ export class EditProfilePage implements OnInit {
     });
   }
 
+  openImagePicker(){
+    console.log('click');
+    this.imagePicker.hasReadPermission()
+    .then((result) => {
+      if (result === false) {
+        // no callbacks required as this opens a popup which returns async
+        this.imagePicker.requestReadPermission();
+      }
+      else if (result === true) {
+        this.imagePicker.getPictures({
+          maximumImagesCount: 1,
+          quality: 50
+        }).then(
+        (results) => {
+          for (let i = 0; i < results.length; i++) {
+            this.uploadImageToFirebase(results[i]);
+          }
+        }, (err) => console.log(err)
+        );
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  async uploadImageToFirebase(image) {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    const toast = await this.toastCtrl.create({
+      message: 'Image was updated successfully',
+      duration: 3000
+    });
+    this.presentLoading2(loading);
+    let image_src = this.webview.convertFileSrc(image);
+    let randomId = Math.random().toString(36).substring(2);
+
+    //uploads img to firebase storage
+    this.services.uploadImage(image_src, randomId)
+    .then(photoURL => {
+      this.urlImage = photoURL;
+      this.img=photoURL;
+      loading.dismiss();
+      toast.present();
+    }, err => {
+      console.log(err);
+    });
+  }
+  async presentLoading2(loading) {
+    return await loading.present();
+  }
+
+
 
   onUpload(e) {
     console.log(e.target.files[0]);
@@ -116,7 +173,7 @@ export class EditProfilePage implements OnInit {
       name: name,
       phone: phone,
       mail: this.mail,
-      img: image || this.img,
+      img: image || this.urlImage,
       adress:   this.adress || 'new' ,
       uid: this.uid,
       zone: this.zone || 'new',
