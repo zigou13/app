@@ -15,12 +15,18 @@ export class GetService {
     return this.http.get(`http://uicar.openode.io/zones/${id}/10`);
   }
 
-  async ridesuid(uid: string) {
-    await this.http.get(`http://uicar.openode.io/rides/${uid}/`).subscribe((data: any) => {
-      console.log(data);
-      this.userrides = data;
-    });
+
+
+  ridesuid(uid: string) {
+    return this.http.get(`http://uicar.openode.io/rides/${uid}/`);
   }
+
+  // async ridesuid(uid: string) {
+  //   await this.http.get(`http://uicar.openode.io/rides/${uid}/`).subscribe((data: any) => {
+  //     console.log(data);
+  //     this.userrides = data;
+  //   });
+  // }
 
 
   async viewridesuid(uid: string) {

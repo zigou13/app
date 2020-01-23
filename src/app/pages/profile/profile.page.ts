@@ -20,6 +20,8 @@ export class ProfilePage implements OnInit {
   rides: any;
 
   stars: number;
+  userrides:any;
+  userrriesN:number;
 
   numbers: any;
 
@@ -30,25 +32,25 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.getLogueado();
     this.getrides();
-   }
+  }
 
   getLogueado() {
     this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            console.log('logeado');
-            this.uid = user.uid;
-            console.log(this.uid);
-            this.getProfile(this.uid);
-            this.getrides();
-          } else {
-            this.rout.navigateByUrl('/login');
-          }
-        },
-        () => {
+    .subscribe(
+      user => {
+        if (user) {
+          console.log('logeado');
+          this.uid = user.uid;
+          console.log(this.uid);
+          this.getProfile(this.uid);
+          this.getrides();
+        } else {
           this.rout.navigateByUrl('/login');
         }
+      },
+      () => {
+        this.rout.navigateByUrl('/login');
+      }
       );
   }
 
@@ -78,12 +80,17 @@ export class ProfilePage implements OnInit {
     this.rout.navigateByUrl('/login');
   }
 
-  getrides() {
-    this.bs.ridesuid(this.uid);
- }
- gotoride(id) {
-  this.rout.navigateByUrl(`ride/${id}`);
-}
+  async getrides() {
+    // this.bs.ridesuid(this.uid);
+
+    await this.bs.ridesuid(this.uid).subscribe((data:any)=>{
+      this.userrides=data;
+      this.userrriesN=data.length;
+    });
+  }
+  gotoride(id) {
+    this.rout.navigateByUrl(`ride/${id}`);
+  }
 
 
 

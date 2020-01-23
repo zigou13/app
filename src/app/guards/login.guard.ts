@@ -23,7 +23,7 @@ export class LoginGuard implements CanActivate {
         .subscribe(
           user => {
             if (user) {
-              // this.rout.navigateByUrl('');
+              this.rout.navigateByUrl('/');
             } else {
               this.rout.navigateByUrl('/register');
             }

@@ -75,7 +75,7 @@
               <ion-card  color="primary" >
                   <ion-card-header>
                       <ion-card-title style="color:var(--ion-color-light)" class="goodfont">Rides</ion-card-title>
-                      <ion-card-subtitle style="font-size:40px;color:var(--ion-color-light)!important" class="goodfont">{{ bs.userrides.length }}</ion-card-subtitle>
+                      <ion-card-subtitle style="font-size:40px;color:var(--ion-color-light)!important" class="goodfont">{{ userrriesN }}</ion-card-subtitle>
                       
                     </ion-card-header>
                   
@@ -128,10 +128,13 @@
         
       
         <br>
+
+
+
         <div *ngIf="empty">
         <h2 class="goodfont" style="font-size:38px;" padding>Trayectos</h2>
         <br>
-          <div padding *ngIf="bs.userrides.length === 0" text-center>
+          <div padding *ngIf="userrides.length === 0" text-center>
             <img width="400px" src="assets/map.svg">
             <h3 color="secondary" text-center class="goodfont">No tienes ningún trayecto todavía<a [routerLink]="['/create']">crea uno</a></h3>
 
@@ -140,7 +143,7 @@
         <br>
         </div>
 
-        <div *ngFor="let item of bs.userrides">
+        <div *ngFor="let item of userrides">
           <ion-card (click)="gotoride(item.id)"   mode="ios" *ngIf="item.start !== null" >
               <ion-card-content style="height: 110px;border-radius: 100px !important">
                   <ion-row class="carta">
