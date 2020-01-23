@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.uicar.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.uicar.ios" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Uicar</name>
-    <description>Uicar app share car in daily rides.</description>
-    <author email="hi@ionicframework.com" href="http://uicar.io/">Uicar Team</author>
+    <description>Comparte coche en trayectos cotidianos.</description>
+    <author email="info@uicar.io" href="http://uicar.io/">Uicar Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
